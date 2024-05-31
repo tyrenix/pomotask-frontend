@@ -1,4 +1,9 @@
 {
+    "Manifest": {
+        "name": "Pomotask",
+        "short-name": "Pomotask",
+        "description": "PomoTask - лучшее решение для отслеживание своей активности на важных задачах"
+    },
     "Metadata": {
         "title": "Pomotask - поможет следить за временем!",
         "description": "PomoTask - лучшее решение для отслеживание своей активности на важных задачах"

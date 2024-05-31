@@ -70,6 +70,7 @@ export const generateMetadata = async ({
                 },
                 {
                     rel: 'apple-touch-icon',
+                    type: 'image/png',
                     sizes: '180x180',
                     url: '/icons/favicon-180x180.png'
                 }
@@ -85,7 +86,7 @@ interface IProps extends PropsWithChildren {
     params: {locale: string}
 }
 
-const RootLayout = async ({children, params}: IProps) => {
+export default async function RootLayout({children, params}: IProps) {
     const cookieStore = cookies()
     const messages = await getMessages()
 
@@ -109,5 +110,3 @@ const RootLayout = async ({children, params}: IProps) => {
         </html>
     )
 }
-
-export default RootLayout
