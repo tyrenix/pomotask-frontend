@@ -41,6 +41,6 @@ html.dark body {
         --content-color: var(--content-color-dark);
         --accent-color: var(--accent-color-dark);
         --primary-color: var(--primary-color-dark);
-        --primaryInvert-color: var(--primaryInvert-color);
+        --primaryInvert-color: var(--primaryInvert-color-dark);
     }
 }
