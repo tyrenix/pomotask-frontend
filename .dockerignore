@@ -1,7 +1,7 @@
 /node_modules
 /.next/
 /build
-.dockerignore
+.gitignore
 .DS_Store
 .env
 .vercel
