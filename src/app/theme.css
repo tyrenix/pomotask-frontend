@@ -21,23 +21,7 @@
     --blue-color: 72, 112, 255;
 }
 
-html body {
-    --content-color: var(--content-color-light);
-    --accent-color: var(--accent-color-light);
-    --primary-color: var(--primary-color-light);
-    --primaryInvert-color: var(--primaryInvert-color-light);
-}
-
-@media (prefers-color-scheme: dark) {
-    html body {
-        --content-color: var(--content-color-dark);
-        --accent-color: var(--accent-color-dark);
-        --primary-color: var(--primary-color-dark);
-        --primaryInvert-color: var(--primaryInvert-color);
-    }
-}
-
-
+html.system body,
 html.light body {
     --content-color: var(--content-color-light);
     --accent-color: var(--accent-color-light);
@@ -50,4 +34,13 @@ html.dark body {
     --accent-color: var(--accent-color-dark);
     --primary-color: var(--primary-color-dark);
     --primaryInvert-color: var(--primaryInvert-color-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+    html.system body {
+        --content-color: var(--content-color-dark);
+        --accent-color: var(--accent-color-dark);
+        --primary-color: var(--primary-color-dark);
+        --primaryInvert-color: var(--primaryInvert-color);
+    }
 }
