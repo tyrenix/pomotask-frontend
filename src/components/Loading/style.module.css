@@ -1,0 +1,49 @@
+.wrapper {
+    animation: rotate-wrapper 1.2s ease-in-out infinite;
+    @apply w-16 h-16 relative;
+}
+
+.wrapper > div {
+    animation: move-to-center 1.5s ease-in-out infinite;
+    @apply w-7 h-7 absolute bg-accent rounded-full;
+}
+
+.wrapper > div:nth-child(1) {
+    @apply left-0 top-0;
+}
+
+.wrapper > div:nth-child(2) {
+    @apply left-0 top-full -translate-y-full;
+}
+
+.wrapper > div:nth-child(3) {
+    @apply right-0 top-0;
+}
+
+.wrapper > div:nth-child(4) {
+    @apply right-0 top-full -translate-y-full;
+}
+
+@keyframes rotate-wrapper {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes move-to-center {
+    0% {
+
+    }
+    50% {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        @apply w-9 h-9;
+    }
+    100% {
+
+    }
+}

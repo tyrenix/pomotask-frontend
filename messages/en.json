@@ -1,0 +1,14 @@
+{
+    "Metadata": {
+        "title": "Pomotask - an observer will help in time!",
+        "description": "PomoTask is the best solution for tracking your activity on important tasks"
+    },
+    "Wait": {
+        "text": "The site is still in development,\nbut it will be available soon!"
+    },
+    "NotFound": {
+        "title": "Not found",
+        "description": "The requested resource could not be found",
+        "to-main": "To main page"
+    }
+}
