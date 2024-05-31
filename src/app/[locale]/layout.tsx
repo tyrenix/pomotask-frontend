@@ -17,8 +17,10 @@ export const viewport: Viewport = {
     maximumScale: 1
 }
 
-export const generateMetadata = async (params: {
-    locale: string
+export const generateMetadata = async ({
+    params
+}: {
+    params: {locale: string}
 }): Promise<Metadata> => {
     const t = await getTranslations({
         locale: params.locale,
@@ -32,7 +34,7 @@ export const generateMetadata = async (params: {
             title: t('title'),
             description: t('description'),
             type: 'website',
-            images: '/icons/favicon-1024x1024.png'
+            images: `${process.env.NEXT_HOST || ''}/icons/favicon-1024x1024.png`
         },
         icons: {
             icon: [
@@ -80,16 +82,16 @@ export const generateMetadata = async (params: {
 }
 
 interface IProps extends PropsWithChildren {
-    locale: string
+    params: {locale: string}
 }
 
-const RootLayout = async (props: IProps) => {
+const RootLayout = async ({children, params}: IProps) => {
     const cookieStore = cookies()
     const messages = await getMessages()
 
     return (
         <html
-            lang={props.locale}
+            lang={params.locale}
             className={`w-full h-full ${cookieStore.get('theme')?.value || ''}`}
         >
             <body className={`w-full h-full ${nunito.className} bg-content`}>
@@ -100,7 +102,7 @@ const RootLayout = async (props: IProps) => {
                         }
                     />
                     <main className='w-full h-full px-4 py-7 text-primaryInvert pt-20'>
-                        {props.children}
+                        {children}
                     </main>
                 </NextIntlClientProvider>
             </body>
