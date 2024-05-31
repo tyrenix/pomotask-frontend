@@ -92,7 +92,7 @@ const RootLayout = async ({children, params}: IProps) => {
     return (
         <html
             lang={params.locale}
-            className={`w-full h-full ${cookieStore.get('theme')?.value || ''}`}
+            className={`w-full h-full ${cookieStore.get('theme')?.value || 'system'}`}
         >
             <body className={`w-full h-full ${nunito.className} bg-content`}>
                 <NextIntlClientProvider messages={messages}>
