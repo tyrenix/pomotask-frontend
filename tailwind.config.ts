@@ -76,10 +76,10 @@ const config: Config = {
                 'xs-regular': ['0.625rem', {fontWeight: 'regular'}]
             },
             padding: {
-                st: '0.9375rem'
+                standard: '0.9375rem'
             },
             margin: {
-                st: '0.9375rem'
+                standard: '0.9375rem'
             },
             borderRadius: {}
         }

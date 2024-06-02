@@ -1,8 +1,7 @@
 'use server'
 
 import {useTranslations} from 'next-intl'
-import Link from 'next/link'
-import LinkComponent from '@components/Link/link.component'
+import LinkComponent from '@/components/Link/link.component'
 
 const NotFoundPage = () => {
     const t = useTranslations('NotFound')

@@ -1,0 +1,55 @@
+.form {
+    @apply
+    w-full
+    h-full
+    flex
+    justify-center
+    items-center
+}
+
+.wrapper {
+    @apply
+    sm:max-w-[450px]
+    w-full
+    sm:h-auto
+    sm:p-10
+    p-standard
+    py-10
+    rounded-2xl
+    bg-primary
+    flex
+    flex-col
+    items-center
+    gap-8
+}
+
+.form-title {
+    @apply
+    text-2xl-bold
+}
+
+.inputs-wrapper {
+    @apply
+    w-full
+    flex
+    flex-col
+    gap-2.5
+}
+
+.buttons-wrapper {
+    @apply
+    w-full
+    flex
+    flex-col
+    gap-4
+}
+
+.change-method-wrapper {
+    @apply
+    w-full
+    text-lg-regular
+    flex
+    justify-center
+    items-center
+    gap-1
+}

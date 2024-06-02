@@ -9,6 +9,6 @@ export interface IAuthResponse extends IUser {
     accessToken: string
 }
 
-export interface IUpdateTokens {
+export interface IGetNewTokens {
     accessToken: string
 }

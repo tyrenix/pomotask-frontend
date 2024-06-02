@@ -1,9 +1,11 @@
 .wrapper {
     @apply
         fixed
+        top-0
+        left-0
         w-full
         h-14
-        px-st
+        px-standard
         flex
         items-center
         justify-between

@@ -1,0 +1,6 @@
+.wrapper {
+    @apply
+    rounded-full
+    border-4
+    animate-spin
+}

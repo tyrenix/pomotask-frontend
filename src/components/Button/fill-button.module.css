@@ -1,0 +1,28 @@
+.button {
+    @apply
+    w-full
+    h-16
+    flex
+    justify-center
+    items-center
+    rounded-2xl
+    overflow-hidden
+    bg-accent
+    text-lg-bold
+    text-white
+    hover:bg-accent-70
+    active:bg-accent-70
+    transition-colors-custom
+}
+
+.button-loading,
+.button-disabled {
+    @apply
+    bg-accent-70
+    cursor-not-allowed
+}
+
+.button-loading {
+    @apply
+    cursor-wait
+}

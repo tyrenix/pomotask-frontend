@@ -4,7 +4,6 @@ import {Nunito} from 'next/font/google'
 import {NextIntlClientProvider} from 'next-intl'
 import {getMessages, getTranslations} from 'next-intl/server'
 import {cookies} from 'next/headers'
-import HeaderComponent from '@components/Header/header.component'
 import '../globals.css'
 import '../theme.css'
 
@@ -28,7 +27,10 @@ export const generateMetadata = async ({
     })
 
     return {
-        title: t('title'),
+        title: {
+            default: t('title'),
+            template: `%s | ${t('title')}`
+        },
         description: t('description'),
         openGraph: {
             title: t('title'),
@@ -97,12 +99,7 @@ export default async function RootLayout({children, params}: IProps) {
         >
             <body className={`w-full h-full ${nunito.className} bg-content`}>
                 <NextIntlClientProvider messages={messages}>
-                    <HeaderComponent
-                        theme={
-                            (cookieStore.get('theme')?.value as any) || 'system'
-                        }
-                    />
-                    <main className='w-full h-full px-4 py-7 text-primaryInvert pt-20'>
+                    <main className='w-full h-full p-standard text-primaryInvert'>
                         {children}
                     </main>
                 </NextIntlClientProvider>
