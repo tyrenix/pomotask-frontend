@@ -32,10 +32,7 @@ const InputComponent = forwardRef<HTMLInputElement, IInputProps>(
                     disabled={disabled}
                     {...rest}
                     onFocus={() => setIsFocus(true)}
-                    onBlur={() => {
-                        setIsFocus(false)
-                        console.log('asdfas')
-                    }}
+                    onBlur={() => setIsFocus(false)}
                 />
             </div>
         )

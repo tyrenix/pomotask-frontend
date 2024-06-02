@@ -1,7 +1,7 @@
 import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {getTranslations} from 'next-intl/server'
-import {seoConstants} from '@/constants/seo.constants'
+import {seoConstants} from '@/constants/seo.constant'
 import AuthComponent from '@/app/[locale]/app/auth/[type]/components/Auth/auth.component'
 
 export const generateMetadata = async ({

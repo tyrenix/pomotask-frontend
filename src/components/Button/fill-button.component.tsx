@@ -4,7 +4,7 @@ import LoaderComponent from '@/components/Loader/loader.component'
 
 interface IFillButtonProps {
     label: string
-    onClick: (e: MouseEvent<HTMLButtonElement>) => any
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => any
     loading?: boolean
     disabled?: boolean
 }

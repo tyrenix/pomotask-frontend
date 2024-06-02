@@ -1,9 +1,10 @@
 import axios, {type CreateAxiosDefaults} from 'axios'
 import {getAccessToken, removeAccessToken} from '@/services/auth-token.service'
 import {authService} from '@/services/auth.service'
+import {envConstant} from '@/constants/env.constant'
 
 const options: CreateAxiosDefaults = {
-    baseURL: process.env.API_HOST,
+    baseURL: envConstant.API_HOST,
     headers: {
         'Content-Type': 'application/json'
     },

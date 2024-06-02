@@ -8,6 +8,8 @@ import LogoComponent from '@/components/Logo/logo.component'
 import FillButtonComponent from '@/components/Button/fill-button.component'
 import LinkComponent from '@/components/Link/link.component'
 import styles from './styles.module.css'
+import {useMutation} from '@tanstack/react-query'
+import {authService} from '@/services/auth.service'
 
 export interface IAuthProps {
     type: 'register' | 'login'
@@ -15,9 +17,25 @@ export interface IAuthProps {
 
 export default function AuthComponent({type}: IAuthProps) {
     const t = useTranslations('Auth')
-    const {register, handleSubmit} = useForm<IAuthForm>()
+    const {register, handleSubmit, reset, setError} = useForm<IAuthForm>()
 
-    const onSubmit: SubmitHandler<IAuthForm> = data => console.log(data)
+    const {mutate, isPending} = useMutation({
+        mutationKey: ['auth'],
+        mutationFn: (data: IAuthForm) =>
+            new Promise(async () =>
+                setTimeout(() => authService.main(type, data), 1e3 * 5)
+            ),
+        onError(error) {
+            console.log(error)
+        },
+        onSuccess() {
+            console.log('Success!')
+        }
+    })
+
+    const onSubmit: SubmitHandler<IAuthForm> = (data: IAuthForm) => {
+        mutate(data)
+    }
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -32,19 +50,25 @@ export default function AuthComponent({type}: IAuthProps) {
                         id='emailForm'
                         type='email'
                         label={t('form.enter-email')}
+                        disabled={isPending}
                         {...register('email', {required: true})}
                     />
                     <InputComponent
                         id='passwordForm'
                         type='password'
                         label={t('form.enter-password')}
-                        {...register('password', {required: true})}
+                        disabled={isPending}
+                        {...register('password', {
+                            required: true,
+                            minLength: 8,
+                            maxLength: 16
+                        })}
                     />
                 </div>
                 <div className={styles.buttonsWrapper}>
                     <FillButtonComponent
                         label={t(`form.${type}`)}
-                        onClick={() => {}}
+                        loading={isPending}
                     />
                     <div className={styles.changeMethodWrapper}>
                         <span>

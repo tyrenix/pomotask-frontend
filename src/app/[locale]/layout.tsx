@@ -4,6 +4,8 @@ import {Nunito} from 'next/font/google'
 import {NextIntlClientProvider} from 'next-intl'
 import {getMessages, getTranslations} from 'next-intl/server'
 import {cookies} from 'next/headers'
+import {TanStackQueryProvider} from '@/providers/tanStack-query.provider'
+
 import '../globals.css'
 import '../theme.css'
 
@@ -99,9 +101,11 @@ export default async function RootLayout({children, params}: IProps) {
         >
             <body className={`w-full h-full ${nunito.className} bg-content`}>
                 <NextIntlClientProvider messages={messages}>
-                    <main className='w-full h-full p-standard text-primaryInvert'>
-                        {children}
-                    </main>
+                    <TanStackQueryProvider>
+                        <main className='w-full h-full p-standard text-primaryInvert'>
+                            {children}
+                        </main>
+                    </TanStackQueryProvider>
                 </NextIntlClientProvider>
             </body>
         </html>
