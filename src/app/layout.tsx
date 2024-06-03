@@ -6,12 +6,12 @@ import {NextIntlClientProvider} from 'next-intl'
 import {getLocale, getMessages, getTranslations} from 'next-intl/server'
 import {cookies} from 'next/headers'
 import {TanStackQueryProvider} from '@/providers/tanStack-query.provider'
+import {cookieConstant} from '@/constants/cookie.constant'
 import {seoConstants} from '@/constants/seo.constant'
 import {envConstant} from '@/constants/env.constant'
 
 import '@/styles/globals.css'
 import '@/styles/theme.css'
-import {cookieConstant} from '@/constants/cookie.constant'
 
 const nunito = Nunito({subsets: ['latin', 'cyrillic']})
 
@@ -61,7 +61,7 @@ export default async function RootLayout({children}: PropsWithChildren) {
                         <Toaster
                             theme={theme as any}
                             position='top-center'
-                            duration={1500}
+                            duration={2500}
                         />
                         <main className='w-full h-full p-standard text-primaryInvert'>
                             {children}

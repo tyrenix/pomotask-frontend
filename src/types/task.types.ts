@@ -19,3 +19,7 @@ export interface ICreateTask {
     title: string
     description?: string
 }
+
+export interface IFiltersSearchTask {
+    isCompleted?: boolean
+}

@@ -15,11 +15,6 @@ const options: CreateAxiosDefaults = {
 const axiosWithoutAuth = axios.create(options)
 const axiosWithAuth = axios.create(options)
 
-axiosWithoutAuth.interceptors.response.use(
-    config => config,
-    async err => catchErrorsInterceptor(err)
-)
-
 axiosWithAuth.interceptors.request.use(config => {
     const accessToken = getAccessToken()
 
@@ -33,28 +28,28 @@ axiosWithAuth.interceptors.request.use(config => {
 axiosWithAuth.interceptors.response.use(
     config => config,
     async error => {
-        const originalRequest = error.config
+        const originalConfig = error.config
 
         if (
-            originalRequest?.response?.status === 401 &&
+            error?.response?.status === 401 &&
             error.config &&
             !error.config._isRetry
         ) {
-            originalRequest._isRetry = true
+            originalConfig._isRetry = true
             try {
                 await authService.getNewTokens()
-                return axiosWithAuth.request(originalRequest)
-            } catch (err) {
-                console.log(err)
+                return axiosWithAuth.request(originalConfig)
+            } catch (error) {
                 // @ts-ignore
-                if (err?.response?.status === 401) {
+                if (error?.response?.status === 401) {
                     removeAccessToken()
                 }
-                catchErrorsInterceptor(err)
+
+                throw catchErrorsInterceptor(error)
             }
         }
 
-        throw error
+        throw catchErrorsInterceptor(error)
     }
 )
 

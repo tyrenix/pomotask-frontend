@@ -1,18 +1,17 @@
-import type {NextRequest, NextFetchEvent} from 'next/server'
-import {cookieConstant} from '@/constants/cookie.constant'
+import type {NextRequest} from 'next/server'
 import {dashboardConstant} from '@/constants/dashboard.constant'
+import {cookieConstant} from '@/constants/cookie.constant'
 
 export function middleware(request: NextRequest) {
-    const accessToken = request.cookies.get(cookieConstant.ACCESS_TOKEN)
-    const refreshToken = request.cookies.get(cookieConstant.REFRESH_TOKEN)
-
-    // const isExistTokens = !!(accessToken && refreshToken)
-    const isExistTokens = !!accessToken
+    const refreshToken = request.cookies.get(
+        cookieConstant.REFRESH_TOKEN
+    )?.value
+    // const refreshToken = true
     const pathname = request.nextUrl.pathname
 
     if (
         // If user no auth and stay in app pages
-        !isExistTokens &&
+        !refreshToken &&
         pathname !== dashboardConstant.LOGIN_PAGE &&
         pathname !== dashboardConstant.REGISTER_PAGE
     ) {
@@ -21,7 +20,7 @@ export function middleware(request: NextRequest) {
         )
     } else if (
         // If user auth and stay in auth page
-        isExistTokens &&
+        refreshToken &&
         (pathname === dashboardConstant.LOGIN_PAGE ||
             pathname === dashboardConstant.REGISTER_PAGE)
     ) {

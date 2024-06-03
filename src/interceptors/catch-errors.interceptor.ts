@@ -1,6 +1,6 @@
-export const catchErrorsInterceptor = (err: any) => {
+export const catchErrorsInterceptor = (err: any): string => {
     const message = err?.response?.data?.message
-    throw message
+    return message
         ? typeof err?.response?.data?.message === 'object'
             ? message[0]
             : message
