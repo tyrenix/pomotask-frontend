@@ -2,9 +2,10 @@ import axios, {type CreateAxiosDefaults} from 'axios'
 import {getAccessToken, removeAccessToken} from '@/services/auth-token.service'
 import {authService} from '@/services/auth.service'
 import {envConstant} from '@/constants/env.constant'
+import {catchErrorsInterceptor} from '@/interceptors/catch-errors.interceptor'
 
 const options: CreateAxiosDefaults = {
-    baseURL: envConstant.API_HOST,
+    baseURL: envConstant.NEXT_PUBLIC_API_HOST,
     headers: {
         'Content-Type': 'application/json'
     },
@@ -13,6 +14,11 @@ const options: CreateAxiosDefaults = {
 
 const axiosWithoutAuth = axios.create(options)
 const axiosWithAuth = axios.create(options)
+
+axiosWithoutAuth.interceptors.response.use(
+    config => config,
+    async err => catchErrorsInterceptor(err)
+)
 
 axiosWithAuth.interceptors.request.use(config => {
     const accessToken = getAccessToken()
@@ -44,6 +50,7 @@ axiosWithAuth.interceptors.response.use(
                 if (err?.response?.status === 401) {
                     removeAccessToken()
                 }
+                catchErrorsInterceptor(err)
             }
         }
 

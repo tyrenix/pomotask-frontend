@@ -1,8 +1,7 @@
-import {IAuthForm, IAuthResponse, IGetNewTokens} from '@/types/auth.types'
-import {axiosWithAuth, axiosWithoutAuth} from '@/api/interceptors'
-import {removeAccessToken, saveAccessToken} from '@/services/auth-token.service'
 import {AxiosResponse} from 'axios'
-import {envConstant} from '@/constants/env.constant'
+import {axiosWithAuth, axiosWithoutAuth} from '@/interceptors/axios.interceptor'
+import {removeAccessToken, saveAccessToken} from '@/services/auth-token.service'
+import {IAuthForm, IAuthResponse, IGetNewTokens} from '@/types/auth.types'
 
 class AuthService {
     async main(

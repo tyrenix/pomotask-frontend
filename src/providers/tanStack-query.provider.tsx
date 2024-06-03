@@ -3,6 +3,7 @@
 import {PropsWithChildren, useState} from 'react'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
+import {envConstant} from '@/constants/env.constant'
 
 export function TanStackQueryProvider({children}: PropsWithChildren) {
     const [client] = useState(
@@ -18,7 +19,9 @@ export function TanStackQueryProvider({children}: PropsWithChildren) {
     return (
         <QueryClientProvider client={client}>
             {children}
-            <ReactQueryDevtools initialIsOpen={false} />
+            {envConstant.NEXT_PUBLIC_IS_DEV === 'YES' && (
+                <ReactQueryDevtools initialIsOpen={false} />
+            )}
         </QueryClientProvider>
     )
 }

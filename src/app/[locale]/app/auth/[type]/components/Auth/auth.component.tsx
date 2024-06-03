@@ -19,19 +19,18 @@ export default function AuthComponent({type}: IAuthProps) {
     const t = useTranslations('Auth')
     const {register, handleSubmit, reset, setError} = useForm<IAuthForm>()
 
-    const {mutate, isPending} = useMutation({
+    const {mutate, isPending, error} = useMutation({
         mutationKey: ['auth'],
-        mutationFn: (data: IAuthForm) =>
-            new Promise(async () =>
-                setTimeout(() => authService.main(type, data), 1e3 * 5)
-            ),
+        mutationFn: (data: IAuthForm) => authService.main(type, data),
         onError(error) {
-            console.log(error)
+            console.log('Error', error)
         },
-        onSuccess() {
-            console.log('Success!')
+        onSuccess(data) {
+            console.log('Success!', data)
         }
     })
+
+    console.log(error)
 
     const onSubmit: SubmitHandler<IAuthForm> = (data: IAuthForm) => {
         mutate(data)
