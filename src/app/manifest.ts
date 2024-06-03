@@ -1,6 +1,7 @@
 import type {MetadataRoute} from 'next'
 import {cookies} from 'next/headers'
 import {getTranslations} from 'next-intl/server'
+import {cookieConstant} from '@/constants/cookie.constant'
 import {defaultLocale} from '@/i18n'
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
@@ -10,7 +11,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
         locale: defaultLocale
     })
 
-    const theme = cookieStore.get('theme')?.value || 'system'
+    const theme = cookieStore.get(cookieConstant.THEME)?.value || 'system'
 
     return {
         name: t('name'),

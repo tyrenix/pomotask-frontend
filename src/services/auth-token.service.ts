@@ -1,23 +1,18 @@
-import Cookie from 'js-cookie'
-
-export enum EnumTokens {
-    ACCESS_TOKEN = 'accessToken',
-    REFRESH_TOKEN = 'refreshToken'
-}
+import {setCookie, deleteCookie, getCookie} from 'cookies-next'
+import {cookieConstant} from '@/constants/cookie.constant'
 
 export const getAccessToken = (): string | null => {
-    const accessToken = Cookie.get(EnumTokens.ACCESS_TOKEN)
+    const accessToken = getCookie(cookieConstant.ACCESS_TOKEN)
     return accessToken || null
 }
 
 export const saveAccessToken = (accessToken: string): void => {
-    Cookie.set(EnumTokens.ACCESS_TOKEN, accessToken, {
+    setCookie(cookieConstant.ACCESS_TOKEN, accessToken, {
         domain: process.env.DOMAIN,
-        sameSite: 'strict',
-        expires: 1
+        sameSite: 'strict'
     })
 }
 
 export const removeAccessToken = () => {
-    Cookie.remove(EnumTokens.ACCESS_TOKEN)
+    deleteCookie(cookieConstant.ACCESS_TOKEN)
 }

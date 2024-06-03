@@ -2,11 +2,11 @@
     "Manifest": {
         "name": "Pomotask",
         "short-name": "Pomotask",
-        "description": "PomoTask is the best solution for tracking your activity on important tasks"
+        "description": "Pomotask is the best solution for tracking your activity on important tasks"
     },
     "Metadata": {
         "title": "Pomotask - an observer will help in time!",
-        "description": "PomoTask is the best solution for tracking your activity on important tasks"
+        "description": "Pomotask is the best solution for tracking your activity on important tasks"
     },
     "Wait": {
         "text": "The site is still in development,\nbut it will be available soon!"
@@ -15,5 +15,54 @@
         "title": "Not found :(",
         "description": "The requested resource could not be found",
         "to-main": "To main page"
+    },
+    "Auth": {
+        "title": "Authorization",
+        "login": "Account Login",
+        "register": "Registration",
+        "success": "Successfully logged in!",
+        "form": {
+            "enter-email": "Enter email",
+            "enter-password": "Enter password",
+            "change-to-login": "Already have an account?",
+            "change-to-register": "Don't have an account yet?",
+            "login": "Login",
+            "register": "Register",
+            "errors": {
+                "email": {
+                    "required": "This field is required!"
+                },
+                "password": {
+                    "required": "This field is required!",
+                    "minLength": "The minimum password length is 8 characters",
+                    "maxLength": "The maximum password length is 16 characters"
+                }
+            }
+        }
+    },
+    "Welcome": {
+        "title": "Welcome",
+        "content": {
+            "title": "Welcome to Pomotask!",
+            "description": "Your reliable assistant for productive work and efficient time management. With our app, you can easily keep track of time, work in focused intervals, and achieve great results.",
+            "advantages": {
+                "focus": {
+                    "title": "Focus and Productivity",
+                    "description": "Work with maximum concentration by using 25-minute work intervals and short breaks."
+                },
+                "flexibility": {
+                    "title": "Flexibility",
+                    "description": "Customize the duration of sessions and breaks to tailor the timer to your needs."
+                },
+                "stats": {
+                    "title": "Statistics",
+                    "description": "Track your productivity and progress by analyzing completed tasks and time spent."
+                }
+            },
+            "next": "Continue"
+        }
+    },
+    "Error": {
+        "E500": "Unknown error, please try again later"
     }
 }

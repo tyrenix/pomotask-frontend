@@ -1,4 +1,3 @@
-import {AxiosResponse} from 'axios'
 import {axiosWithAuth, axiosWithoutAuth} from '@/interceptors/axios.interceptor'
 import {removeAccessToken, saveAccessToken} from '@/services/auth-token.service'
 import {IAuthForm, IAuthResponse, IGetNewTokens} from '@/types/auth.types'
@@ -7,7 +6,7 @@ class AuthService {
     async main(
         type: 'login' | 'register',
         data: IAuthForm
-    ): Promise<AxiosResponse<IAuthResponse>> {
+    ): Promise<IAuthResponse> {
         const response = await axiosWithoutAuth.post<IAuthResponse>(
             `/auth/${type}`,
             data
@@ -17,10 +16,10 @@ class AuthService {
             saveAccessToken(response?.data?.accessToken)
         }
 
-        return response
+        return response.data
     }
 
-    async getNewTokens(): Promise<AxiosResponse<IGetNewTokens>> {
+    async getNewTokens(): Promise<IGetNewTokens> {
         const response =
             await axiosWithoutAuth.post<IGetNewTokens>(`/auth/tokens`)
 
@@ -28,7 +27,7 @@ class AuthService {
             saveAccessToken(response?.data?.accessToken)
         }
 
-        return response
+        return response.data
     }
 
     async logout(): Promise<{success: true}> {
@@ -40,7 +39,7 @@ class AuthService {
             removeAccessToken()
         }
 
-        return response?.data
+        return response.data
     }
 }
 

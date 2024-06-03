@@ -1,7 +1,6 @@
 .button {
     @apply
     w-full
-    h-16
     flex
     justify-center
     items-center
@@ -13,6 +12,7 @@
     hover:bg-accent-70
     active:bg-accent-70
     transition-colors-custom
+    select-none
 }
 
 .button-loading,

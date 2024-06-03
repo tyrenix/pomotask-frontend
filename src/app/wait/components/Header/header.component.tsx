@@ -1,10 +1,12 @@
 'use client'
 
-import {type ChangeEvent, useState} from 'react'
+import type {ChangeEvent} from 'react'
+import {useRouter} from 'next/navigation'
 import {useLocale} from 'next-intl'
-import {CgMoon, CgSun} from 'react-icons/cg'
+import {Moon as MoonIcon, Sun as SunIcon} from 'lucide-react'
 import {setCookie} from 'cookies-next'
-import {usePathname, useRouter} from '@/navigation'
+import {cookieConstant} from '@/constants/cookie.constant'
+
 import styles from './style.module.css'
 
 type Theme = 'light' | 'dark' | 'system'
@@ -14,12 +16,11 @@ interface IProps {
 
 const HeaderComponent = (props: IProps) => {
     const locale = useLocale()
-    const pathname = usePathname()
     const router = useRouter()
 
     const themeChange = () => {
         const setCookieTheme = (theme: Theme) =>
-            setCookie('theme', theme, {
+            setCookie(cookieConstant.THEME, theme, {
                 expires: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 30 * 356)
             })
 
@@ -35,18 +36,21 @@ const HeaderComponent = (props: IProps) => {
     }
 
     const languageChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        router.replace(pathname, {locale: e.target.value})
+        setCookie(cookieConstant.LOCALE, e.target.value, {
+            expires: new Date(Date.now() + 1e3 * 60 * 60 * 24 * 30 * 356)
+        })
+        router.refresh()
     }
 
     return (
         <header className={styles.wrapper}>
             <div className={styles.buttonWrapper} onClick={themeChange}>
                 {props.theme === 'light' ? (
-                    <CgMoon />
+                    <MoonIcon />
                 ) : props.theme === 'dark' ? (
                     'A'
                 ) : (
-                    <CgSun />
+                    <SunIcon />
                 )}
             </div>
             <div className={styles.buttonWrapper}>

@@ -54,6 +54,7 @@
     text-small-bold
     text-primaryInvert-70
     transition-colors-custom
+    line-clamp-1
 }
 
 .input {

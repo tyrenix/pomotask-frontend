@@ -2,7 +2,7 @@ import {cookies} from 'next/headers'
 import {useTranslations} from 'next-intl'
 import LogoComponent from '@/components/Logo/logo.component'
 import LoadingComponent from '@/components/Loading/loading.component'
-import HeaderComponent from '@/app/[locale]/wait/components/Header/header.component'
+import HeaderComponent from '@/app/wait/components/Header/header.component'
 
 const WaitPage = () => {
     const cookieStore = cookies()

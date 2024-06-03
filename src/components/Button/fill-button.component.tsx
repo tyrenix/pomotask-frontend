@@ -7,17 +7,22 @@ interface IFillButtonProps {
     onClick?: (e: MouseEvent<HTMLButtonElement>) => any
     loading?: boolean
     disabled?: boolean
+    size?: 'big' | 'medium' | 'small'
 }
 
 export default function FillButtonComponent({
     onClick,
     label,
     loading,
-    disabled
+    disabled,
+    size = 'big'
 }: IFillButtonProps) {
     return (
         <button
-            className={`${styles.button} ${disabled ? styles.buttonDisabled : ''} ${loading ? styles.buttonLoading : ''}`}
+            className={
+                `${styles.button} ${disabled ? styles.buttonDisabled : ''} ${loading ? styles.buttonLoading : ''} ` +
+                `${size === 'big' ? 'h-16' : size === 'medium' ? 'h-12' : 'h-10'}`
+            }
             onClick={onClick}
             disabled={disabled}
         >

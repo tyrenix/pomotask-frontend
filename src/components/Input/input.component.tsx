@@ -6,7 +6,7 @@ export interface IInputProps {
     placeholder?: string
     label?: string
     disabled?: boolean
-    error?: boolean
+    error?: string | boolean
     type?: string
 }
 
@@ -20,7 +20,7 @@ const InputComponent = forwardRef<HTMLInputElement, IInputProps>(
             >
                 {label && (
                     <label htmlFor={id} className={styles.label}>
-                        {label}
+                        {(typeof error === 'string' ? error : null) || label}
                     </label>
                 )}
                 <input
