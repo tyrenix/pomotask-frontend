@@ -3,7 +3,7 @@ import {axiosWithAuth} from '@/interceptors/axios.interceptor'
 import {IFiltersSearchTask, ITask} from '@/types/task.types'
 
 class TaskService {
-    private readonly PREFIX = '/task'
+    private readonly PREFIX: string = '/task'
 
     async getAllTasks(filters: IFiltersSearchTask = {}) {
         const queryParams = queryString.stringify(filters)

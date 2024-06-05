@@ -1,0 +1,27 @@
+.wrapper {
+    @apply fixed left-0 bottom-0 w-full h-20 bg-content;
+}
+
+.wrapper-buttons {
+    @apply w-full h-full flex items-center;
+}
+
+.wrapper-buttons > li {
+    @apply h-full flex-1 pt-2  cursor-pointer transition-colors-custom hover:text-accent-70 active:text-accent-70;
+}
+
+.wrapper-buttons > li > a {
+    @apply h-full w-full flex flex-col gap-0.5 items-center justify-start;
+}
+
+.wrapper-buttons > li > a > svg {
+    @apply w-8 h-8;
+}
+
+.wrapper-buttons > li > a > span {
+    @apply text-small-bold;
+}
+
+.active-button {
+    @apply text-accent;
+}

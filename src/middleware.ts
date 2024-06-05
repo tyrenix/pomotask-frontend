@@ -12,8 +12,7 @@ export function middleware(request: NextRequest) {
     if (
         // If user no auth and stay in app pages
         !refreshToken &&
-        pathname !== dashboardConstant.LOGIN_PAGE &&
-        pathname !== dashboardConstant.REGISTER_PAGE
+        !pathname.includes(dashboardConstant.PREFIX_AUTH_PAGE)
     ) {
         return Response.redirect(
             new URL(dashboardConstant.AUTH_PAGE, request.url)
@@ -21,8 +20,7 @@ export function middleware(request: NextRequest) {
     } else if (
         // If user auth and stay in auth page
         refreshToken &&
-        (pathname === dashboardConstant.LOGIN_PAGE ||
-            pathname === dashboardConstant.REGISTER_PAGE)
+        pathname.includes(dashboardConstant.PREFIX_AUTH_PAGE)
     ) {
         return Response.redirect(
             new URL(dashboardConstant.APP_PAGE, request.url)
@@ -31,5 +29,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/app/:path*']
+    matcher: ['/auth/:path*', '/app/:path*']
 }

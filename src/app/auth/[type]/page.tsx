@@ -2,7 +2,7 @@ import {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {getLocale, getTranslations} from 'next-intl/server'
 import {seoConstants} from '@/constants/seo.constant'
-import {AuthComponent} from '@/app/app/auth/[type]/components/Auth/auth.component'
+import {AuthComponent} from '@/app/auth/[type]/components/Auth/auth.component'
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const locale = await getLocale()

@@ -1,3 +1,4 @@
+import {clsx} from 'clsx'
 import {MouseEvent} from 'react'
 import styles from './fill-button.module.css'
 import LoaderComponent from '@/components/Loader/loader.component'
@@ -19,10 +20,12 @@ export default function FillButtonComponent({
 }: IFillButtonProps) {
     return (
         <button
-            className={
-                `${styles.button} ${disabled ? styles.buttonDisabled : ''} ${loading ? styles.buttonLoading : ''} ` +
-                `${size === 'big' ? 'h-16' : size === 'medium' ? 'h-12' : 'h-10'}`
-            }
+            className={clsx(
+                styles.button,
+                disabled && styles.buttonDisabled,
+                loading && styles.buttonLoading,
+                size === 'big' ? 'h-16' : size === 'medium' ? 'h-12' : 'h-10'
+            )}
             onClick={onClick}
             disabled={disabled}
         >

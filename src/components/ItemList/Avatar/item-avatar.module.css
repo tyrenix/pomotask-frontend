@@ -1,0 +1,7 @@
+.wrapper-avatar {
+    @apply relative w-16 h-16 rounded-2xl overflow-hidden flex justify-center items-center;
+}
+
+.wrapper-avatar > img {
+    @apply object-cover object-center;
+}

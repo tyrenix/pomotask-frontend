@@ -10,8 +10,8 @@ import {cookieConstant} from '@/constants/cookie.constant'
 import {seoConstants} from '@/constants/seo.constant'
 import {envConstant} from '@/constants/env.constant'
 
-import '@/styles/globals.css'
-import '@/styles/theme.css'
+import '@/styles/globals.styles.css'
+import '@/styles/theme.styles.css'
 
 const nunito = Nunito({subsets: ['latin', 'cyrillic']})
 
@@ -63,9 +63,8 @@ export default async function RootLayout({children}: PropsWithChildren) {
                             position='top-center'
                             duration={2500}
                         />
-                        <main className='w-full h-full p-standard text-primaryInvert'>
-                            {children}
-                        </main>
+
+                        {children}
                     </TanStackQueryProvider>
                 </NextIntlClientProvider>
             </body>

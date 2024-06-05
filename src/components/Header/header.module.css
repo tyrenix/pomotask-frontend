@@ -1,0 +1,15 @@
+.wrapper {
+    @apply w-full h-16 flex items-center ;
+}
+
+.wrapper > h1 {
+    @apply text-3xl-bold;
+}
+
+.wrapper-options {
+    @apply w-12 h-12 ml-auto flex items-center justify-center rounded-2xl cursor-pointer;
+}
+
+.wrapper-options > svg {
+    @apply w-9 h-9;
+}

@@ -1,7 +1,6 @@
 import {Metadata} from 'next'
 import {getLocale, getTranslations} from 'next-intl/server'
 import {WelcomeComponent} from '@/app/app/welcome/components/Welcome/welcome.component'
-import {seoConstants} from '@/constants/seo.constant'
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const locale = await getLocale()
@@ -10,12 +9,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
         namespace: 'Welcome'
     })
 
-    return {
-        title: t('title'),
-        ...seoConstants.NO_INDEX_PAGE
-    }
+    return {title: t('title')}
 }
 
 export default function WelcomePage() {
-    return <WelcomeComponent />
+    return (
+        <div className='fixed top-0 left-0 z-50 p-standard bg-content'>
+            <WelcomeComponent />
+        </div>
+    )
 }

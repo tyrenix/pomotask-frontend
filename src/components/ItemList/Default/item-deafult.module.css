@@ -1,0 +1,27 @@
+.wrapper {
+    @apply w-full flex items-center cursor-pointer transition-colors-custom hover:bg-primaryInvert-10 active:bg-primaryInvert-10;
+}
+
+.wrapper:last-child > .wrapper-main-content {
+    @apply !border-none;
+}
+
+.wrapper-main-content {
+    @apply h-full flex flex-1 pr-standard py-2.5 border-b border-primaryInvert-10 items-center;
+}
+
+.wrapper-description {
+    @apply h-full flex flex-col flex-1;
+}
+
+.wrapper-description > h4 {
+    @apply text-base-bold line-clamp-1;
+}
+
+.wrapper-description > p {
+    @apply text-small-regular text-primaryInvert-70 line-clamp-1 -mt-1;
+}
+
+.wrapper-leftIcon {
+    @apply ml-standard overflow-hidden;
+}
