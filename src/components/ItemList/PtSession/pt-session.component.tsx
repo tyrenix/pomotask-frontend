@@ -1,3 +1,4 @@
+import {useTranslations} from 'next-intl'
 import {clsx} from 'clsx'
 import {
     IProps as ItemDefaultProps,
@@ -6,7 +7,6 @@ import {
 import {TPomodoroSession} from '@/types/pomodoro-session.types'
 
 import styles from './pt-session.module.css'
-import {useTranslations} from 'next-intl'
 
 interface IPropsWithoutLoading
     extends Pick<ItemDefaultProps, 'onClick' | 'description' | 'title'> {
@@ -34,11 +34,17 @@ export const PtSessionComponent = ({
         <div
             className={clsx(
                 isLoading ? styles.wrapperIconLoading : styles.wrapperIcon,
-                isLoading && 'skeletron-loader'
+                isLoading && 'skeletron-loader',
+                !isLoading &&
+                    (type === 'work'
+                        ? 'bg-accent'
+                        : type === 'longBreak'
+                        ? 'bg-blue'
+                        : 'bg-green')
             )}
         >
             {totalMinutes}
-            {t('shortMinutes')}
+            {t('shortMinutes')[0]}
         </div>
     )
 

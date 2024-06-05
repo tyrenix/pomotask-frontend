@@ -15,6 +15,6 @@ export const useActivePage = () => {
     } else if (pathname.includes(dashboardConstant.POMODORO_PAGE)) {
         activePage = 'tasks'
     }
-
+    
     return activePage
 }

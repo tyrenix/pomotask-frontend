@@ -7,7 +7,7 @@
 }
 
 .wrapper-title > p {
-    @apply h-6 text-lg-bold line-clamp-1;
+    @apply h-6 min-w-24 text-lg-bold line-clamp-1;
 }
 
 .wrapper-progress-loading {
@@ -19,7 +19,7 @@
 }
 
 .wrapper-progress > p {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base-bold text-primary;
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base-bold text-white;
 }
 
 .wrapper-progress > div {

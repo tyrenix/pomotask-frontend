@@ -1,5 +1,5 @@
 .wrapper-icon {
-    @apply w-12 h-12 bg-accent rounded-2xl flex justify-center items-center text-small-bold text-white overflow-hidden;
+    @apply w-12 h-12 rounded-2xl flex justify-center items-center text-small-bold text-white overflow-hidden;
 }
 
 .wrapper-icon-loading {

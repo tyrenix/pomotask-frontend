@@ -1,26 +1,22 @@
 import {clsx} from 'clsx'
 import {useTranslations} from 'next-intl'
+import {getHoursAndMinutes} from '@/helpers/get-hours-and-minutes.helper'
 
 import styles from './activity.module.css'
 
-const getHoursAndMinutes = (
-    seconds: number
-): {hours: number; minutes: number} => {
-    const hours = Math.floor(seconds / 60 / 60)
-    const minutes = Math.floor((seconds - hours * 60 * 60) / 60)
-
-    return {
-        hours,
-        minutes
-    }
-}
-
-interface IProps {
+interface IPropsWithoutLoading {
     completedSeconds: number
     totalSeconds: number
     title: string
-    isLoading?: boolean
+    isLoading?: false
 }
+
+interface IPropsWitLoading
+    extends Omit<Partial<IPropsWithoutLoading>, 'isLoading'> {
+    isLoading: true
+}
+
+type IProps = IPropsWitLoading | IPropsWithoutLoading
 
 export const ActivityComponent = ({
     completedSeconds,
@@ -30,8 +26,13 @@ export const ActivityComponent = ({
 }: IProps) => {
     const t = useTranslations('Units')
 
-    const completedTime = getHoursAndMinutes(completedSeconds)
-    const totalTime = getHoursAndMinutes(totalSeconds)
+    const options = {
+        mins: t('shortMinutes'),
+        hours: t('shortHours')
+    }
+
+    const completedTime = getHoursAndMinutes(completedSeconds || 0, options)
+    const totalTime = getHoursAndMinutes(totalSeconds || 0, options)
 
     return (
         <div className={styles.wrapper}>
@@ -50,18 +51,12 @@ export const ActivityComponent = ({
                     <>
                         <div
                             style={{
-                                width: `${Math.floor((completedSeconds / totalSeconds) * 100)}%`
+                                width: `${Math.floor(
+                                    (completedSeconds / totalSeconds) * 100
+                                )}%`
                             }}
                         />
-                        <p>
-                            {completedTime.hours
-                                ? `${completedTime.hours}${t('shortHours')} ${completedTime.minutes}${t('shortMinutes')}`
-                                : `${completedTime.minutes}${t('shortMinutes')}`}{' '}
-                            /{' '}
-                            {totalTime.hours
-                                ? `${totalTime.hours}${t('shortHours')} ${totalTime.minutes}${t('shortMinutes')}`
-                                : `${totalTime.minutes}${t('shortMinutes')}`}
-                        </p>
+                        <p>{`${completedTime.string} / ${totalTime.string}`}</p>
                     </>
                 )}
             </div>

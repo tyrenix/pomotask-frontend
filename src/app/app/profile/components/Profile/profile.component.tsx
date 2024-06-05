@@ -4,44 +4,95 @@ import {useTranslations} from 'next-intl'
 import {ListComponent} from '@/components/List/list.component'
 import {ActivityComponent} from '@/components/Activity/activity.component'
 import * as ItemList from '@/components/ItemList'
+import {useUser} from '@/hooks/useUser.hook'
+import {useUserActivity} from '@/hooks/useUserActivity.hook'
+import {envConstant} from '@/constants/env.constant'
+import {getHoursAndMinutes} from '@/helpers/get-hours-and-minutes.helper'
+import {usePtSettings} from '@/hooks/usePtSettings.hook'
+import {usePtSessions} from '@/hooks/usePtSessions.hook'
+import {ProfileSettingsComponent} from '../Settings/settings.component'
 
 export const ProfileComponent = () => {
+    const tUnit = useTranslations('Units')
     const t = useTranslations('Profile')
+
+    const {user, isLoading: isLoadingUser} = useUser()
+    const {activity, isLoading: isLoadingUserActivity} = useUserActivity()
+    const {ptSettings, isLoading: isLoadingPtSettings} = usePtSettings()
+    const {ptSessions, isLoading: isLoadingPtSessions} = usePtSessions()
 
     return (
         <>
-            <ListComponent>
-                <ItemList.ItemAvatarComponent isLoading={true} />
-                <ItemList.ItemTransitionComponent
-                    size='small'
-                    isLoading={true}
-                />
-            </ListComponent>
-            <ListComponent title={t('activity')}>
-                <div className='flex flex-col p-standard gap-4'>
-                    <ActivityComponent
-                        title={t('activity.today')}
-                        completedSeconds={12000}
-                        totalSeconds={19000}
+            {!user || isLoadingUser || isLoadingUserActivity ? (
+                <ListComponent>
+                    <ItemList.ItemAvatarComponent isLoading={true} />
+                    <ItemList.ItemTransitionComponent
+                        size='medium'
                         isLoading={true}
                     />
-                    <ActivityComponent
-                        title={t('activity.month')}
-                        completedSeconds={12000}
-                        totalSeconds={19000}
-                        isLoading={true}
+                </ListComponent>
+            ) : (
+                <ListComponent>
+                    <ItemList.ItemAvatarComponent
+                        avatar={`${envConstant.NEXT_PUBLIC_DOMAIN}/images/avatars/${user?.avatar}.webp`}
+                        title={user?.email || ''}
+                        description={
+                            getHoursAndMinutes(activity?.total || 0, {
+                                hours: tUnit('shortHours'),
+                                mins: tUnit('shortMinutes')
+                            }).string
+                        }
                     />
-                </div>
-            </ListComponent>
-            <ListComponent title={t('pomodoro-sessions')}>
-                <ItemList.PtSessionComponent
-                    type='work'
-                    title='Work'
-                    description='Started on 19'
-                    totalSeconds={300}
-                    isLoading={true}
-                />
-            </ListComponent>
+                    <ItemList.ItemTransitionComponent
+                        title={t('settings')}
+                        size='medium'
+                    />
+                </ListComponent>
+            )}
+            {!activity ||
+            !ptSettings ||
+            isLoadingUserActivity ||
+            isLoadingPtSettings ? (
+                <ListComponent title={t('activity.title')}>
+                    <div className='flex flex-col p-standard gap-4'>
+                        <ActivityComponent isLoading={true} />
+                        <ActivityComponent isLoading={true} />
+                    </div>
+                </ListComponent>
+            ) : (
+                <ListComponent title={t('activity.title')}>
+                    <div className='flex flex-col p-standard gap-4'>
+                        <ActivityComponent
+                            title={t('activity.today')}
+                            completedSeconds={activity.today}
+                            totalSeconds={ptSettings.workingTime}
+                        />
+                        <ActivityComponent
+                            title={t('activity.week')}
+                            completedSeconds={activity.week}
+                            totalSeconds={ptSettings.workingTime * 7}
+                        />
+                    </div>
+                </ListComponent>
+            )}
+            {!ptSessions || isLoadingPtSessions ? (
+                <ListComponent title={t('pomodoro-sessions.title')}>
+                    <ItemList.PtSessionComponent isLoading={true} />
+                    <ItemList.PtSessionComponent isLoading={true} />
+                    <ItemList.PtSessionComponent isLoading={true} />
+                </ListComponent>
+            ) : ptSessions.length ? (
+                <ListComponent title={t('pomodoro-sessions.title')}>
+                    {ptSessions.map(ptSession => (
+                        <ItemList.PtSessionComponent
+                            title={ptSession.type}
+                            type={ptSession.type}
+                            totalSeconds={ptSession.totalSeconds}
+                        />
+                    ))}
+                </ListComponent>
+            ) : null}
+            <ProfileSettingsComponent />
         </>
     )
 }
