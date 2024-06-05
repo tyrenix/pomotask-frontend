@@ -1,0 +1,27 @@
+.wrapper {
+    @apply w-full flex flex-col gap-1.5;
+}
+
+.wrapper-title {
+    @apply flex;
+}
+
+.wrapper-title > p {
+    @apply h-6 text-lg-bold line-clamp-1;
+}
+
+.wrapper-progress-loading {
+    @apply w-full h-12;
+}
+
+.wrapper-progress {
+    @apply relative w-full h-12 bg-primaryInvert-30 rounded-2xl overflow-hidden flex;
+}
+
+.wrapper-progress > p {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-base-bold text-primary;
+}
+
+.wrapper-progress > div {
+    @apply h-full bg-accent rounded-2xl;
+}

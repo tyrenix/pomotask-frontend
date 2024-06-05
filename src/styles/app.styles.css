@@ -11,6 +11,6 @@
         @apply opacity-100;
     }
     50% {
-        @apply opacity-85;
+        @apply opacity-75;
     }
 }
