@@ -3,7 +3,7 @@
 }
 
 .wrapper-container {
-    @apply w-full px-standard bg-content rounded-t-2xl overflow-hidden transition-transform-custom;
+    @apply w-full bg-content rounded-t-2xl overflow-hidden transition-transform-custom;
 }
 
 .wrapper-container-full {
@@ -11,11 +11,11 @@
 }
 
 .wrapper-container-small {
-    @apply h-2/3;
+    @apply max-h-full h-auto;
 }
 
 .header {
-    @apply relative w-full h-14 flex items-center justify-between;
+    @apply relative w-full h-14 px-standard flex items-center justify-between;
 }
 
 .header-buttons {
@@ -35,7 +35,11 @@
 }
 
 .wrapper-content {
-    @apply w-full h-full pt-standard pb-20 overflow-y-scroll;
+    @apply w-full h-full px-standard pt-standard overflow-y-scroll;
+}
+
+.wrapper-content > div {
+    @apply h-auto;
 }
 
 @keyframes show-wrapper {

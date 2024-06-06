@@ -1,0 +1,31 @@
+.wrapper-main-info {
+    @apply w-full flex flex-col items-center gap-3;
+}
+
+.wrapper-icon {
+    @apply w-36 h-36 rounded-3xl text-white flex justify-center items-center;
+}
+
+.wrapper-icon-load {
+    @apply bg-accent;
+}
+
+.wrapper-icon > svg {
+    @apply w-16 h-16;
+}
+
+.wrapper-info {
+    @apply flex flex-col items-center justify-center;
+}
+
+.wrapper-info > h4 {
+    @apply h-9 min-w-40 text-center text-2xl-bold;
+}
+
+.wrapper-info > p {
+    @apply h-6 min-w-52 text-center text-lg-regular text-primaryInvert-70;
+}
+
+.info-text {
+    @apply text-primaryInvert-70 line-clamp-1;
+}

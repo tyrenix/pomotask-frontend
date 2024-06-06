@@ -47,7 +47,7 @@ export const PopUpMenuComponent = ({
             setStatus('opening')
             setTimeout(() => {
                 setStatus('open')
-            }, 100)
+            }, 10)
         } else if (!isOpen && status !== 'closing' && status !== 'close') {
             setStatus('closing')
             setTimeout(() => {
@@ -122,15 +122,17 @@ export const PopUpMenuComponent = ({
                             ) : null}
                         </>
                     ) : (
-                        <div
-                            className={styles.headerCloseButton}
-                            onClick={handlerCancelButton}
-                        >
-                            <XIcon />
-                        </div>
+                        <>
+                            <div className={styles.headerTitle}>{title}</div>
+                            <div
+                                className={styles.headerCloseButton}
+                                onClick={handlerCancelButton}
+                            >
+                                <XIcon />
+                            </div>
+                        </>
                     )}
                 </div>
-
                 <div className={clsx(className, styles.wrapperContent)}>
                     {children}
                 </div>
