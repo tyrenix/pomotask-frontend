@@ -1,5 +1,6 @@
 'use client'
 
+import {useState} from 'react'
 import {useTranslations} from 'next-intl'
 import {ListComponent} from '@/components/List/list.component'
 import {ActivityComponent} from '@/components/Activity/activity.component'
@@ -15,6 +16,8 @@ import {ProfileSettingsComponent} from '../Settings/settings.component'
 export const ProfileComponent = () => {
     const tUnit = useTranslations('Units')
     const t = useTranslations('Profile')
+
+    const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false)
 
     const {user, isLoading: isLoadingUser} = useUser()
     const {activity, isLoading: isLoadingUserActivity} = useUserActivity()
@@ -46,6 +49,7 @@ export const ProfileComponent = () => {
                     <ItemList.ItemTransitionComponent
                         title={t('settings')}
                         size='medium'
+                        onClick={() => setIsOpenSettings(true)}
                     />
                 </ListComponent>
             )}
@@ -92,7 +96,10 @@ export const ProfileComponent = () => {
                     ))}
                 </ListComponent>
             ) : null}
-            <ProfileSettingsComponent />
+            <ProfileSettingsComponent
+                isOpen={isOpenSettings}
+                onClose={() => setIsOpenSettings(false)}
+            />
         </>
     )
 }
