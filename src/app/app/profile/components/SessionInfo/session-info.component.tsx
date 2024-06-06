@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 import {useTranslations} from 'use-intl'
 import DeviceDetector from 'device-detector-js'

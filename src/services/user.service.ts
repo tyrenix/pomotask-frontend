@@ -1,4 +1,4 @@
-import {IUser} from '@/types/user.types'
+import {IUpdateUser, IUser} from '@/types/user.types'
 import {axiosWithAuth} from '@/interceptors/axios.interceptor'
 
 class UserService {
@@ -6,6 +6,17 @@ class UserService {
 
     async getUser(): Promise<IUser> {
         const response = await axiosWithAuth.get<IUser>(this.PREFIX)
+        return response.data
+    }
+
+    async update(data: IUpdateUser): Promise<IUser> {
+        const response = await axiosWithAuth.patch<IUser>(
+            `${this.PREFIX}/update`,
+            {
+                data
+            }
+        )
+
         return response.data
     }
 }

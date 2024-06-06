@@ -10,6 +10,7 @@ import {
 import {ListComponent} from '@/components/List/list.component'
 import {useSessions} from '@/hooks/useSessions.hook'
 import {SessionInfoComponent} from '../SessionInfo/session-info.component'
+import {PasswordComponent} from '../Password/password.component'
 
 interface IProps {
     isOpen: boolean
@@ -76,6 +77,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                 isOpen={!!openSessionPopUp}
                 sessionId={openSessionPopUp || ''}
                 onClose={() => setOpenSessionPopUp(null)}
+            />
+            <PasswordComponent
+                isOpen={isOpenPasswordPopUp}
+                onClose={() => setIsOpenPasswordPopUp(false)}
             />
         </>
     )

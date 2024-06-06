@@ -37,7 +37,6 @@ export const AuthComponent = ({type}: IAuthProps) => {
         mutationKey: ['auth'],
         mutationFn: (data: IAuthForm) => authService.main(type, data),
         onError(err: string) {
-            console.log(err)
             toast.error(err)
             setIsError(true)
         },
@@ -102,7 +101,11 @@ export const AuthComponent = ({type}: IAuthProps) => {
                     <div className={styles.changeMethodWrapper}>
                         <span>
                             {t(
-                                `form.${type === 'register' ? 'change-to-login' : 'change-to-register'}`
+                                `form.${
+                                    type === 'register'
+                                        ? 'change-to-login'
+                                        : 'change-to-register'
+                                }`
                             )}
                         </span>
                         <LinkComponent
@@ -112,7 +115,9 @@ export const AuthComponent = ({type}: IAuthProps) => {
                                     : dashboardConstant.REGISTER_PAGE
                             }
                             label={t(
-                                `form.${type === 'register' ? 'login' : 'register'}`
+                                `form.${
+                                    type === 'register' ? 'login' : 'register'
+                                }`
                             )}
                         />
                     </div>

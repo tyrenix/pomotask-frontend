@@ -5,5 +5,5 @@ export interface IUser {
 }
 
 export interface IUpdateUser {
-    password: string
+    password?: string
 }

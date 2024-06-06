@@ -90,8 +90,11 @@
     "Settings": {
         "title": "Настройки",
         "password": {
-            "title": "Пароль",
-            "text": "Изменить пароль"
+            "title": "Смена пароля",
+            "text": "Изменить пароль",
+            "enterOldPassword": "Введите старый пароль",
+            "enterNewPassword": "Введите новый пароль",
+            "passwordChange": "Пароль изменен!"
         },
         "pomodoro": {
             "title": "Помодоро таймер",
