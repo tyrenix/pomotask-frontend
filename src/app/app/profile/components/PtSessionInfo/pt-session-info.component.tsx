@@ -1,56 +1,38 @@
 'use client'
 
+import FillButtonComponent from '@/components/Button/fill-button.component'
+import {ItemDefaultComponent} from '@/components/ItemList'
+import {ListComponent} from '@/components/List/list.component'
+import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
+import {sessionService} from '@/services/session.service'
+import {useMutation, useQueryClient} from '@tanstack/react-query'
 import clsx from 'clsx'
-import {useTranslations} from 'use-intl'
 import DeviceDetector from 'device-detector-js'
 import {
-    Smartphone as SmartphoneIcon,
     Computer as ComputerIcon,
-    ShieldQuestion as ShieldQuestionIcon
+    ShieldQuestion as ShieldQuestionIcon,
+    Smartphone as SmartphoneIcon
 } from 'lucide-react'
-import {useSession} from '@/hooks/useSession.hook'
-import {useMutation, useQueryClient} from '@tanstack/react-query'
-import {sessionService} from '@/services/session.service'
-import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
-import {ListComponent} from '@/components/List/list.component'
-import {ItemDefaultComponent} from '@/components/ItemList'
-import FillButtonComponent from '@/components/Button/fill-button.component'
-
-import styles from './session-info.module.css'
+import {useTranslations} from 'use-intl'
+import {usePtSession} from '@/hooks/usePtSession.hook'
 import {toast} from 'sonner'
 
+import styles from './session-info.module.css'
+
 interface IProps {
-    sessionId: string
+    ptSessionId: string
     isOpen: boolean
     onClose: () => any
 }
 
-export const SessionInfoComponent = ({sessionId, isOpen, onClose}: IProps) => {
-    const queryClient = useQueryClient()
-
+export const PtSessionInfoComponent = ({
+    ptSessionId,
+    isOpen,
+    onClose
+}: IProps) => {
     const t = useTranslations('Settings.sessions.info')
 
-    const {session, isLoading} = useSession(sessionId)
-
-    const deviceDetect = new DeviceDetector().parse(session?.userAgent || '')
-    const agent = deviceDetect.device?.type
-
-    const {mutate} = useMutation({
-        mutationFn: (sessionId: string) =>
-            sessionService.closeSession(sessionId),
-        onSuccess: () => {
-            toast.success(t('sessionClosed'))
-            queryClient.invalidateQueries({queryKey: ['sessions']})
-        },
-        onError: error => {
-            toast.error(t('sessionCloseError'))
-        }
-    })
-
-    const closeSession = () => {
-        onClose()
-        mutate(sessionId)
-    }
+    const {session, isLoading} = usePtSession(ptSessionId)
 
     return (
         <PopUpMenuComponent

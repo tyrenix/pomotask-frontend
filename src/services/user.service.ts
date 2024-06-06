@@ -13,7 +13,7 @@ class UserService {
         const response = await axiosWithAuth.patch<IUser>(
             `${this.PREFIX}/update`,
             {
-                data
+                ...data
             }
         )
 

@@ -1,10 +1,10 @@
 import {axiosWithAuth} from '@/interceptors/axios.interceptor'
 import {IPomodoroSettings} from '@/types/pomodoro-settings.types'
 
-class PtSessionService {
+class PtSettingsService {
     private readonly PREFIX: string = '/pomodoro-settings'
 
-    async getUserActivity(): Promise<IPomodoroSettings> {
+    async get(): Promise<IPomodoroSettings> {
         const response = await axiosWithAuth.get<IPomodoroSettings>(
             this.PREFIX + '/'
         )
@@ -12,4 +12,4 @@ class PtSessionService {
     }
 }
 
-export const ptSessionService = new PtSessionService()
+export const ptSettingsService = new PtSettingsService()

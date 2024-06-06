@@ -1,13 +1,13 @@
-import {toast} from 'sonner'
-import {useEffect} from 'react'
+import {ptSessionService} from '@/services/pt-session.service'
 import {useQuery} from '@tanstack/react-query'
-import {sessionService} from '@/services/session.service'
+import {useEffect} from 'react'
+import {toast} from 'sonner'
 
-export const useSession = (sessionId: string) => {
+export const usePtSession = (ptSessionId: string) => {
     const {data, error, isSuccess, isLoading} = useQuery({
-        queryKey: ['sessions', sessionId],
-        queryFn: () => sessionService.getById(sessionId),
-        enabled: !!sessionId
+        queryKey: ['sessions', ptSessionId],
+        queryFn: () => ptSessionService,
+        enabled: !!ptSessionId
     })
 
     useEffect(() => {

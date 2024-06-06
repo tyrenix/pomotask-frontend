@@ -1,17 +1,17 @@
-import {useTranslations} from 'next-intl'
+'use client'
+
 import {clsx} from 'clsx'
+import {useTranslations} from 'next-intl'
 import {
-    IProps as ItemDefaultProps,
-    ItemDefaultComponent
+    ItemDefaultComponent,
+    IProps as ItemDefaultProps
 } from '@/components/ItemList'
-import {TPomodoroSession} from '@/types/pomodoro-session.types'
+import {IPomodoroSession} from '@/types/pomodoro-session.types'
 
 import styles from './item-pt-session.module.css'
 
-interface IPropsWithoutLoading
-    extends Pick<ItemDefaultProps, 'onClick' | 'description' | 'title'> {
-    type: TPomodoroSession
-    totalSeconds: number
+interface IPropsWithoutLoading extends Pick<ItemDefaultProps, 'onClick'> {
+    ptSession: IPomodoroSession
     isLoading?: false
 }
 
@@ -23,22 +23,24 @@ interface IPropsWithLoading
 type IProps = IPropsWithLoading | IPropsWithoutLoading
 
 export const ItemPtSessionComponent = ({
-    type,
-    totalSeconds,
+    ptSession,
     isLoading,
     ...rest
 }: IProps) => {
     const t = useTranslations('Units')
-    const totalMinutes = Math.floor((totalSeconds || 0) / 60)
+    const tPtSession = useTranslations('PtSession')
+
+    const totalMinutes = Math.floor((ptSession?.totalSeconds || 0) / 60)
+
     const icon = (
         <div
             className={clsx(
                 isLoading ? styles.wrapperIconLoading : styles.wrapperIcon,
                 isLoading && 'skeletron-loader',
                 !isLoading &&
-                    (type === 'work'
+                    (ptSession.type === 'work'
                         ? 'bg-accent'
-                        : type === 'longBreak'
+                        : ptSession.type === 'longBreak'
                         ? 'bg-blue'
                         : 'bg-green')
             )}
@@ -51,6 +53,16 @@ export const ItemPtSessionComponent = ({
     return (
         <ItemDefaultComponent
             size='big'
+            title={tPtSession(ptSession?.type)}
+            description={new Date(ptSession?.createdAt || 0).toLocaleDateString(
+                'ru-RU',
+                {
+                    day: '2-digit',
+                    month: '2-digit',
+                    minute: '2-digit',
+                    hour: '2-digit'
+                }
+            )}
             leftComponent={icon}
             isLoading={isLoading}
             {...rest}

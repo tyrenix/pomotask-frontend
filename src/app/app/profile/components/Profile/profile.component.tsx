@@ -16,21 +16,33 @@ import {getHoursAndMinutes} from '@/helpers/get-hours-and-minutes.helper'
 import {usePtSettings} from '@/hooks/usePtSettings.hook'
 import {usePtSessions} from '@/hooks/usePtSessions.hook'
 import {ProfileSettingsComponent} from '../Settings/settings.component'
+import {PtSessionListComponent} from '../PtSessionList/pt-session-list.component'
 
 export const ProfileComponent = () => {
     const tUnit = useTranslations('Units')
     const t = useTranslations('Profile')
 
     const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false)
+    const [isOpenPtSessionsList, setIsOpenPtSessionsList] =
+        useState<boolean>(false)
 
     const {user, isLoading: isLoadingUser} = useUser()
-    const {activity, isLoading: isLoadingUserActivity} = useUserActivity()
+
+    const {activity: activityTotal, isLoading: isLoadingUserActivityTotal} =
+        useUserActivity({filter: 'total'})
+    const {activity: activityDay, isLoading: isLoadingUserActivityDay} =
+        useUserActivity({filter: 'day'})
+    const {activity: activityWeek, isLoading: isLoadingUserActivityWeek} =
+        useUserActivity({filter: 'week'})
+
     const {ptSettings, isLoading: isLoadingPtSettings} = usePtSettings()
-    const {ptSessions, isLoading: isLoadingPtSessions} = usePtSessions()
+    const {ptSessions, isLoading: isLoadingPtSessions} = usePtSessions({
+        isCompleted: true
+    })
 
     return (
         <>
-            {!user || isLoadingUser || isLoadingUserActivity ? (
+            {!user || isLoadingUser || isLoadingUserActivityTotal ? (
                 <ListComponent>
                     <ItemAvatarComponent isLoading={true} />
                     <ItemTransitionComponent size='medium' isLoading={true} />
@@ -41,7 +53,7 @@ export const ProfileComponent = () => {
                         avatar={`${envConstant.NEXT_PUBLIC_DOMAIN}/images/avatars/${user?.avatar}.webp`}
                         title={user?.email || ''}
                         description={
-                            getHoursAndMinutes(activity?.total || 0, {
+                            getHoursAndMinutes(activityTotal, {
                                 hours: tUnit('shortHours'),
                                 mins: tUnit('shortMinutes')
                             }).string
@@ -54,9 +66,9 @@ export const ProfileComponent = () => {
                     />
                 </ListComponent>
             )}
-            {!activity ||
-            !ptSettings ||
-            isLoadingUserActivity ||
+            {!ptSettings ||
+            isLoadingUserActivityDay ||
+            isLoadingUserActivityWeek ||
             isLoadingPtSettings ? (
                 <ListComponent title={t('activity.title')}>
                     <div className='flex flex-col p-standard gap-4'>
@@ -69,12 +81,12 @@ export const ProfileComponent = () => {
                     <div className='flex flex-col p-standard gap-4'>
                         <ActivityComponent
                             title={t('activity.today')}
-                            completedSeconds={activity.today}
+                            completedSeconds={activityDay}
                             totalSeconds={ptSettings.workingTime}
                         />
                         <ActivityComponent
                             title={t('activity.week')}
-                            completedSeconds={activity.week}
+                            completedSeconds={activityWeek}
                             totalSeconds={ptSettings.workingTime * 7}
                         />
                     </div>
@@ -88,18 +100,26 @@ export const ProfileComponent = () => {
                 </ListComponent>
             ) : ptSessions.length ? (
                 <ListComponent title={t('pomodoro-sessions.title')}>
-                    {ptSessions.map(ptSession => (
+                    {ptSessions.map((ptSession, index) => (
                         <ItemPtSessionComponent
-                            title={ptSession.type}
-                            type={ptSession.type}
-                            totalSeconds={ptSession.totalSeconds}
+                            key={index}
+                            ptSession={ptSession}
                         />
                     ))}
+                    <ItemTransitionComponent
+                        onClick={() => setIsOpenPtSessionsList(true)}
+                        size='medium'
+                        title={t('pomodoro-sessions.openFull')}
+                    />
                 </ListComponent>
             ) : null}
             <ProfileSettingsComponent
                 isOpen={isOpenSettings}
                 onClose={() => setIsOpenSettings(false)}
+            />
+            <PtSessionListComponent
+                isOpen={isOpenPtSessionsList}
+                onClose={() => setIsOpenPtSessionsList(false)}
             />
         </>
     )

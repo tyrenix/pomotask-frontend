@@ -1,19 +1,28 @@
+import queryString from 'query-string'
 import {axiosWithAuth} from '@/interceptors/axios.interceptor'
-import {IPomodoroSession} from '@/types/pomodoro-session.types'
+import {
+    IActivityFiltersPomodoroSession,
+    IGetListPomodoroSession,
+    IPomodoroSession
+} from '@/types/pomodoro-session.types'
 
 class PtSessionService {
     private readonly PREFIX: string = '/pomodoro-session'
 
-    async getUserActivity() {
-        const response = await axiosWithAuth.get<any>(
-            this.PREFIX + '/activity/?type=week'
+    async getById(ptSessionId: string) {}
+
+    async getUserActivity(filters: IActivityFiltersPomodoroSession) {
+        const queryParams = queryString.stringify(filters)
+        const response = await axiosWithAuth.get<{activity: number}>(
+            this.PREFIX + `/activity/?${queryParams.toString()}`
         )
         return response.data
     }
 
-    async getListSessions() {
+    async getListSessions(filters?: IGetListPomodoroSession) {
+        const queryParams = queryString.stringify(filters || {})
         const response = await axiosWithAuth.get<IPomodoroSession[]>(
-            this.PREFIX + '/list'
+            this.PREFIX + `/list?${queryParams.toString()}`
         )
         return response.data
     }

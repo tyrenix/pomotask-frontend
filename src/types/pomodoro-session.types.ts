@@ -6,6 +6,7 @@ export interface IPomodoroSession {
     isCompleted: boolean
     isPaused: boolean
     type: TPomodoroSession
+    createdAt: Date
 }
 
 export interface IUpdatePomodoroSession
@@ -22,3 +23,7 @@ export interface IGetListPomodoroSession {
 
 export interface ICreatePomodoroSession
     extends Partial<Pick<IPomodoroSession, 'taskId' | 'type'>> {}
+
+export interface IActivityFiltersPomodoroSession {
+    filter?: 'day' | 'week' | 'total'
+}

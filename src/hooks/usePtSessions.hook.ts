@@ -1,13 +1,16 @@
 import {toast} from 'sonner'
 import {useEffect} from 'react'
 import {useQuery} from '@tanstack/react-query'
-import {IPomodoroSession} from '@/types/pomodoro-session.types'
+import {
+    IGetListPomodoroSession,
+    IPomodoroSession
+} from '@/types/pomodoro-session.types'
 import {ptSessionService} from '@/services/pt-session.service'
 
-export const usePtSessions = () => {
+export const usePtSessions = (filters?: IGetListPomodoroSession) => {
     const {data, isLoading, error, isError} = useQuery<IPomodoroSession[]>({
         queryKey: ['pomodoro-sessions'],
-        queryFn: () => ptSessionService.getListSessions()
+        queryFn: () => ptSessionService.getListSessions(filters)
     })
 
     useEffect(() => {
