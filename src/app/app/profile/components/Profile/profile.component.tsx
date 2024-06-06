@@ -4,7 +4,11 @@ import {useState} from 'react'
 import {useTranslations} from 'next-intl'
 import {ListComponent} from '@/components/List/list.component'
 import {ActivityComponent} from '@/components/Activity/activity.component'
-import * as ItemList from '@/components/ItemList'
+import {
+    ItemAvatarComponent,
+    ItemPtSessionComponent,
+    ItemTransitionComponent
+} from '@/components/ItemList'
 import {useUser} from '@/hooks/useUser.hook'
 import {useUserActivity} from '@/hooks/useUserActivity.hook'
 import {envConstant} from '@/constants/env.constant'
@@ -28,15 +32,12 @@ export const ProfileComponent = () => {
         <>
             {!user || isLoadingUser || isLoadingUserActivity ? (
                 <ListComponent>
-                    <ItemList.ItemAvatarComponent isLoading={true} />
-                    <ItemList.ItemTransitionComponent
-                        size='medium'
-                        isLoading={true}
-                    />
+                    <ItemAvatarComponent isLoading={true} />
+                    <ItemTransitionComponent size='medium' isLoading={true} />
                 </ListComponent>
             ) : (
                 <ListComponent>
-                    <ItemList.ItemAvatarComponent
+                    <ItemAvatarComponent
                         avatar={`${envConstant.NEXT_PUBLIC_DOMAIN}/images/avatars/${user?.avatar}.webp`}
                         title={user?.email || ''}
                         description={
@@ -46,7 +47,7 @@ export const ProfileComponent = () => {
                             }).string
                         }
                     />
-                    <ItemList.ItemTransitionComponent
+                    <ItemTransitionComponent
                         title={t('settings')}
                         size='medium'
                         onClick={() => setIsOpenSettings(true)}
@@ -81,14 +82,14 @@ export const ProfileComponent = () => {
             )}
             {!ptSessions || isLoadingPtSessions ? (
                 <ListComponent title={t('pomodoro-sessions.title')}>
-                    <ItemList.PtSessionComponent isLoading={true} />
-                    <ItemList.PtSessionComponent isLoading={true} />
-                    <ItemList.PtSessionComponent isLoading={true} />
+                    <ItemPtSessionComponent isLoading={true} />
+                    <ItemPtSessionComponent isLoading={true} />
+                    <ItemPtSessionComponent isLoading={true} />
                 </ListComponent>
             ) : ptSessions.length ? (
                 <ListComponent title={t('pomodoro-sessions.title')}>
                     {ptSessions.map(ptSession => (
-                        <ItemList.PtSessionComponent
+                        <ItemPtSessionComponent
                             title={ptSession.type}
                             type={ptSession.type}
                             totalSeconds={ptSession.totalSeconds}

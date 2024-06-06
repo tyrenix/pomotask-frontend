@@ -1,0 +1,48 @@
+.wrapper {
+    @apply fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-end transition-custom;
+}
+
+.wrapper-container {
+    @apply w-full px-standard bg-content rounded-t-2xl overflow-hidden transition-transform-custom;
+}
+
+.wrapper-container-full {
+    @apply h-5/6;
+}
+
+.wrapper-container-small {
+    @apply h-2/3;
+}
+
+.header {
+    @apply relative w-full h-14 flex items-center justify-between;
+}
+
+.header-buttons {
+    @apply h-full flex justify-center items-center text-lg-bold text-accent cursor-pointer transition-colors-custom hover:text-accent-70 active:text-accent-70;
+}
+
+.header-title {
+    @apply absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-primaryInvert text-lg-bold line-clamp-1;
+}
+
+.header-close-button {
+    @apply w-8 h-8 rounded-full flex items-center justify-center bg-primaryInvert-10 ml-auto cursor-pointer transition-colors-custom hover:bg-primaryInvert-30 active:bg-primaryInvert-30;
+}
+
+.header-close-button > svg {
+    @apply w-5 h-5;
+}
+
+.wrapper-content {
+    @apply w-full h-full pt-standard pb-20 overflow-y-scroll;
+}
+
+@keyframes show-wrapper {
+    0% {
+        @apply -translate-y-full;
+    }
+    100% {
+        @apply translate-y-0;
+    }
+}

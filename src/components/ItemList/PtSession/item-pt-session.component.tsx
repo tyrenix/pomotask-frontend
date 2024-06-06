@@ -6,7 +6,7 @@ import {
 } from '@/components/ItemList'
 import {TPomodoroSession} from '@/types/pomodoro-session.types'
 
-import styles from './pt-session.module.css'
+import styles from './item-pt-session.module.css'
 
 interface IPropsWithoutLoading
     extends Pick<ItemDefaultProps, 'onClick' | 'description' | 'title'> {
@@ -22,7 +22,7 @@ interface IPropsWithLoading
 
 type IProps = IPropsWithLoading | IPropsWithoutLoading
 
-export const PtSessionComponent = ({
+export const ItemPtSessionComponent = ({
     type,
     totalSeconds,
     isLoading,

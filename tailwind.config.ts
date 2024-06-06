@@ -95,6 +95,17 @@ const config: Config = {
                         'color, background-color, border-color, text-decoration-color, fill, stroke',
                     'transition-duration': '300ms',
                     'transition-timing-function': 'ease-in-out'
+                },
+                '.transition-custom': {
+                    'transition-property':
+                        'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
+                    'transition-duration': '300ms',
+                    'transition-timing-function': 'ease-in-out'
+                },
+                '.transition-transform-custom': {
+                    'transition-property': 'transform',
+                    'transition-duration': '300ms',
+                    'transition-timing-function': 'ease-in-out'
                 }
             }
 
