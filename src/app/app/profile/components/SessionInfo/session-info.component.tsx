@@ -1,23 +1,23 @@
 'use client'
 
+import FillButtonComponent from '@/components/Button/fill-button.component'
+import {ItemDefaultComponent} from '@/components/ItemList'
+import {ListComponent} from '@/components/List/list.component'
+import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
+import {useSession} from '@/hooks/useSession.hook'
+import {sessionService} from '@/services/session.service'
+import {useMutation, useQueryClient} from '@tanstack/react-query'
 import clsx from 'clsx'
-import {useTranslations} from 'use-intl'
 import DeviceDetector from 'device-detector-js'
 import {
-    Smartphone as SmartphoneIcon,
     Computer as ComputerIcon,
-    ShieldQuestion as ShieldQuestionIcon
+    ShieldQuestion as ShieldQuestionIcon,
+    Smartphone as SmartphoneIcon
 } from 'lucide-react'
-import {useSession} from '@/hooks/useSession.hook'
-import {useMutation, useQueryClient} from '@tanstack/react-query'
-import {sessionService} from '@/services/session.service'
-import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
-import {ListComponent} from '@/components/List/list.component'
-import {ItemDefaultComponent} from '@/components/ItemList'
-import FillButtonComponent from '@/components/Button/fill-button.component'
+import {toast} from 'sonner'
+import {useTranslations} from 'use-intl'
 
 import styles from './session-info.module.css'
-import {toast} from 'sonner'
 
 interface IProps {
     sessionId: string

@@ -3,11 +3,7 @@
 }
 
 .wrapper-icon {
-    @apply w-36 h-36 rounded-3xl text-white flex justify-center items-center;
-}
-
-.wrapper-icon-load {
-    @apply bg-accent;
+    @apply w-36 h-36 rounded-3xl text-white flex justify-center items-center text-2xl-bold line-clamp-1;
 }
 
 .wrapper-icon > svg {

@@ -6,7 +6,7 @@ import {toast} from 'sonner'
 export const usePtSession = (ptSessionId: string) => {
     const {data, error, isSuccess, isLoading} = useQuery({
         queryKey: ['sessions', ptSessionId],
-        queryFn: () => ptSessionService,
+        queryFn: () => ptSessionService.getById(ptSessionId),
         enabled: !!ptSessionId
     })
 
@@ -17,7 +17,7 @@ export const usePtSession = (ptSessionId: string) => {
     }, [error])
 
     return {
-        session: data,
+        ptSession: data,
         isSuccess,
         isLoading
     }

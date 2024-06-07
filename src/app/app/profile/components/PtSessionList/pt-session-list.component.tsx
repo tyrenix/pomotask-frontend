@@ -2,10 +2,11 @@
 
 import {useTranslations} from 'next-intl'
 
-import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
 import {ItemPtSessionComponent} from '@/components/ItemList'
-import {usePtSessions} from '@/hooks/usePtSessions.hook'
 import {ListComponent} from '@/components/List/list.component'
+import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
+import {usePtSessions} from '@/hooks/usePtSessions.hook'
+import {useState} from 'react'
 import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component'
 
 interface IProps {
@@ -15,6 +16,8 @@ interface IProps {
 
 export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
     const t = useTranslations('Profile.pomodoro-sessions')
+
+    const [openPtSession, setOpenPtSession] = useState<string | null>(null)
 
     const {ptSessions, isLoading} = usePtSessions({isCompleted: true})
 
@@ -40,15 +43,16 @@ export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
                             <ItemPtSessionComponent
                                 key={ptSession.id}
                                 ptSession={ptSession}
+                                onClick={() => setOpenPtSession(ptSession.id)}
                             />
                         ))}
                     </ListComponent>
                 )}
             </PopUpMenuComponent>
             <PtSessionInfoComponent
-                isOpen={true}
-                onClose={() => {}}
-                ptSessionId=''
+                isOpen={!!openPtSession}
+                onClose={() => setOpenPtSession(null)}
+                ptSessionId={openPtSession || ''}
             />
         </>
     )

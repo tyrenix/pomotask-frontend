@@ -9,7 +9,12 @@ import {
 class PtSessionService {
     private readonly PREFIX: string = '/pomodoro-session'
 
-    async getById(ptSessionId: string) {}
+    async getById(ptSessionId: string) {
+        const response = await axiosWithAuth.get<IPomodoroSession>(
+            this.PREFIX + `/${ptSessionId}`
+        )
+        return response.data
+    }
 
     async getUserActivity(filters: IActivityFiltersPomodoroSession) {
         const queryParams = queryString.stringify(filters)

@@ -119,6 +119,13 @@
                 "sessionClosed": "Сессия закрыта",
                 "sessionCloseError": "Не удалось закрыть сессию"
             }
+        },
+        "pomodoro-sessions": {
+            "info": {
+                "title": "Информация",
+                "started": "Начата",
+                "ended": "Закончена"
+            }
         }
     },
     "Error": {
