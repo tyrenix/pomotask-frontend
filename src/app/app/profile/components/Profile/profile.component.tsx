@@ -17,6 +17,7 @@ import {usePtSettings} from '@/hooks/usePtSettings.hook'
 import {usePtSessions} from '@/hooks/usePtSessions.hook'
 import {ProfileSettingsComponent} from '../Settings/settings.component'
 import {PtSessionListComponent} from '../PtSessionList/pt-session-list.component'
+import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component'
 
 export const ProfileComponent = () => {
     const tUnit = useTranslations('Units')
@@ -25,6 +26,7 @@ export const ProfileComponent = () => {
     const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false)
     const [isOpenPtSessionsList, setIsOpenPtSessionsList] =
         useState<boolean>(false)
+    const [openPtSessionInfo, setOpenPtSession] = useState<string | null>(null)
 
     const {user, isLoading: isLoadingUser} = useUser()
 
@@ -99,12 +101,13 @@ export const ProfileComponent = () => {
                     <ItemPtSessionComponent isLoading={true} />
                     <ItemPtSessionComponent isLoading={true} />
                 </ListComponent>
-            ) : ptSessions.length ? (
+            ) : ptSessions.pages[0].length ? (
                 <ListComponent title={t('pomodoro-sessions.title')}>
-                    {ptSessions.map((ptSession, index) => (
+                    {ptSessions.pages[0].map((ptSession, index) => (
                         <ItemPtSessionComponent
                             key={index}
                             ptSession={ptSession}
+                            onClick={() => setOpenPtSession(ptSession.id)}
                         />
                     ))}
                     <ItemTransitionComponent
@@ -121,6 +124,11 @@ export const ProfileComponent = () => {
             <PtSessionListComponent
                 isOpen={isOpenPtSessionsList}
                 onClose={() => setIsOpenPtSessionsList(false)}
+            />
+            <PtSessionInfoComponent
+                isOpen={!!openPtSessionInfo}
+                onClose={() => setOpenPtSession(null)}
+                ptSessionId={openPtSessionInfo || ''}
             />
         </>
     )

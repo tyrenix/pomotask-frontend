@@ -15,7 +15,7 @@ export default function AppLayout({children}: PropsWithChildren) {
         <>
             <div className='w-full h-full p-standard text-primaryInvert flex flex-col gap-8 overflow-y-scroll'>
                 <HeaderComponent />
-                <main className='w-full h-full flex flex-col gap-8 mb-20'>
+                <main className='w-full h-auto flex flex-col gap-8 mb-20'>
                     {children}
                 </main>
                 <NavigationComponent />

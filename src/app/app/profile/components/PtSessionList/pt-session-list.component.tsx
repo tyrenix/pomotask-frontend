@@ -1,12 +1,12 @@
 'use client'
 
 import {useTranslations} from 'next-intl'
-
 import {ItemPtSessionComponent} from '@/components/ItemList'
 import {ListComponent} from '@/components/List/list.component'
 import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
 import {usePtSessions} from '@/hooks/usePtSessions.hook'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import {useInView} from 'react-intersection-observer'
 import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component'
 
 interface IProps {
@@ -19,14 +19,23 @@ export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
 
     const [openPtSession, setOpenPtSession] = useState<string | null>(null)
 
-    const {ptSessions, isLoading} = usePtSessions({
+    const {ref, inView} = useInView({threshold: 0.5})
+
+    const {ptSessions, isLoading, fetchNextPage} = usePtSessions({
         filters: {isCompleted: true},
         enabled: isOpen
     })
 
+    useEffect(() => {
+        if (inView) {
+            fetchNextPage()
+        }
+    }, [inView])
+
     return (
         <>
             <PopUpMenuComponent
+                className='pb-20'
                 isOpen={isOpen}
                 onClose={onClose}
                 title={t('title')}
@@ -42,13 +51,27 @@ export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
                     </ListComponent>
                 ) : (
                     <ListComponent>
-                        {ptSessions.map(ptSession => (
-                            <ItemPtSessionComponent
-                                key={ptSession.id}
-                                ptSession={ptSession}
-                                onClick={() => setOpenPtSession(ptSession.id)}
-                            />
-                        ))}
+                        {ptSessions.pages.map((page, pageIndex) =>
+                            page.map((ptSession, index) => (
+                                <>
+                                    <ItemPtSessionComponent
+                                        key={ptSession.id}
+                                        ptSession={ptSession}
+                                        onClick={() =>
+                                            setOpenPtSession(ptSession.id)
+                                        }
+                                    />
+                                    {ptSessions.pages.length - 1 ===
+                                        pageIndex &&
+                                    page.length - 3 === index ? (
+                                        <div
+                                            ref={ref}
+                                            className='w-full h-0 overflow-hidden'
+                                        />
+                                    ) : null}
+                                </>
+                            ))
+                        )}
                     </ListComponent>
                 )}
             </PopUpMenuComponent>

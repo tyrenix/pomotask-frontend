@@ -38,10 +38,6 @@
     @apply w-full h-full px-standard pt-standard overflow-y-scroll;
 }
 
-.wrapper-content > div {
-    @apply h-auto;
-}
-
 @keyframes show-wrapper {
     0% {
         @apply -translate-y-full;
