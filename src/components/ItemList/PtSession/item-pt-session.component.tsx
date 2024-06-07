@@ -53,7 +53,7 @@ export const ItemPtSessionComponent = ({
     return (
         <ItemDefaultComponent
             size='big'
-            title={tPtSession(ptSession?.type)}
+            title={ptSession?.type && tPtSession(ptSession.type)}
             description={new Date(ptSession?.createdAt || 0).toLocaleDateString(
                 'ru-RU',
                 {

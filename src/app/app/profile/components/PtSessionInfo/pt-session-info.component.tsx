@@ -71,17 +71,16 @@ export const PtSessionInfoComponent = ({
                             (isLoading || !ptSession) && 'skeletron-loader'
                         )}
                     >
-                        {t(ptSession?.type)}
+                        {ptSession?.type && t(ptSession?.type)}
                     </h4>
                     <p
                         className={clsx(
                             (isLoading || !ptSession) && 'skeletron-loader mt-2'
                         )}
                     >
-                        {`${t('info.started')} ${new Date().toLocaleDateString(
-                            'ru-RU',
-                            toLocaleStringConfig
-                        )}`}
+                        {`${t('info.started')} ${new Date(
+                            ptSession?.createdAt || 0
+                        ).toLocaleDateString('ru-RU', toLocaleStringConfig)}`}
                     </p>
                 </div>
             </div>

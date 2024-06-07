@@ -1,11 +1,11 @@
 'use client'
 
-import {useTranslations} from 'next-intl'
 import {ItemPtSessionComponent} from '@/components/ItemList'
 import {ListComponent} from '@/components/List/list.component'
 import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
 import {usePtSessions} from '@/hooks/usePtSessions.hook'
-import {useEffect, useState} from 'react'
+import {useTranslations} from 'next-intl'
+import React, {useEffect, useState} from 'react'
 import {useInView} from 'react-intersection-observer'
 import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component'
 
@@ -51,27 +51,28 @@ export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
                     </ListComponent>
                 ) : (
                     <ListComponent>
-                        {ptSessions.pages.map((page, pageIndex) =>
-                            page.map((ptSession, index) => (
-                                <>
-                                    <ItemPtSessionComponent
-                                        key={ptSession.id}
-                                        ptSession={ptSession}
-                                        onClick={() =>
-                                            setOpenPtSession(ptSession.id)
-                                        }
-                                    />
-                                    {ptSessions.pages.length - 1 ===
-                                        pageIndex &&
-                                    page.length - 3 === index ? (
-                                        <div
-                                            ref={ref}
-                                            className='w-full h-0 overflow-hidden'
+                        {ptSessions.pages.map((page, pageIndex) => (
+                            <React.Fragment key={pageIndex}>
+                                {page.map((ptSession, index) => (
+                                    <React.Fragment key={ptSession.id}>
+                                        <ItemPtSessionComponent
+                                            ptSession={ptSession}
+                                            onClick={() =>
+                                                setOpenPtSession(ptSession.id)
+                                            }
                                         />
-                                    ) : null}
-                                </>
-                            ))
-                        )}
+                                        {ptSessions.pages.length - 1 ===
+                                            pageIndex &&
+                                        page.length - 3 === index ? (
+                                            <div
+                                                ref={ref}
+                                                className='w-full h-0 overflow-hidden'
+                                            />
+                                        ) : null}
+                                    </React.Fragment>
+                                ))}
+                            </React.Fragment>
+                        ))}
                     </ListComponent>
                 )}
             </PopUpMenuComponent>
