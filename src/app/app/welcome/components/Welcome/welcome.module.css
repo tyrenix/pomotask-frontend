@@ -1,6 +1,5 @@
 .wrapper {
-    @apply
-    relative
+    @apply relative
     w-full
     h-full
     flex
@@ -8,54 +7,47 @@
     gap-8
     pt-standard
     pb-28
-    overflow-y-auto
+    overflow-y-auto;
 }
 
 .wrapper > h1 {
-    @apply
-    text-3xl-bold
+    @apply text-3xl-bold;
 }
 
 .wrapper > p {
-    @apply
-    text-lg-regular
-    text-primaryInvert-70
+    @apply text-lg-regular
+    text-primaryInvert-70;
 }
 
 .wrapper > ul {
-    @apply
-    flex
+    @apply flex
     flex-col
     gap-5
     text-lg-regular
-    text-primaryInvert-70
+    text-primaryInvert-70;
 }
 
 .wrapper > ul > li {
-    @apply
-    flex
-    gap-3
+    @apply flex
+    gap-3;
 }
 
 .wrapper > ul > li > svg {
-    @apply
-    min-w-8
+    @apply min-w-8
     w-8
-    h-8
+    h-8;
 }
 
 .wrapper > ul > li > div > h3 {
-    @apply
-    font-bold
-    text-primaryInvert
+    @apply font-bold
+    text-primaryInvert;
 }
 
 .button-wrapper {
-    @apply
-    fixed
+    @apply fixed
     bottom-0
     left-0
     w-full
     p-standard
-    bg-content
+    bg-content;
 }

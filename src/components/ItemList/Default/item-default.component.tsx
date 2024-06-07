@@ -29,10 +29,10 @@ export const ItemDefaultComponent = ({
                 size === 'ultra-big'
                     ? 'h-20'
                     : size === 'big'
-                      ? 'h-16'
-                      : size === 'medium'
-                        ? 'h-14'
-                        : 'h-12'
+                    ? 'h-16'
+                    : size === 'medium'
+                    ? 'h-14'
+                    : 'h-12'
             )}
             onClick={onClick}
         >
