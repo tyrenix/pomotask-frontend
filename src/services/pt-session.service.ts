@@ -29,6 +29,7 @@ class PtSessionService {
         const response = await axiosWithAuth.get<IPomodoroSession[]>(
             this.PREFIX + `/list?${queryParams.toString()}`
         )
+
         return response.data
     }
 }

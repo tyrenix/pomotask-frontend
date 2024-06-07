@@ -37,7 +37,8 @@ export const ProfileComponent = () => {
 
     const {ptSettings, isLoading: isLoadingPtSettings} = usePtSettings()
     const {ptSessions, isLoading: isLoadingPtSessions} = usePtSessions({
-        isCompleted: true
+        filters: {isCompleted: true, limit: 10},
+        enabled: true
     })
 
     return (

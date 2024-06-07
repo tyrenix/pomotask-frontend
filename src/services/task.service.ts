@@ -13,6 +13,14 @@ class TaskService {
 
         return response.data
     }
+
+    async getTaskById(taskId: string) {
+        const response = await axiosWithAuth.get<ITask>(
+            `${this.PREFIX}/${taskId}`
+        )
+
+        return response.data
+    }
 }
 
 export const taskService = new TaskService()

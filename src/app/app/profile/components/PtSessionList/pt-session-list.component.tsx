@@ -19,7 +19,10 @@ export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
 
     const [openPtSession, setOpenPtSession] = useState<string | null>(null)
 
-    const {ptSessions, isLoading} = usePtSessions({isCompleted: true})
+    const {ptSessions, isLoading} = usePtSessions({
+        filters: {isCompleted: true},
+        enabled: isOpen
+    })
 
     return (
         <>

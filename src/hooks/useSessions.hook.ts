@@ -1,3 +1,5 @@
+'use client'
+
 import {toast} from 'sonner'
 import {useQuery} from '@tanstack/react-query'
 import {useEffect} from 'react'

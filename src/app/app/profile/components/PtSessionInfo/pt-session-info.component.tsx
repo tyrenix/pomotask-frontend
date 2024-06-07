@@ -1,7 +1,9 @@
 'use client'
 
-import FillButtonComponent from '@/components/Button/fill-button.component'
-import {ItemDefaultComponent} from '@/components/ItemList'
+import {
+    ItemDefaultComponent,
+    ItemTransitionComponent
+} from '@/components/ItemList'
 import {ListComponent} from '@/components/List/list.component'
 import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
 import {usePtSession} from '@/hooks/usePtSession.hook'
@@ -9,6 +11,15 @@ import clsx from 'clsx'
 import {useTranslations} from 'use-intl'
 
 import styles from './pt-session-info.module.css'
+import {useTask} from '@/hooks/useTask.hook'
+
+const toLocaleStringConfig: Intl.DateTimeFormatOptions = {
+    minute: '2-digit',
+    hour: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    year: '2-digit'
+}
 
 interface IProps {
     ptSessionId: string
@@ -22,9 +33,10 @@ export const PtSessionInfoComponent = ({
     onClose
 }: IProps) => {
     const tUnits = useTranslations('Units')
-    const t = useTranslations('Settings.pomodoro-sessions.info')
+    const t = useTranslations('PtSession')
 
     const {ptSession, isLoading} = usePtSession(ptSessionId)
+    const {task, isLoading: isLoadingTask} = useTask(ptSession?.taskId || '')
 
     return (
         <PopUpMenuComponent
@@ -32,7 +44,7 @@ export const PtSessionInfoComponent = ({
             isOpen={isOpen}
             onClose={onClose}
             type='small'
-            title={t('title')}
+            title={t('info.title')}
         >
             <div className={styles.wrapperMainInfo}>
                 <div
@@ -58,21 +70,18 @@ export const PtSessionInfoComponent = ({
                         className={clsx(
                             (isLoading || !ptSession) && 'skeletron-loader'
                         )}
-                    ></h4>
+                    >
+                        {t(ptSession?.type)}
+                    </h4>
                     <p
                         className={clsx(
                             (isLoading || !ptSession) && 'skeletron-loader mt-2'
                         )}
                     >
-                        {/* {new Date(
-                            (session?.createdAt || 0) * 1e3
-                        ).toLocaleString('ru-RU', {
-                            minute: '2-digit',
-                            hour: '2-digit',
-                            month: '2-digit',
-                            day: '2-digit',
-                            year: '2-digit'
-                        })} */}
+                        {`${t('info.started')} ${new Date().toLocaleDateString(
+                            'ru-RU',
+                            toLocaleStringConfig
+                        )}`}
                     </p>
                 </div>
             </div>
@@ -80,17 +89,49 @@ export const PtSessionInfoComponent = ({
                 <ListComponent>
                     <ItemDefaultComponent size='medium' isLoading={true} />
                     <ItemDefaultComponent size='medium' isLoading={true} />
-                    <ItemDefaultComponent size='medium' isLoading={true} />
                 </ListComponent>
             ) : (
                 <ListComponent>
                     <ItemDefaultComponent
                         size='medium'
-                        title={t('started')}
-                        rightComponent={<div className={styles.infoText}></div>}
+                        title={t('info.started')}
+                        rightComponent={
+                            <div className={styles.infoText}>
+                                {new Date(
+                                    ptSession.createdAt
+                                ).toLocaleDateString(
+                                    'ru-RU',
+                                    toLocaleStringConfig
+                                )}
+                            </div>
+                        }
+                    />
+                    <ItemDefaultComponent
+                        size='medium'
+                        title={t('info.ended')}
+                        rightComponent={
+                            <div className={styles.infoText}>
+                                {new Date(
+                                    new Date(ptSession.createdAt).getTime() +
+                                        ptSession.totalSeconds * 1e3
+                                ).toLocaleDateString(
+                                    'ru-RU',
+                                    toLocaleStringConfig
+                                )}
+                            </div>
+                        }
                     />
                 </ListComponent>
             )}
+            {isLoadingTask ? (
+                <ListComponent title={t('info.task')}>
+                    <ItemTransitionComponent isLoading={true} />
+                </ListComponent>
+            ) : task ? (
+                <ListComponent title={t('info.task')}>
+                    <ItemTransitionComponent title={task.title} />
+                </ListComponent>
+            ) : null}
         </PopUpMenuComponent>
     )
 }

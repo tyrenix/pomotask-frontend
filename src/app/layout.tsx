@@ -61,7 +61,7 @@ export default async function RootLayout({children}: PropsWithChildren) {
                         <Toaster
                             theme={theme as any}
                             position='top-center'
-                            duration={2500}
+                            duration={2000}
                         />
 
                         {children}

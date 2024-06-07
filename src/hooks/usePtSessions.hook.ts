@@ -7,10 +7,22 @@ import {
 } from '@/types/pomodoro-session.types'
 import {ptSessionService} from '@/services/pt-session.service'
 
-export const usePtSessions = (filters?: IGetListPomodoroSession) => {
+interface IProps {
+    enabled?: boolean
+    filters?: IGetListPomodoroSession
+}
+
+export const usePtSessions = ({enabled, filters}: IProps) => {
     const {data, isLoading, error, isError} = useQuery<IPomodoroSession[]>({
-        queryKey: ['pomodoro-sessions'],
-        queryFn: () => ptSessionService.getListSessions(filters)
+        queryKey: [
+            'pomodoro-sessions',
+            filters?.isCompleted,
+            filters?.limit,
+            filters?.page,
+            filters?.taskId
+        ],
+        queryFn: () => ptSessionService.getListSessions(filters),
+        enabled
     })
 
     useEffect(() => {
