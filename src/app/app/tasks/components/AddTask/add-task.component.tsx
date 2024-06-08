@@ -24,7 +24,7 @@ export const AddTaskComponent = ({isOpen, ...props}: IProps) => {
 
     const t = useTranslations('Task')
 
-    const {register, getValues, watch, reset} = useForm<ICreateTask>()
+    const {register, getValues, watch, reset, setFocus} = useForm<ICreateTask>()
     const {mutate, isPending} = useMutation({
         mutationKey: ['create-task'],
         mutationFn: (data: ICreateTask) => taskService.createTask(data),
@@ -41,6 +41,7 @@ export const AddTaskComponent = ({isOpen, ...props}: IProps) => {
     useEffect(() => {
         if (isOpen) {
             watch()
+            setTimeout(() => setFocus('title'), 300)
         }
     }, [isOpen])
 
