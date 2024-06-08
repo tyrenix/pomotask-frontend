@@ -1,8 +1,9 @@
 'use client'
 
 import {taskService} from '@/services/task.service'
+import {ITask} from '@/types/task.types'
 import {useQuery} from '@tanstack/react-query'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {toast} from 'sonner'
 
 export const useTask = (taskId: string) => {
@@ -12,11 +13,17 @@ export const useTask = (taskId: string) => {
         enabled: !!taskId
     })
 
+    const [task, setTask] = useState<ITask | undefined>(undefined)
+
     useEffect(() => {
         if (error) {
             toast.error(error as unknown as string)
         }
     }, [error])
 
-    return {task: data, isSuccess, isLoading, isError, error}
+    useEffect(() => {
+        setTask(data)
+    }, [data])
+
+    return {task, setTask, isSuccess, isLoading, isError, error}
 }

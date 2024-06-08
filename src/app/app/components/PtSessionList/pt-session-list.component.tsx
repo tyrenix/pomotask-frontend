@@ -12,9 +12,10 @@ import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component
 interface IProps {
     isOpen: boolean
     onClose: () => any
+    taskId?: string
 }
 
-export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
+export const PtSessionListComponent = ({isOpen, onClose, taskId}: IProps) => {
     const t = useTranslations('Profile.pomodoro-sessions')
 
     const [openPtSession, setOpenPtSession] = useState<string | null>(null)
@@ -22,7 +23,7 @@ export const PtSessionListComponent = ({isOpen, onClose}: IProps) => {
     const {ref, inView} = useInView({threshold: 0.5})
 
     const {ptSessions, isLoading, fetchNextPage} = usePtSessions({
-        filters: {isCompleted: true},
+        filters: {isCompleted: true, taskId},
         enabled: isOpen
     })
 

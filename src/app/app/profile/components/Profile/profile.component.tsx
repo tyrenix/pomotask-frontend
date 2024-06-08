@@ -16,8 +16,8 @@ import {getHoursAndMinutes} from '@/helpers/get-hours-and-minutes.helper'
 import {usePtSettings} from '@/hooks/usePtSettings.hook'
 import {usePtSessions} from '@/hooks/usePtSessions.hook'
 import {ProfileSettingsComponent} from '../Settings/settings.component'
-import {PtSessionListComponent} from '../PtSessionList/pt-session-list.component'
-import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component'
+import {PtSessionListComponent} from '@/app/app/components/PtSessionList/pt-session-list.component'
+import {PtSessionInfoComponent} from '@/app/app/components/PtSessionInfo/pt-session-info.component'
 
 export const ProfileComponent = () => {
     const tUnit = useTranslations('Units')
@@ -31,11 +31,11 @@ export const ProfileComponent = () => {
     const {user, isLoading: isLoadingUser} = useUser()
 
     const {activity: activityTotal, isLoading: isLoadingUserActivityTotal} =
-        useUserActivity({filter: 'total'})
+        useUserActivity({filters: {filter: 'total'}})
     const {activity: activityDay, isLoading: isLoadingUserActivityDay} =
-        useUserActivity({filter: 'day'})
+        useUserActivity({filters: {filter: 'day'}})
     const {activity: activityWeek, isLoading: isLoadingUserActivityWeek} =
-        useUserActivity({filter: 'week'})
+        useUserActivity({filters: {filter: 'week'}})
 
     const {ptSettings, isLoading: isLoadingPtSettings} = usePtSettings()
     const {ptSessions, isLoading: isLoadingPtSessions} = usePtSessions({
