@@ -1,6 +1,11 @@
-import queryString from 'query-string'
 import {axiosWithAuth} from '@/interceptors/axios.interceptor'
-import {IFiltersSearchTask, ITask, IUpdateTask} from '@/types/task.types'
+import {
+    ICreateTask,
+    IFiltersSearchTask,
+    ITask,
+    IUpdateTask
+} from '@/types/task.types'
+import queryString from 'query-string'
 
 class TaskService {
     private readonly PREFIX: string = '/task'
@@ -26,6 +31,15 @@ class TaskService {
         const response = await axiosWithAuth.patch<ITask>(
             `${this.PREFIX}/${taskId}`,
             {...data}
+        )
+
+        return response.data
+    }
+
+    async createTask(data: ICreateTask) {
+        const response = await axiosWithAuth.post<ICreateTask>(
+            `${this.PREFIX}/create`,
+            data
         )
 
         return response.data

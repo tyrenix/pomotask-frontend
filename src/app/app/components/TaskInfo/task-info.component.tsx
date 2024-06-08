@@ -91,9 +91,6 @@ export const TaskInfoComponent = ({isOpen, taskId, onClose}: IProps) => {
                                     <div
                                         ref={field.ref}
                                         className={styles.wrapperCompletedBox}
-                                        onClick={() =>
-                                            field.onChange(!task.isCompleted)
-                                        }
                                     >
                                         <CheckBoxTaskComponent
                                             changeCompleted={() =>

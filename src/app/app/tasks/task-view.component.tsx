@@ -3,17 +3,21 @@
 import {ItemTaskComponent, ItemTransitionComponent} from '@/components/ItemList'
 import {ListComponent} from '@/components/List/list.component'
 import {useTasks} from '@/hooks/useTasks.hook'
-import {BadgeCheckIcon} from 'lucide-react'
-import {useTranslations} from 'next-intl'
-import {TasksCompletedListComponent} from './components/TasksCompletedList/tasks-completed-list.component'
-import {useState} from 'react'
 import {useUpdateTask} from '@/hooks/useUpdateTask.hook'
+import {CircleCheckBigIcon, PlusIcon} from 'lucide-react'
+import {useTranslations} from 'next-intl'
+import {useState} from 'react'
 import {TaskInfoComponent} from '../components/TaskInfo/task-info.component'
+import {TasksCompletedListComponent} from './components/TasksCompletedList/tasks-completed-list.component'
+
+import styles from './task-view.module.css'
+import {AddTaskComponent} from './components/AddTask/add-task.component'
 
 export const TaskView = () => {
     const t = useTranslations('Tasks')
 
     const [openTaskInfo, setOpenTaskInfo] = useState<string | null>(null)
+    const [isOpenAddTask, setIsOpenAddTask] = useState<boolean>(false)
     const [isOpenTasksCompleted, setIsOpenTasksCompleted] =
         useState<boolean>(false)
 
@@ -71,11 +75,17 @@ export const TaskView = () => {
                         title={t('completed')}
                         onClick={() => setIsOpenTasksCompleted(true)}
                         leftComponent={
-                            <BadgeCheckIcon className='h-7 w-7 text-primaryInvert-70' />
+                            <CircleCheckBigIcon className='h-7 w-7 text-primaryInvert-70' />
                         }
                     />
                 )}
             </ListComponent>
+            <div
+                className={styles.wrapperAddTask}
+                onClick={() => setIsOpenAddTask(true)}
+            >
+                <PlusIcon strokeWidth={3} />
+            </div>
             <TasksCompletedListComponent
                 isOpen={isOpenTasksCompleted}
                 onClose={() => setIsOpenTasksCompleted(false)}
@@ -84,6 +94,10 @@ export const TaskView = () => {
                 isOpen={!!openTaskInfo}
                 onClose={() => setOpenTaskInfo(null)}
                 taskId={openTaskInfo || ''}
+            />
+            <AddTaskComponent
+                isOpen={isOpenAddTask}
+                onClose={() => setIsOpenAddTask(false)}
             />
         </>
     )
