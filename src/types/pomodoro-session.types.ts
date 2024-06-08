@@ -25,5 +25,6 @@ export interface ICreatePomodoroSession
     extends Partial<Pick<IPomodoroSession, 'taskId' | 'type'>> {}
 
 export interface IActivityFiltersPomodoroSession {
+    taskId?: string
     filter?: 'day' | 'week' | 'total'
 }

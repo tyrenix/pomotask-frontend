@@ -1,13 +1,19 @@
-import {toast} from 'sonner'
-import {useEffect} from 'react'
-import {useQuery} from '@tanstack/react-query'
 import {ptSessionService} from '@/services/pt-session.service'
 import {IActivityFiltersPomodoroSession} from '@/types/pomodoro-session.types'
+import {useQuery} from '@tanstack/react-query'
+import {useEffect} from 'react'
+import {toast} from 'sonner'
 
-export const useUserActivity = ({filter}: IActivityFiltersPomodoroSession) => {
+interface IProps {
+    filters?: IActivityFiltersPomodoroSession
+    enabled?: boolean
+}
+
+export const useUserActivity = ({filters, enabled}: IProps) => {
     const {data, isLoading, error, isError} = useQuery({
-        queryKey: ['userActivity', filter],
-        queryFn: () => ptSessionService.getUserActivity({filter})
+        queryKey: ['userActivity', filters],
+        queryFn: () => ptSessionService.getUserActivity(filters),
+        enabled: enabled ?? true
     })
 
     useEffect(() => {

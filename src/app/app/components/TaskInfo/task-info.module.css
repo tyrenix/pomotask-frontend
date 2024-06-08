@@ -1,0 +1,7 @@
+.wrapper-description {
+    @apply w-full p-standard pl-14 text-lg-regular text-primaryInvert-70;
+}
+
+.wrapper-description > textarea {
+    @apply w-full resize-none outline-none;
+}

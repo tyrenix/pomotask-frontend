@@ -13,8 +13,13 @@ export const useUpdateTask = () => {
         onError(error) {
             toast.error(error as unknown as string)
         },
-        onSuccess() {
-            queryClient.invalidateQueries({queryKey: ['tasks']})
+        onSuccess(task) {
+            queryClient.invalidateQueries({
+                queryKey: ['tasks']
+            })
+            queryClient.invalidateQueries({
+                queryKey: ['task', task.id]
+            })
         }
     })
 

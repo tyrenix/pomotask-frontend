@@ -8,10 +8,12 @@ import {useTranslations} from 'next-intl'
 import {TasksCompletedListComponent} from './components/TasksCompletedList/tasks-completed-list.component'
 import {useState} from 'react'
 import {useUpdateTask} from '@/hooks/useUpdateTask.hook'
+import {TaskInfoComponent} from '../components/TaskInfo/task-info.component'
 
 export const TaskView = () => {
     const t = useTranslations('Tasks')
 
+    const [openTaskInfo, setOpenTaskInfo] = useState<string | null>(null)
     const [isOpenTasksCompleted, setIsOpenTasksCompleted] =
         useState<boolean>(false)
 
@@ -50,7 +52,7 @@ export const TaskView = () => {
                             <ItemTaskComponent
                                 key={task.id}
                                 task={task}
-                                onClick={() => {}}
+                                onClick={() => setOpenTaskInfo(task.id)}
                                 changeCompleted={() =>
                                     changeCompleted(task.id, !task.isCompleted)
                                 }
@@ -77,6 +79,11 @@ export const TaskView = () => {
             <TasksCompletedListComponent
                 isOpen={isOpenTasksCompleted}
                 onClose={() => setIsOpenTasksCompleted(false)}
+            />
+            <TaskInfoComponent
+                isOpen={!!openTaskInfo}
+                onClose={() => setOpenTaskInfo(null)}
+                taskId={openTaskInfo || ''}
             />
         </>
     )

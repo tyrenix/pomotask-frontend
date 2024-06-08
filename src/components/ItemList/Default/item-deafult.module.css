@@ -23,5 +23,5 @@
 }
 
 .wrapper-leftIcon {
-    @apply ml-standard overflow-hidden;
+    @apply ml-standard;
 }

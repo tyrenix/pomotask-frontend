@@ -24,6 +24,7 @@
         "query-string": "^9.0.0",
         "react": "^18",
         "react-dom": "^18",
+        "react-expanding-textarea": "^2.3.6",
         "react-hook-form": "^7.51.5",
         "react-intersection-observer": "^9.10.3",
         "sonner": "^1.4.41"

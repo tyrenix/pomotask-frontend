@@ -16,8 +16,8 @@ class PtSessionService {
         return response.data
     }
 
-    async getUserActivity(filters: IActivityFiltersPomodoroSession) {
-        const queryParams = queryString.stringify(filters)
+    async getUserActivity(filters?: IActivityFiltersPomodoroSession) {
+        const queryParams = queryString.stringify(filters || {})
         const response = await axiosWithAuth.get<{activity: number}>(
             this.PREFIX + `/activity/?${queryParams.toString()}`
         )

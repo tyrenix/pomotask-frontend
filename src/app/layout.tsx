@@ -12,6 +12,7 @@ import {envConstant} from '@/constants/env.constant'
 
 import '@/styles/globals.styles.css'
 import '@/styles/theme.styles.css'
+import clsx from 'clsx'
 
 const nunito = Nunito({subsets: ['latin', 'cyrillic']})
 
@@ -55,7 +56,9 @@ export default async function RootLayout({children}: PropsWithChildren) {
 
     return (
         <html lang={locale} className={`w-full h-full ${theme}`}>
-            <body className={`w-full h-full ${nunito.className} bg-content`}>
+            <body
+                className={clsx('w-full h-full bg-content', nunito.className)}
+            >
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <TanStackQueryProvider>
                         <Toaster
