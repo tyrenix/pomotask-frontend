@@ -1,24 +1,23 @@
-'use client'
+'use server'
 
-import {useRouter} from 'next/navigation'
-import {dashboardConstant} from '@/constants/dashboard.constant'
+import {seoConstants} from '@/constants/seo.constant'
+import type {Metadata} from 'next'
+import {getLocale, getTranslations} from 'next-intl/server'
+import {PomodoroView} from './pomodoro-view'
 
-export default function MainPage() {
-    // const {data, error} = useQuery<ITask[], string, ITask[], QueryKey>({
-    //     queryKey: ['tasks'],
-    //     queryFn: () => taskService.getAllTasks()
-    // })
-    //
-    // useEffect(() => {
-    //     if (error) {
-    //         toast.error(error)
-    //     }
-    // }, [error])
-    //
-    // return <h1>data: {JSON.stringify(data || {message: 'not found!'})}</h1>
+export const generateMetadata = async (): Promise<Metadata> => {
+    const locale = await getLocale()
+    const t = await getTranslations({
+        locale,
+        namespace: 'Pomodoro'
+    })
 
-    const router = useRouter()
-    router.replace(dashboardConstant.PROFILE_PAGE)
+    return {
+        title: t('title'),
+        ...seoConstants.NO_INDEX_PAGE
+    }
+}
 
-    return null
+export default async function MainPage() {
+    return <PomodoroView />
 }
