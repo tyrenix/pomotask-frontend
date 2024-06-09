@@ -57,6 +57,8 @@ export const PopUpMenuComponent = ({
                 onClose()
                 setTimeout(() => setStatus('close'), 10)
             }, 300)
+        } else if (!isOpen && status === 'open') {
+            setStatus('closing')
         }
     }, [isOpen, status])
 

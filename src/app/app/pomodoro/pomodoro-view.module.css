@@ -7,7 +7,7 @@
 }
 
 .wrapper-select-task-icon {
-    @apply w-14 h-14 bg-accent rounded-2xl text-white flex justify-center items-center;
+    @apply w-14 h-14 rounded-2xl text-white flex justify-center items-center;
 }
 
 .wrapper-select-task-icon > svg {

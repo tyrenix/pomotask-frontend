@@ -6,10 +6,12 @@ import {
     IProps as ItemDefaultProps
 } from '../Default/item-default.component'
 import {CheckBoxTaskComponent} from '@/components/CheckBox'
+import {Divide, ListStartIcon} from 'lucide-react'
 
 interface IPropsWithoutLoading extends Pick<ItemDefaultProps, 'onClick'> {
     task: ITask
     isLoading?: false
+    type?: 'task' | 'select'
     changeCompleted: () => any
 }
 
@@ -24,7 +26,8 @@ export const ItemTaskComponent = ({
     task,
     onClick,
     isLoading,
-    changeCompleted
+    changeCompleted,
+    type
 }: TProps) => {
     return (
         <ItemDefaultComponent
@@ -33,11 +36,15 @@ export const ItemTaskComponent = ({
             onClick={onClick}
             isLoading={isLoading}
             leftComponent={
-                <CheckBoxTaskComponent
-                    changeCompleted={changeCompleted}
-                    isCompleted={task?.isCompleted}
-                    isLoading={isLoading}
-                />
+                type === 'select' ? (
+                    <ListStartIcon className='w-7 h-7 text-primaryInvert-70' />
+                ) : (
+                    <CheckBoxTaskComponent
+                        changeCompleted={changeCompleted}
+                        isCompleted={task?.isCompleted}
+                        isLoading={isLoading}
+                    />
+                )
             }
         />
     )

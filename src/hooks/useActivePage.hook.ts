@@ -13,8 +13,8 @@ export const useActivePage = () => {
     } else if (pathname.includes(dashboardConstant.TASKS_PAGE)) {
         activePage = 'tasks'
     } else if (pathname.includes(dashboardConstant.POMODORO_PAGE)) {
-        activePage = 'tasks'
+        activePage = 'pomodoro'
     }
-    
+
     return activePage
 }
