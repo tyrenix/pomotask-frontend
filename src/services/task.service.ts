@@ -44,6 +44,15 @@ class TaskService {
 
         return response.data
     }
+
+    async updateIndex(tasksIds: string[]) {
+        const response = await axiosWithAuth.patch<{success: true}>(
+            `${this.PREFIX}/update-index`,
+            {tasksIds}
+        )
+
+        return response.data
+    }
 }
 
 export const taskService = new TaskService()
