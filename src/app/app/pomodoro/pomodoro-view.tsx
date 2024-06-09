@@ -4,18 +4,14 @@ import {getHoursAndMinutes} from '@/helpers/get-hours-and-minutes.helper'
 import {useTask} from '@/hooks/useTask.hook'
 import {useUserActivity} from '@/hooks/useUserActivity.hook'
 import clsx from 'clsx'
-import {
-    CircleFadingPlusIcon,
-    Code2Icon,
-    HistoryIcon,
-    PlayIcon,
-    StepForwardIcon
-} from 'lucide-react'
+import {CircleFadingPlusIcon, Code2Icon} from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import {act, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {SelectTaskComponent} from './components/select-task.component'
+import {TimerComponent} from './components/timer.component'
 import styles from './pomodoro-view.module.css'
 import {selectTaskService} from './services/select-task.service'
+import {useActive} from './hook/useActive.hook'
 
 export const PomodoroView = () => {
     const tUnits = useTranslations('Units')
@@ -25,6 +21,8 @@ export const PomodoroView = () => {
     const [selectedTask, setSelectedTask] = useState<string | undefined>(
         undefined
     )
+
+    const {active} = useActive()
 
     const selectTask = (taskId?: string) => {
         setSelectedTask(taskId)
@@ -47,7 +45,7 @@ export const PomodoroView = () => {
                 <div
                     className={styles.wrapperSelectTask}
                     onClick={
-                        isLoadingActivity || isLoadingTask
+                        isLoadingActivity || isLoadingTask || active
                             ? undefined
                             : () => setIsOpenSelectTask(true)
                     }
@@ -90,45 +88,7 @@ export const PomodoroView = () => {
                         </p>
                     </div>
                 </div>
-                <div className={styles.wrapperPomodoro}>
-                    <svg className={styles.pomodoro}>
-                        <circle
-                            cx='50%'
-                            cy='50%'
-                            r='120'
-                            stroke='currentColor'
-                            strokeWidth={35}
-                            fill='transparent'
-                        />
-                        <circle
-                            cx='50%'
-                            cy='50%'
-                            r='120'
-                            stroke='rgb(var(--accent-color))'
-                            strokeWidth={35}
-                            fill='transparent'
-                            strokeDasharray='754.08935546875'
-                            strokeDashoffset='75'
-                            strokeLinecap='round'
-                        />
-                    </svg>
-                    <div>
-                        <h4>25:00</h4>
-                        <p>2 of 4 steps!</p>
-                    </div>
-                </div>
-                <div className={styles.wrapperAlert}>Start and focus!</div>
-                <div className={styles.wrapperButtons}>
-                    <button className={styles.secondaryButton}>
-                        <HistoryIcon />
-                    </button>
-                    <button className={styles.mainButton}>
-                        <PlayIcon />
-                    </button>
-                    <button className={styles.secondaryButton}>
-                        <StepForwardIcon />
-                    </button>
-                </div>
+                <TimerComponent taskId={selectedTask} />
             </div>
             <SelectTaskComponent
                 isOpen={isOpenSelectTask}

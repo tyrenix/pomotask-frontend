@@ -1,0 +1,47 @@
+.wrapper-pomodoro {
+    @apply relative w-full h-72 flex justify-center items-center;
+}
+
+.wrapper-pomodoro > svg {
+    @apply w-72 h-72 text-primaryInvert-10 -rotate-90 transition-transform-custom;
+}
+
+.wrapper-pomodoro > div {
+    @apply absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2;
+}
+
+.wrapper-pomodoro > div > h4 {
+    @apply text-3xl-bold text-center;
+}
+
+.wrapper-pomodoro > div > p {
+    @apply -mt-1 text-lg-regular text-primaryInvert-70 text-center;
+}
+
+.wrapper-alert {
+    @apply w-full h-7 text-center text-lg-bold text-primaryInvert-70 flex justify-center items-center;
+}
+
+.wrapper-alert > p {
+    @apply min-w-24 h-full text-center;
+}
+
+.wrapper-buttons {
+    @apply w-full flex justify-center items-center gap-4;
+}
+
+.secondary-button {
+    @apply w-16 h-16 bg-primaryInvert-10 text-primaryInvert rounded-3xl flex justify-center items-center transition-colors-custom cursor-pointer hover:bg-primaryInvert-30 active:bg-primaryInvert-30;
+}
+
+.secondary-button > svg {
+    @apply w-8 h-8;
+}
+
+.main-button {
+    @apply w-20 h-20 text-white rounded-3xl flex justify-center items-center transition-colors-custom hover:bg-accent-70 active:bg-accent-70;
+}
+
+.main-button > svg {
+    @apply w-10 h-10;
+}
