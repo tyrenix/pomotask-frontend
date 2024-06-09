@@ -30,7 +30,7 @@ export const ItemPtSessionComponent = ({
     const t = useTranslations('Units')
     const tPtSession = useTranslations('PtSession')
 
-    const totalMinutes = Math.floor((ptSession?.totalSeconds || 0) / 60)
+    const completedMinutes = Math.floor((ptSession?.completedSeconds || 0) / 60)
 
     const icon = (
         <div
@@ -45,7 +45,7 @@ export const ItemPtSessionComponent = ({
                         : 'bg-green')
             )}
         >
-            {totalMinutes}
+            {completedMinutes}
             {t('shortMinutes')[0]}
         </div>
     )

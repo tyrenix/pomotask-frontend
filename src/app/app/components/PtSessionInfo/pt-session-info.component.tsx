@@ -42,7 +42,11 @@ export const PtSessionInfoComponent = ({
     const [openTaskInfo, setOpenTaskInfo] = useState<string | null>(null)
 
     const {ptSession, isLoading} = usePtSession(ptSessionId)
-    const {task, isLoading: isLoadingTask} = useTask(ptSession?.taskId || '')
+    const {
+        task,
+        isLoading: isLoadingTask,
+        isPending: isPendingTask
+    } = useTask(ptSession?.taskId || '')
 
     return (
         <>
@@ -68,9 +72,9 @@ export const PtSessionInfoComponent = ({
                     >
                         {!isLoading &&
                             ptSession &&
-                            `${Math.floor(ptSession.totalSeconds / 60)}${tUnits(
-                                'shortMinutes'
-                            )}`}
+                            `${Math.floor(
+                                ptSession.completedSeconds / 60
+                            )}${tUnits('shortMinutes')}`}
                     </div>
                     <div className={styles.wrapperInfo}>
                         <h4
@@ -125,7 +129,7 @@ export const PtSessionInfoComponent = ({
                                         new Date(
                                             ptSession.createdAt
                                         ).getTime() +
-                                            ptSession.totalSeconds * 1e3
+                                            ptSession.completedSeconds * 1e3
                                     ).toLocaleDateString(
                                         'ru-RU',
                                         toLocaleStringConfig
@@ -135,12 +139,10 @@ export const PtSessionInfoComponent = ({
                         />
                     </ListComponent>
                 )}
-                {isLoadingTask ? (
-                    <ListComponent title={t('info.task')}>
+                <ListComponent title={t('info.task')}>
+                    {isLoadingTask || isPendingTask ? (
                         <ItemTransitionComponent isLoading={true} />
-                    </ListComponent>
-                ) : task ? (
-                    <ListComponent title={t('info.task')}>
+                    ) : task ? (
                         <ItemTransitionComponent
                             title={task.title}
                             onClick={() => {
@@ -148,8 +150,12 @@ export const PtSessionInfoComponent = ({
                                 setStatusShow('showing')
                             }}
                         />
-                    </ListComponent>
-                ) : null}
+                    ) : (
+                        <ItemTransitionComponent
+                            title={t('info.not-select-task')}
+                        />
+                    )}
+                </ListComponent>
             </PopUpMenuComponent>
             {statusShow !== 'close' && (
                 <TaskInfoComponent

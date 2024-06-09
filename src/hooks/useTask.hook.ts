@@ -7,7 +7,7 @@ import {useEffect, useState} from 'react'
 import {toast} from 'sonner'
 
 export const useTask = (taskId: string) => {
-    const {data, isSuccess, isLoading, isError, error} = useQuery({
+    const {data, isSuccess, isPending, isLoading, isError, error} = useQuery({
         queryKey: ['task', taskId],
         queryFn: () => taskService.getTaskById(taskId),
         enabled: !!taskId
@@ -25,5 +25,5 @@ export const useTask = (taskId: string) => {
         setTask(data)
     }, [data])
 
-    return {task, setTask, isSuccess, isLoading, isError, error}
+    return {task, setTask, isPending, isSuccess, isLoading, isError, error}
 }

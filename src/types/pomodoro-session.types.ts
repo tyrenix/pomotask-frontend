@@ -3,16 +3,17 @@ export interface IPomodoroSession {
     id: string
     taskId: string
     totalSeconds: number
+    completedSeconds: number
     isCompleted: boolean
     isPaused: boolean
     type: TPomodoroSession
+    completionTime: Date
     createdAt: Date
 }
 
-export interface IUpdatePomodoroSession
-    extends Partial<
-        Pick<IPomodoroSession, 'totalSeconds' | 'isCompleted' | 'isPaused'>
-    > {}
+export interface IUpdatePomodoroSession {
+    id: string
+}
 
 export interface IGetListPomodoroSession {
     taskId?: string
@@ -22,7 +23,7 @@ export interface IGetListPomodoroSession {
 }
 
 export interface ICreatePomodoroSession
-    extends Partial<Pick<IPomodoroSession, 'taskId' | 'type'>> {}
+    extends Partial<Pick<IPomodoroSession, 'taskId'>> {}
 
 export interface IActivityFiltersPomodoroSession {
     taskId?: string
