@@ -1,10 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
+import {X as XIcon} from 'lucide-react'
 import {useTranslations} from 'next-intl'
 import {MouseEvent, PropsWithChildren, useEffect, useState} from 'react'
-import {X as XIcon} from 'lucide-react'
-
 import styles from './popup-menu.module.css'
 
 interface IPropsForFull extends PropsWithChildren {
@@ -43,32 +42,37 @@ export const PopUpMenuComponent = ({
     >('close')
 
     useEffect(() => {
-        if (isOpen && status !== 'opening' && status !== 'open') {
+        if (
+            isOpen &&
+            status !== 'opening' &&
+            status !== 'open' &&
+            status !== 'closing'
+        ) {
             setStatus('opening')
             setTimeout(() => {
                 setStatus('open')
             }, 10)
-        } else if (!isOpen && status !== 'closing' && status !== 'close') {
-            setStatus('closing')
+        } else if (status === 'closing') {
             setTimeout(() => {
-                setStatus('close')
+                onClose()
+                setTimeout(() => setStatus('close'), 10)
             }, 300)
         }
-    }, [isOpen])
+    }, [isOpen, status])
 
     const handlerCancelButton = () => {
-        onClose()
+        setStatus('closing')
     }
 
     const handlerDoneButton = () => {
-        onClose()
+        setStatus('closing')
         onDone && onDone()
     }
 
     const onWrapperClick = (e: MouseEvent<HTMLDivElement>) => {
         const target = e.target as HTMLDivElement | undefined
         if (target && target.classList.contains('popup-window')) {
-            onClose()
+            setStatus('closing')
         }
     }
 
@@ -82,9 +86,9 @@ export const PopUpMenuComponent = ({
                 'popup-window',
                 styles.wrapper,
                 status === 'opening' || status === 'closing'
-                    ? 'opacity-0'
+                    ? 'bg-black bg-opacity-0'
                     : status === 'open'
-                    ? 'opacity-100'
+                    ? 'bg-black bg-opacity-50'
                     : ''
             )}
             onClick={onWrapperClick}

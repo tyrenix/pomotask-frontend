@@ -1,5 +1,5 @@
 .wrapper {
-    @apply fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-end transition-custom;
+    @apply fixed z-10 top-0 left-0 w-full h-full flex items-end transition-colors-custom;
 }
 
 .wrapper-container {
