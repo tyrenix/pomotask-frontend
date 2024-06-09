@@ -18,8 +18,8 @@ export const PomodoroView = () => {
     const t = useTranslations('Pomodoro')
 
     const [isOpenSelectTask, setIsOpenSelectTask] = useState<boolean>(false)
-    const [selectedTask, setSelectedTask] = useState<string | undefined>(
-        undefined
+    const [selectedTask, setSelectedTask] = useState<string | null | undefined>(
+        null
     )
 
     const {active} = useActive()
@@ -35,7 +35,7 @@ export const PomodoroView = () => {
 
     const {task, isLoading: isLoadingTask} = useTask(selectedTask || '')
     const {activity, isLoading: isLoadingActivity} = useUserActivity({
-        filters: {taskId: selectedTask, filter: 'total'},
+        filters: {taskId: selectedTask || undefined, filter: 'total'},
         enabled: !!selectedTask
     })
 
@@ -53,7 +53,9 @@ export const PomodoroView = () => {
                     <div
                         className={clsx(
                             styles.wrapperSelectTaskIcon,
-                            isLoadingTask || isLoadingActivity
+                            isLoadingTask ||
+                                isLoadingActivity ||
+                                (!task && selectedTask === null)
                                 ? 'skeletron-loader'
                                 : 'bg-accent'
                         )}
@@ -67,7 +69,9 @@ export const PomodoroView = () => {
                     <div
                         className={clsx(
                             styles.wrapperSelectTaskDescription,
-                            (isLoadingActivity || isLoadingTask) &&
+                            (isLoadingActivity ||
+                                isLoadingTask ||
+                                (!task && selectedTask === null)) &&
                                 'skeletron-loader !h-14'
                         )}
                     >
@@ -88,7 +92,7 @@ export const PomodoroView = () => {
                         </p>
                     </div>
                 </div>
-                <TimerComponent taskId={selectedTask} />
+                <TimerComponent taskId={selectedTask || undefined} />
             </div>
             <SelectTaskComponent
                 isOpen={isOpenSelectTask}

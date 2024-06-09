@@ -1,10 +1,12 @@
 import {ptSessionService} from '@/services/pt-session.service'
 import {IPomodoroSession} from '@/types/pomodoro-session.types'
-import {useMutation, useQuery} from '@tanstack/react-query'
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import {useEffect, useState} from 'react'
 import {toast} from 'sonner'
 
 export const useActive = () => {
+    const queryClient = useQueryClient()
+
     const {data, refetch, ...query} = useQuery({
         queryKey: ['pomodoro-session'],
         queryFn: () => ptSessionService.getActive()
@@ -38,8 +40,12 @@ export const useActive = () => {
         onError() {
             refetch()
         },
-        onSuccess() {
+        onSuccess(data) {
             refetch()
+
+            if (data.taskId) {
+                queryClient.invalidateQueries({queryKey: ['task', data.taskId]})
+            }
         }
     })
 

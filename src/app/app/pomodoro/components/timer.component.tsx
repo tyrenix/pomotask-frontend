@@ -1,12 +1,13 @@
 'use client'
 
-import LoaderComponent from '@/components/Loader/loader.component'
 import clsx from 'clsx'
 import {HistoryIcon, PauseIcon, PlayIcon, StepForwardIcon} from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import {useEffect, useRef} from 'react'
+import {useEffect, useRef, useState} from 'react'
+import {toast} from 'sonner'
 import {useActive} from '../hook/useActive.hook'
 import styles from './timer.module.css'
+import LoaderComponent from '@/components/Loader/loader.component'
 
 interface IProps {
     taskId?: string
@@ -59,11 +60,14 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     const reset = () => {
         if (!active) return
+        setActive(undefined)
         restActive.deleteMutation.mutate(active.id)
     }
 
     const completion = () => {
         if (!active) return
+        setActive(undefined)
+        toast.success(t('completion'))
         restActive.completionMutation.mutate(active.id)
     }
 
@@ -89,6 +93,19 @@ export const TimerComponent = ({taskId}: IProps) => {
                         isLoading && 'skeletron-loader !rounded-full',
                         active && !active.isPaused && 'scale-110'
                     )}
+                    style={
+                        {
+                            '--color': `rgba(${
+                                !active
+                                    ? '0, 0, 0, 0'
+                                    : active.type === 'longBreak'
+                                    ? 'var(--blue-color)'
+                                    : active.type === 'shortBreak'
+                                    ? 'var(--green-color)'
+                                    : 'var(--accent-color)'
+                            })`
+                        } as any
+                    }
                 >
                     {!isLoading && (
                         <>
@@ -105,7 +122,7 @@ export const TimerComponent = ({taskId}: IProps) => {
                                 cx='50%'
                                 cy='50%'
                                 r='120'
-                                stroke='rgb(var(--accent-color))'
+                                stroke='var(--color)'
                                 strokeWidth={35}
                                 fill='transparent'
                                 strokeDasharray={totalLengthCircle}
@@ -138,13 +155,31 @@ export const TimerComponent = ({taskId}: IProps) => {
                                           .padStart(2, '0')}`}
                             </h4>
                         }
-                        {active && <p>2 of 4 steps!</p>}
+                        {/* {active && !active.isPaused && (
+                            <p>
+                                {t(
+                                    `mini-slogans.${Math.floor(
+                                        Math.random() *
+                                            (Number(t('mini-slogans.0')) + 1)
+                                    )}`
+                                )}
+                            </p>
+                        )} */}
                     </div>
                 )}
             </div>
             <div className={styles.wrapperAlert}>
                 <p className={clsx(isLoading && 'skeletron-loader')}>
-                    {active && 'Start and focus!'}
+                    {active &&
+                        (active.isPaused
+                            ? t('slogan.pause')
+                            : active.type === 'longBreak'
+                            ? t('slogan.longBreak')
+                            : active.type === 'shortBreak'
+                            ? t('slogan.shortBreak')
+                            : active.type === 'work'
+                            ? t('slogan.work')
+                            : '')}
                 </p>
             </div>
             <div className={styles.wrapperButtons}>
@@ -168,7 +203,13 @@ export const TimerComponent = ({taskId}: IProps) => {
                     onClick={startOrPause}
                     disabled={isPending}
                 >
-                    {!active || active?.isPaused ? <PlayIcon /> : <PauseIcon />}
+                    {restActive.createMutation.isPending ? (
+                        <LoaderComponent mainColor='white' />
+                    ) : !active || active?.isPaused ? (
+                        <PlayIcon />
+                    ) : (
+                        <PauseIcon />
+                    )}
                 </button>
                 {(isLoading || active) && (
                     <button

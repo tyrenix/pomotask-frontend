@@ -3,7 +3,7 @@
 }
 
 .wrapper-description > textarea {
-    @apply w-full min-h-12 resize-none outline-none;
+    @apply w-full min-h-12 resize-none outline-none bg-transparent;
 }
 
 .wrapper-description > span {
