@@ -48,7 +48,7 @@ export const TasksListDndComponent = ({
 
         let updatedTasks = [...tasks]
         const [movedTask] = updatedTasks.splice(source.index, 1)
-        updatedTasks.splice(destination.index, 0, movedTask)
+        movedTask && updatedTasks.splice(destination.index, 0, movedTask)
         updatedTasks = updatedTasks.map((task, index) => ({...task, index}))
 
         const ids = updatedTasks.map(task => task.id)
@@ -58,19 +58,20 @@ export const TasksListDndComponent = ({
     }
 
     const {mutate} = useUpdateTask()
-    const changeCompleted = (taskId: string, isCompleted: boolean) => {
+    const changeCompleted = (taskId: string, statusIsCompleted: boolean) => {
         setTasks(tasks => {
             if (!tasks) return
 
             const index = tasks?.findIndex(task => task.id === taskId)
-            if (isCompleted && index !== -1) tasks.splice(index, 1)
-            else if (!isCompleted && index !== -1)
-                tasks.splice(index, 1, {...tasks[index], isCompleted})
+            tasks.splice(index, 1, {
+                ...tasks[index],
+                isCompleted: statusIsCompleted
+            })
 
             return tasks
         })
 
-        mutate({taskId, data: {isCompleted}})
+        mutate({taskId, data: {isCompleted: statusIsCompleted}})
     }
 
     return (
