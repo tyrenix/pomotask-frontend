@@ -17,6 +17,10 @@
         "shortHours": "ч",
         "shortMinutes": "мин"
     },
+    "Dialog": {
+        "perform": "Выполнить",
+        "cancel": "Отмена"
+    },
     "PtSession": {
         "work": "Помидор",
         "shortBreak": "Короткий перерыв",

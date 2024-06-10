@@ -7,6 +7,8 @@ import {toast} from 'sonner'
 export const useActive = () => {
     const queryClient = useQueryClient()
 
+    const [isPending, setIsPending] = useState<boolean>(false)
+
     const {data, refetch, ...query} = useQuery({
         queryKey: ['pomodoro-session'],
         queryFn: () => ptSessionService.getActive()
@@ -14,7 +16,10 @@ export const useActive = () => {
 
     const createMutation = useMutation({
         mutationKey: ['pomodoro-session', 'create'],
-        mutationFn: (taskId?: string) => ptSessionService.create(taskId),
+        mutationFn: (taskId?: string) => {
+            setIsPending(true)
+            return ptSessionService.create(taskId)
+        },
         onError(error) {
             toast.error(error as unknown as string)
         },
@@ -25,7 +30,10 @@ export const useActive = () => {
 
     const startOrPauseMutation = useMutation({
         mutationKey: ['pomodoro-session', 'pauseOrStart'],
-        mutationFn: (id: string) => ptSessionService.pauseOrStart(id),
+        mutationFn: (id: string) => {
+            setIsPending(true)
+            return ptSessionService.pauseOrStart(id)
+        },
         onError(error) {
             toast.error(error as unknown as string)
         },
@@ -70,13 +78,8 @@ export const useActive = () => {
 
     useEffect(() => {
         setActive(data || undefined)
+        setIsPending(false)
     }, [data])
-
-    const isPending =
-        createMutation.isPending ||
-        deleteMutation.isPending ||
-        completionMutation.isPending ||
-        startOrPauseMutation.isPending
 
     return {
         query,

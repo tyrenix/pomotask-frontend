@@ -8,6 +8,8 @@ import {toast} from 'sonner'
 import {useActive} from '../hook/useActive.hook'
 import styles from './timer.module.css'
 import LoaderComponent from '@/components/Loader/loader.component'
+import {ButtonComponent} from './button.component'
+import {DialogComponent} from '@/components/Dialog/dialog.component'
 
 interface IProps {
     taskId?: string
@@ -17,6 +19,12 @@ export const TimerComponent = ({taskId}: IProps) => {
     const t = useTranslations('Pomodoro.timer')
 
     const mainCircleRef = useRef<SVGCircleElement | null>(null)
+    const [isClickAnimation, setIsClickAnimation] = useState<boolean>(false)
+    const [dialog, setDialog] = useState<{
+        title: string
+        description: string
+        onClick: () => any
+    } | null>(null)
 
     const {active, setActive, isPending, isLoading, ...restActive} = useActive()
 
@@ -87,7 +95,16 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     return (
         <>
-            <div className={styles.wrapperPomodoro}>
+            <div
+                className={clsx(
+                    styles.wrapperPomodoro,
+                    isClickAnimation && 'animate-scale'
+                )}
+                onClick={() => {
+                    setIsClickAnimation(true)
+                    setTimeout(() => setIsClickAnimation(false), 150)
+                }}
+            >
                 <svg
                     className={clsx(
                         isLoading && 'skeletron-loader !rounded-full',
@@ -155,16 +172,6 @@ export const TimerComponent = ({taskId}: IProps) => {
                                           .padStart(2, '0')}`}
                             </h4>
                         }
-                        {/* {active && !active.isPaused && (
-                            <p>
-                                {t(
-                                    `mini-slogans.${Math.floor(
-                                        Math.random() *
-                                            (Number(t('mini-slogans.0')) + 1)
-                                    )}`
-                                )}
-                            </p>
-                        )} */}
                     </div>
                 )}
             </div>
@@ -183,47 +190,54 @@ export const TimerComponent = ({taskId}: IProps) => {
                 </p>
             </div>
             <div className={styles.wrapperButtons}>
-                {(isLoading || active) && (
-                    <button
-                        className={clsx(
-                            styles.secondaryButton,
-                            isLoading && 'skeletron-loader'
-                        )}
-                        onClick={reset}
-                        disabled={isPending}
-                    >
-                        <HistoryIcon />
-                    </button>
-                )}
-                <button
-                    className={clsx(
-                        styles.mainButton,
-                        isLoading ? 'skeletron-loader' : 'bg-accent'
-                    )}
-                    onClick={startOrPause}
-                    disabled={isPending}
-                >
-                    {restActive.createMutation.isPending ? (
-                        <LoaderComponent mainColor='white' />
-                    ) : !active || active?.isPaused ? (
-                        <PlayIcon />
-                    ) : (
-                        <PauseIcon />
-                    )}
-                </button>
-                {(isLoading || active) && (
-                    <button
-                        className={clsx(
-                            styles.secondaryButton,
-                            isLoading && 'skeletron-loader'
-                        )}
-                        onClick={completion}
-                        disabled={isPending}
-                    >
-                        <StepForwardIcon />
-                    </button>
-                )}
+                <ButtonComponent
+                    icon={<HistoryIcon />}
+                    onClick={reset}
+                    isLoading={isLoading}
+                    isPending={false}
+                    isShow={!!active}
+                    type='secondary'
+                />
+                <ButtonComponent
+                    icon={
+                        restActive.createMutation.isPending ||
+                        isLoading ||
+                        isPending ? (
+                            <LoaderComponent mainColor='white' />
+                        ) : !active || active?.isPaused ? (
+                            <PlayIcon />
+                        ) : (
+                            <PauseIcon />
+                        )
+                    }
+                    isShow={true}
+                    isLoading={isLoading}
+                    isPending={isPending}
+                    // onClick={startOrPause}
+                    onClick={() =>
+                        setDialog({
+                            description: 'description',
+                            title: 'title',
+                            onClick: () => {}
+                        })
+                    }
+                    type='primary'
+                />
+                <ButtonComponent
+                    icon={<StepForwardIcon />}
+                    isShow={!!active}
+                    isLoading={isLoading}
+                    isPending={false}
+                    onClick={completion}
+                    type='secondary'
+                />
             </div>
+            <DialogComponent
+                isOpen={!!dialog}
+                onClose={() => setDialog(null)}
+                title={dialog?.title}
+                description={dialog?.description}
+            />
         </>
     )
 }

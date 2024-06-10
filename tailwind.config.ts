@@ -13,7 +13,8 @@ const config: Config = {
     theme: {
         extend: {
             animation: {
-                blink: 'blink 1.5s ease-in-out infinite'
+                blink: 'blink 1.5s ease-in-out infinite',
+                scale: 'scale .15s ease-in-out'
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

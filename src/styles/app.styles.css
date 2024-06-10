@@ -15,3 +15,12 @@
         @apply opacity-65;
     }
 }
+
+@keyframes scale {
+    0% {
+        @apply scale-125;
+    }
+    100% {
+        @apply scale-100;
+    }
+}
