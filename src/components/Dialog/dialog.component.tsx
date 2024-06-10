@@ -7,10 +7,17 @@ import styles from './dialog.module.css'
 import FillButtonComponent from '../Button/fill-button.component'
 import NoFillButtonComponent from '../Button/no-fill.button.component'
 import {useTranslations} from 'next-intl'
+import {CircleHelpIcon} from 'lucide-react'
 
-interface IOpened {
+export interface IDialogData {
     title: string
     description: string
+    button: string
+    onClick: () => any
+}
+
+interface IOpened {
+    dialog?: IDialogData | null
     isOpen: true
     onClose: () => any
 }
@@ -21,12 +28,7 @@ interface INoOpened extends Omit<IOpened, 'isOpen'> {
 
 type IProps = IOpened | INoOpened
 
-export const DialogComponent = ({
-    isOpen,
-    onClose,
-    title,
-    description
-}: IProps) => {
+export const DialogComponent = ({isOpen, onClose, dialog}: IProps) => {
     const t = useTranslations('Dialog')
 
     const [status, setStatus] = useState<
@@ -58,6 +60,11 @@ export const DialogComponent = ({
         setStatus('closing')
     }
 
+    const handlerDoneButton = () => {
+        setStatus('closing')
+        dialog?.onClick && dialog.onClick()
+    }
+
     const onWrapperClick = (e: MouseEvent<HTMLDivElement>) => {
         const target = e.target as HTMLDivElement | undefined
         if (target && target.classList.contains('dialog-window')) {
@@ -82,14 +89,31 @@ export const DialogComponent = ({
             )}
             onClick={onWrapperClick}
         >
-            <div className={styles.window}>
+            <div
+                className={clsx(
+                    styles.window,
+                    status === 'opening' || status === 'closing'
+                        ? 'scale-0'
+                        : status === 'open'
+                        ? 'scale-100'
+                        : ''
+                )}
+            >
                 <div className={styles.content}>
-                    <h2>{title}</h2>
-                    <p>{description}</p>
+                    <h2>{dialog?.title}</h2>
+                    <p>{dialog?.description}</p>
                 </div>
                 <div className={styles.buttons}>
-                    <FillButtonComponent size='medium' label={t('perform')} />
-                    <NoFillButtonComponent size='medium' label={t('cancel')} />
+                    <FillButtonComponent
+                        size='medium'
+                        label={dialog?.button || t('perform')}
+                        onClick={handlerDoneButton}
+                    />
+                    <NoFillButtonComponent
+                        size='medium'
+                        label={t('cancel')}
+                        onClick={handlerCancelButton}
+                    />
                 </div>
             </div>
         </div>

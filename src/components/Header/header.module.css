@@ -1,5 +1,5 @@
 .wrapper {
-    @apply w-full h-16 flex items-center ;
+    @apply w-full h-16 flex items-center;
 }
 
 .wrapper > h1 {
@@ -7,9 +7,9 @@
 }
 
 .wrapper-options {
-    @apply w-12 h-12 ml-auto flex items-center justify-center rounded-2xl cursor-pointer;
+    @apply w-12 h-12 ml-auto flex items-center justify-center rounded-2xl cursor-pointer transition-colors-custom bg-primaryInvert-10 hover:bg-primaryInvert-30 active:bg-primaryInvert-30;
 }
 
 .wrapper-options > svg {
-    @apply w-9 h-9;
+    @apply w-7 h-7;
 }

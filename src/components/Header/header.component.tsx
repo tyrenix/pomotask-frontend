@@ -1,24 +1,26 @@
 'use client'
 
-import {useTranslations} from 'next-intl'
-import {EllipsisVertical} from 'lucide-react'
 import {useActivePage} from '@/hooks/useActivePage.hook'
-
+import {BoltIcon} from 'lucide-react'
+import {useTranslations} from 'next-intl'
 import styles from './header.module.css'
+import {useHeaderContext} from '@/app/app/context/header.context'
 
 export const HeaderComponent = () => {
     const t = useTranslations('Pages')
+
+    const {handleClick} = useHeaderContext()
     const activePage = useActivePage()
 
-    const showOptions = false
+    const showOptions = activePage === 'pomodoro'
 
     return (
         <header className={styles.wrapper}>
             <h1>{t(activePage)}</h1>
             {showOptions && (
-                <div className={styles.wrapperOptions}>
-                    <EllipsisVertical />
-                </div>
+                <button className={styles.wrapperOptions} onClick={handleClick}>
+                    <BoltIcon />
+                </button>
             )}
         </header>
     )

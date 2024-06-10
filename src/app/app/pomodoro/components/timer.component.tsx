@@ -1,15 +1,21 @@
 'use client'
 
+import {
+    DialogComponent,
+    IDialogData
+} from '@/components/Dialog/dialog.component'
+import LoaderComponent from '@/components/Loader/loader.component'
 import clsx from 'clsx'
 import {HistoryIcon, PauseIcon, PlayIcon, StepForwardIcon} from 'lucide-react'
 import {useTranslations} from 'next-intl'
 import {useEffect, useRef, useState} from 'react'
 import {toast} from 'sonner'
+import {useHeaderContext} from '../../context/header.context'
 import {useActive} from '../hook/useActive.hook'
-import styles from './timer.module.css'
-import LoaderComponent from '@/components/Loader/loader.component'
 import {ButtonComponent} from './button.component'
-import {DialogComponent} from '@/components/Dialog/dialog.component'
+import styles from './timer.module.css'
+import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
+import {PtSettingsComponent} from '../../components/PtSettings/pt-settings.component'
 
 interface IProps {
     taskId?: string
@@ -19,14 +25,13 @@ export const TimerComponent = ({taskId}: IProps) => {
     const t = useTranslations('Pomodoro.timer')
 
     const mainCircleRef = useRef<SVGCircleElement | null>(null)
+
+    const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false)
+    const [dialog, setDialog] = useState<IDialogData | null>(null)
     const [isClickAnimation, setIsClickAnimation] = useState<boolean>(false)
-    const [dialog, setDialog] = useState<{
-        title: string
-        description: string
-        onClick: () => any
-    } | null>(null)
 
     const {active, setActive, isPending, isLoading, ...restActive} = useActive()
+    const {isPressed} = useHeaderContext()
 
     useEffect(() => {
         if (active && !active.isPaused) {
@@ -48,20 +53,17 @@ export const TimerComponent = ({taskId}: IProps) => {
         }
     }, [active])
 
+    useEffect(() => {
+        if (!isOpenSettings) {
+            setIsOpenSettings(true)
+        }
+    }, [isPressed])
+
     const startOrPause = () => {
         if (!active) {
             restActive.createMutation.mutate(taskId)
             return
         }
-
-        setActive(active => {
-            if (!active) return
-
-            const newActive = {...active}
-            newActive.isPaused = !newActive.isPaused
-
-            return {...newActive}
-        })
 
         restActive.startOrPauseMutation.mutate(active.id)
     }
@@ -192,7 +194,14 @@ export const TimerComponent = ({taskId}: IProps) => {
             <div className={styles.wrapperButtons}>
                 <ButtonComponent
                     icon={<HistoryIcon />}
-                    onClick={reset}
+                    onClick={() =>
+                        setDialog({
+                            title: t('ask.reset.title'),
+                            description: t('ask.reset.description'),
+                            button: t('ask.reset.button'),
+                            onClick: reset
+                        })
+                    }
                     isLoading={isLoading}
                     isPending={false}
                     isShow={!!active}
@@ -213,30 +222,33 @@ export const TimerComponent = ({taskId}: IProps) => {
                     isShow={true}
                     isLoading={isLoading}
                     isPending={isPending}
-                    // onClick={startOrPause}
-                    onClick={() =>
-                        setDialog({
-                            description: 'description',
-                            title: 'title',
-                            onClick: () => {}
-                        })
-                    }
+                    onClick={startOrPause}
                     type='primary'
                 />
                 <ButtonComponent
                     icon={<StepForwardIcon />}
+                    onClick={() =>
+                        setDialog({
+                            title: t('ask.completion.title'),
+                            description: t('ask.completion.description'),
+                            button: t('ask.completion.button'),
+                            onClick: completion
+                        })
+                    }
                     isShow={!!active}
                     isLoading={isLoading}
                     isPending={false}
-                    onClick={completion}
                     type='secondary'
                 />
             </div>
             <DialogComponent
                 isOpen={!!dialog}
                 onClose={() => setDialog(null)}
-                title={dialog?.title}
-                description={dialog?.description}
+                dialog={dialog}
+            />
+            <PtSettingsComponent
+                isOpen={isOpenSettings}
+                onClose={() => setIsOpenSettings(false)}
             />
         </>
     )
