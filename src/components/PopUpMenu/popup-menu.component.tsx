@@ -13,6 +13,7 @@ interface IPropsForFull extends PropsWithChildren {
     onClose: () => any
     onDone?: () => any
     showDone?: boolean
+    activeDone?: boolean
     type?: 'full'
 }
 
@@ -31,6 +32,7 @@ export const PopUpMenuComponent = ({
     children,
     isOpen,
     showDone,
+    activeDone,
     onDone,
     onClose,
     type = 'full'
@@ -120,8 +122,15 @@ export const PopUpMenuComponent = ({
                             <div className={styles.headerTitle}>{title}</div>
                             {showDone ? (
                                 <div
-                                    className={styles.headerButtons}
-                                    onClick={handlerDoneButton}
+                                    className={clsx(
+                                        styles.headerButtons,
+                                        !activeDone && '!text-accent-70'
+                                    )}
+                                    onClick={
+                                        activeDone
+                                            ? handlerDoneButton
+                                            : undefined
+                                    }
                                 >
                                     {t('done')}
                                 </div>

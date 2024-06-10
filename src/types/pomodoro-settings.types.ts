@@ -1,5 +1,5 @@
 export interface IPomodoroSettings {
-    length: number
+    pomodoro: number
     longBreak: number
     shortBreak: number
     longBreakFrequency: number

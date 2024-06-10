@@ -15,7 +15,8 @@
     },
     "Units": {
         "shortHours": "ч",
-        "shortMinutes": "мин"
+        "shortMinutes": "мин",
+        "shortTimes": "раз"
     },
     "Dialog": {
         "perform": "Выполнить",
@@ -171,6 +172,10 @@
         },
         "settings": {
             "title": "Настройки",
+            "status-update": {
+                "success": "Настройки таймера обновлены!",
+                "failure": "Не удалось обновить настройки таймера!"
+            },
             "work-time": {
                 "title": "Время рабочей сессии",
                 "text": "Рабочая сессия",
