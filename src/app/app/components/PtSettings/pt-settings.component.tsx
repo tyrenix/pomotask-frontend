@@ -38,7 +38,7 @@ export const PtSettingsComponent = ({isOpen, onClose}: IProps) => {
             toast.error(t('status-update.failure'))
         },
         onSuccess() {
-            toast.error(t('status-update.success'))
+            toast.success(t('status-update.success'))
             queryClient.invalidateQueries({queryKey: ['pomodoro-settings']})
         }
     })

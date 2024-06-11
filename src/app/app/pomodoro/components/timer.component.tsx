@@ -36,15 +36,18 @@ export const TimerComponent = ({taskId}: IProps) => {
     useEffect(() => {
         if (active && !active.isPaused) {
             const interval = setInterval(() => {
-                setActive(active => {
-                    if (!active) return
-                    // console.log('ipdaye', new Date().getSeconds())
+                if (active.completedSeconds + 1 >= active.totalSeconds) {
+                    completion()
+                } else {
+                    setActive(active => {
+                        if (!active) return
 
-                    const newActive = {...active}
-                    newActive.completedSeconds++
+                        const newActive = {...active}
+                        newActive.completedSeconds++
 
-                    return newActive
-                })
+                        return newActive
+                    })
+                }
             }, 1e3)
 
             return () => {
@@ -83,12 +86,7 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     const totalLengthCircle = mainCircleRef.current?.getTotalLength() || 9999999
     let remainingSeconds: number = active
-        ? Math.floor(
-              (active.isPaused
-                  ? active.totalSeconds
-                  : (new Date(active.completionTime).getTime() - Date.now()) /
-                    1e3) - active.completedSeconds
-          )
+        ? Math.floor(active.totalSeconds - active.completedSeconds)
         : 0
 
     if (remainingSeconds < 0) remainingSeconds = 0
@@ -138,6 +136,7 @@ export const TimerComponent = ({taskId}: IProps) => {
                                 fill='transparent'
                             />
                             <circle
+                                className={styles.circleAnimated}
                                 cx='50%'
                                 cy='50%'
                                 r='120'
@@ -209,8 +208,6 @@ export const TimerComponent = ({taskId}: IProps) => {
                 />
                 <ButtonComponent
                     icon={
-                        restActive.createMutation.isPending ||
-                        isLoading ||
                         isPending ? (
                             <LoaderComponent mainColor='white' />
                         ) : !active || active?.isPaused ? (
