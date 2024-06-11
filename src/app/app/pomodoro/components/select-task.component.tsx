@@ -26,6 +26,7 @@ export const SelectTaskComponent = ({isOpen, onClose, selectTask}: IProps) => {
 
     return (
         <PopUpMenuComponent
+            className='flex flex-col gap-4'
             title={t('title')}
             isOpen={isOpen}
             onClose={onClose}
@@ -39,26 +40,30 @@ export const SelectTaskComponent = ({isOpen, onClose, selectTask}: IProps) => {
                     <ItemTaskComponent isLoading={true} />
                 </ListComponent>
             ) : (
-                <ListComponent>
-                    {tasks &&
-                        tasks.map(task => (
-                            <ItemTaskComponent
-                                key={task.id}
-                                changeCompleted={() => {}}
-                                onClick={() => onSelectTask(task.id)}
-                                task={task}
-                                type='select'
-                            />
-                        ))}
-                    <ItemDefaultComponent
-                        size='big'
-                        title={t('delete-task')}
-                        onClick={() => onSelectTask(undefined)}
-                        leftComponent={
-                            <TrashIcon className='h-7 w-7 text-primaryInvert-70' />
-                        }
-                    />
-                </ListComponent>
+                <>
+                    <ListComponent>
+                        {tasks &&
+                            tasks.map(task => (
+                                <ItemTaskComponent
+                                    key={task.id}
+                                    changeCompleted={() => {}}
+                                    onClick={() => onSelectTask(task.id)}
+                                    task={task}
+                                    type='select'
+                                />
+                            ))}
+                    </ListComponent>
+                    <ListComponent>
+                        <ItemDefaultComponent
+                            size='big'
+                            title={t('delete-task')}
+                            onClick={() => onSelectTask(undefined)}
+                            leftComponent={
+                                <TrashIcon className='h-7 w-7 text-primaryInvert-70' />
+                            }
+                        />
+                    </ListComponent>
+                </>
             )}
         </PopUpMenuComponent>
     )

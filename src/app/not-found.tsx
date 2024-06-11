@@ -8,7 +8,7 @@ const NotFoundPage = () => {
 
     return (
         <div className='w-full h-full flex items-center justify-center flex-col gap-2'>
-            <h1 className='text-2xl-bold'>{t('title')}</h1>
+            <h1 className='text-2xl-bold text-primaryInvert'>{t('title')}</h1>
             <p className='w-1/2 text-lg-regular text-primaryInvert-70 text-center'>
                 {t('description')}
             </p>
