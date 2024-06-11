@@ -1,27 +1,35 @@
 .wrapper {
-    @apply fixed left-0 bottom-0 w-full h-20 bg-content;
+    @apply fixed left-0 bottom-0 w-full h-20 bg-content md:relative md:w-64 md:h-full;
+}
+
+.wrapper-logo {
+    @apply hidden md:flex w-full text-3xl-bold;
+}
+
+.wrapper-logo > span {
+    @apply text-accent;
 }
 
 .wrapper-buttons {
-    @apply w-full h-full flex items-center;
+    @apply w-full h-full flex items-center md:flex-col md:h-screen md:gap-1 md:mt-8;
 }
 
 .wrapper-buttons > li {
-    @apply h-full flex-1 pt-2  cursor-pointer transition-colors-custom hover:text-accent-70 active:text-accent-70;
+    @apply h-full flex-1 pt-2 text-primaryInvert cursor-pointer transition-colors-custom hover:text-accent-70 active:text-accent-70 md:h-16 md:flex-none md:w-full md:bg-primary md:rounded-2xl md:p-standard md:hover:bg-primary-50;
 }
 
 .wrapper-buttons > li > a {
-    @apply h-full w-full flex flex-col gap-0.5 items-center justify-start;
+    @apply h-full w-full flex flex-col gap-0.5 items-center justify-start md:flex-row md:gap-2.5;
 }
 
 .wrapper-buttons > li > a > svg {
-    @apply w-8 h-8;
+    @apply w-8 h-8 md:h-9 md:w-9;
 }
 
 .wrapper-buttons > li > a > span {
-    @apply text-small-bold;
+    @apply text-small-bold md:text-base-bold;
 }
 
 .active-button {
-    @apply text-accent;
+    @apply !text-accent;
 }

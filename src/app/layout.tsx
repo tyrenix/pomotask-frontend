@@ -1,18 +1,17 @@
+import {cookieConstant} from '@/constants/cookie.constant'
+import {envConstant} from '@/constants/env.constant'
+import {seoConstants} from '@/constants/seo.constant'
+import {TanStackQueryProvider} from '@/providers/tanStack-query.provider'
+import clsx from 'clsx'
 import type {Metadata, Viewport} from 'next'
-import {Toaster} from 'sonner'
-import {Nunito} from 'next/font/google'
-import {PropsWithChildren} from 'react'
 import {NextIntlClientProvider} from 'next-intl'
 import {getLocale, getMessages, getTranslations} from 'next-intl/server'
+import {Nunito} from 'next/font/google'
 import {cookies} from 'next/headers'
-import {TanStackQueryProvider} from '@/providers/tanStack-query.provider'
-import {cookieConstant} from '@/constants/cookie.constant'
-import {seoConstants} from '@/constants/seo.constant'
-import {envConstant} from '@/constants/env.constant'
-
+import {PropsWithChildren} from 'react'
+import {Toaster} from 'sonner'
 import '@/styles/globals.styles.css'
 import '@/styles/theme.styles.css'
-import clsx from 'clsx'
 
 const nunito = Nunito({subsets: ['latin', 'cyrillic']})
 
@@ -57,7 +56,10 @@ export default async function RootLayout({children}: PropsWithChildren) {
     return (
         <html lang={locale} className={`w-full h-full ${theme}`}>
             <body
-                className={clsx('w-full h-full bg-content', nunito.className)}
+                className={clsx(
+                    'w-full h-full bg-content md:flex md:items-center md:justify-center',
+                    nunito.className
+                )}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <TanStackQueryProvider>

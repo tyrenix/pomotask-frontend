@@ -1,9 +1,9 @@
 .wrapper {
-    @apply fixed z-10 top-0 left-0 w-full h-full flex items-end transition-colors-custom;
+    @apply fixed z-10 top-0 left-0 w-full h-full flex items-end transition-colors-custom md:justify-center;
 }
 
 .wrapper-container {
-    @apply w-full bg-content rounded-t-2xl overflow-hidden transition-transform-custom;
+    @apply w-full md:w-2/5 bg-content rounded-t-2xl overflow-hidden transition-transform-custom;
 }
 
 .wrapper-container-full {

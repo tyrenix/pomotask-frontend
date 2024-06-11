@@ -11,7 +11,7 @@ interface IProps {
 
 export const useUserActivity = ({filters, enabled}: IProps) => {
     const {data, isLoading, error, isError} = useQuery({
-        queryKey: ['userActivity', filters],
+        queryKey: ['pomodoro-session-activity', filters],
         queryFn: () => ptSessionService.getUserActivity(filters),
         enabled: enabled ?? true
     })

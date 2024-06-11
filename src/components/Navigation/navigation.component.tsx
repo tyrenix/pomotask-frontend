@@ -1,12 +1,11 @@
 'use client'
 
-import {clsx} from 'clsx'
-import Link from 'next/link'
-import {useTranslations} from 'next-intl'
-import {CircleUser, ListChecks, Timer} from 'lucide-react'
 import {dashboardConstant} from '@/constants/dashboard.constant'
 import {useActivePage} from '@/hooks/useActivePage.hook'
-
+import {clsx} from 'clsx'
+import {CircleUser, ListChecks, Timer} from 'lucide-react'
+import {useTranslations} from 'next-intl'
+import Link from 'next/link'
 import styles from './navigation.module.css'
 
 export const NavigationComponent = () => {
@@ -15,6 +14,9 @@ export const NavigationComponent = () => {
 
     return (
         <div className={styles.wrapper}>
+            <div className={styles.wrapperLogo}>
+                <span>Pomo</span>task
+            </div>
             <ul className={styles.wrapperButtons}>
                 <li
                     className={clsx(

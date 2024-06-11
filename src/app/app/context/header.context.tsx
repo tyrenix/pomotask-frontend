@@ -9,22 +9,29 @@ import {
 } from 'react'
 
 interface IContext {
-    isPressed: boolean
+    isPressed?: boolean
+    resetIsPressed: () => any
     handleClick: () => any
 }
 
 const HeaderContext = createContext<IContext>({
-    isPressed: false,
-    handleClick: () => {}
+    isPressed: undefined,
+    handleClick: () => {},
+    resetIsPressed: () => {}
 })
 
 export const HeaderProvider = ({children}: PropsWithChildren) => {
-    const [isPressed, setIsPressed] = useState<boolean>(false)
-
+    const [isPressed, setIsPressed] = useState<boolean | undefined>(undefined)
     const handleClick = useCallback(() => setIsPressed(prev => !prev), [])
 
     return (
-        <HeaderContext.Provider value={{isPressed, handleClick}}>
+        <HeaderContext.Provider
+            value={{
+                isPressed,
+                handleClick,
+                resetIsPressed: () => setIsPressed(undefined)
+            }}
+        >
             {children}
         </HeaderContext.Provider>
     )

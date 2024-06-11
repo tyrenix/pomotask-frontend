@@ -31,7 +31,7 @@ export const TimerComponent = ({taskId}: IProps) => {
     const [isClickAnimation, setIsClickAnimation] = useState<boolean>(false)
 
     const {active, setActive, isPending, isLoading, ...restActive} = useActive()
-    const {isPressed} = useHeaderContext()
+    const {isPressed, resetIsPressed} = useHeaderContext()
 
     useEffect(() => {
         if (active && !active.isPaused) {
@@ -57,8 +57,9 @@ export const TimerComponent = ({taskId}: IProps) => {
     }, [active])
 
     useEffect(() => {
-        if (!isOpenSettings) {
+        if (typeof isPressed === 'boolean' && !isOpenSettings) {
             setIsOpenSettings(true)
+            resetIsPressed()
         }
     }, [isPressed])
 

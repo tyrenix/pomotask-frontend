@@ -53,6 +53,12 @@ export const useActive = () => {
 
             if (data.taskId) {
                 queryClient.invalidateQueries({queryKey: ['task', data.taskId]})
+                queryClient.invalidateQueries({
+                    queryKey: [
+                        'pomodoro-session-activity',
+                        {taskId: data.taskId, filter: 'total'}
+                    ]
+                })
             }
         }
     })

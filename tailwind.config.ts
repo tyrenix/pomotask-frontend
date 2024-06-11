@@ -79,6 +79,9 @@ const config: Config = {
                 'xs-bold': ['0.625rem', {fontWeight: 'bold'}],
                 'xs-regular': ['0.625rem', {fontWeight: 'regular'}]
             },
+            spacing: {
+                standard: '0.9375rem'
+            },
             padding: {
                 standard: '0.9375rem'
             },
