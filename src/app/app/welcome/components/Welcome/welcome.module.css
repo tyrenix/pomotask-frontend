@@ -5,13 +5,13 @@
     flex
     flex-col
     gap-8
+    p-standard
     pt-standard
-    pb-28
-    overflow-y-auto;
+    pb-28;
 }
 
 .wrapper > h1 {
-    @apply text-3xl-bold;
+    @apply text-3xl-bold leading-tight;
 }
 
 .wrapper > p {
@@ -44,10 +44,5 @@
 }
 
 .button-wrapper {
-    @apply fixed
-    bottom-0
-    left-0
-    w-full
-    p-standard
-    bg-content;
+    @apply fixed bottom-0 left-0 w-full p-standard bg-content;
 }
