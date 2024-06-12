@@ -1,5 +1,5 @@
 import {axiosWithoutAuth} from '@/interceptors/axios.interceptor'
-import {removeAccessToken, saveAccessToken} from '@/services/auth-token.service'
+import {removeTokens, saveAccessToken} from '@/services/auth-token.service'
 import {IAuthForm, IAuthResponse, IGetNewTokens} from '@/types/auth.types'
 import {catchErrorsInterceptor} from '@/interceptors/catch-errors.interceptor'
 
@@ -43,7 +43,7 @@ class AuthService {
             })
 
         if (response?.data) {
-            removeAccessToken()
+            removeTokens()
         }
 
         return response.data
