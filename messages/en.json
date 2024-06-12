@@ -2,18 +2,237 @@
     "Manifest": {
         "name": "Pomotask",
         "short-name": "Pomotask",
-        "description": "PomoTask is the best solution for tracking your activity on important tasks"
+        "description": "Pomotask - the best solution for tracking your activity on important tasks"
     },
     "Metadata": {
-        "title": "Pomotask - an observer will help in time!",
-        "description": "PomoTask is the best solution for tracking your activity on important tasks"
+        "title": "Pomotask",
+        "description": "Pomotask - the best solution for tracking your activity on important tasks"
+    },
+    "Pages": {
+        "profile": "Profile",
+        "pomodoro": "Pomodoro",
+        "tasks": "Tasks"
+    },
+    "Units": {
+        "shortHours": "h",
+        "shortMinutes": "min",
+        "shortTimes": "times"
+    },
+    "Dialog": {
+        "perform": "Perform",
+        "cancel": "Cancel"
+    },
+    "PtSession": {
+        "work": "Pomodoro",
+        "shortBreak": "Short Break",
+        "longBreak": "Long Break",
+        "info": {
+            "title": "Information",
+            "started": "Started",
+            "ended": "Ended",
+            "task": "Task",
+            "not-select-task": "Task not selected"
+        }
     },
     "Wait": {
-        "text": "The site is still in development,\nbut it will be available soon!"
+        "text": "The website is still under development,n but will be available soon!"
     },
     "NotFound": {
-        "title": "Not found :(",
+        "title": "Nothing found :(",
         "description": "The requested resource could not be found",
-        "to-main": "To main page"
+        "to-main": "Go to Homepage"
+    },
+    "Auth": {
+        "title": "Authorization",
+        "login": "Log in",
+        "register": "Register",
+        "success": "Successful login!",
+        "form": {
+            "enter-email": "Enter email",
+            "enter-password": "Enter password",
+            "change-to-login": "Already have an account?",
+            "change-to-register": "Don't have an account yet?",
+            "login": "Login",
+            "register": "Register",
+            "errors": {
+                "email": {
+                    "required": "This field is required!"
+                },
+                "password": {
+                    "required": "This field is required!",
+                    "minLength": "Minimum password length is 8 characters",
+                    "maxLength": "Maximum password length is 16 characters"
+                }
+            }
+        }
+    },
+    "Welcome": {
+        "title": "Welcome",
+        "content": {
+            "title": "Welcome to Pomotask!",
+            "description": "Your reliable assistant for productive work and effective time management. With our app, you can easily track time, work in focused intervals, and achieve great results.",
+            "advantages": {
+                "focus": {
+                    "title": "Focus and Productivity",
+                    "description": "Work with maximum concentration using 25-minute work intervals and short breaks."
+                },
+                "flexibility": {
+                    "title": "Flexibility",
+                    "description": "Adjust session and break durations to tailor the timer to your needs."
+                },
+                "stats": {
+                    "title": "Statistics",
+                    "description": "Track your productivity and progress by analyzing completed tasks and time spent."
+                }
+            },
+            "next": "Continue"
+        }
+    },
+    "PopUpMenu": {
+        "close": "Close",
+        "done": "Done"
+    },
+    "Profile": {
+        "title": "Profile",
+        "settings": "Settings",
+        "activity": {
+            "title": "Activity",
+            "today": "Today",
+            "week": "This week"
+        },
+        "pomodoro-sessions": {
+            "title": "List of Activity",
+            "openFull": "All activity"
+        }
+    },
+    "Settings": {
+        "title": "Settings",
+        "password": {
+            "title": "Change Password",
+            "text": "Change password",
+            "enterOldPassword": "Enter old password",
+            "enterNewPassword": "Enter new password",
+            "passwordChange": "Password changed!"
+        },
+        "pomodoro": {
+            "title": "Pomodoro Timer",
+            "text": "Timer"
+        },
+        "sessions": {
+            "title": "Sessions",
+            "description": "List of active sessions, if you see an unfamiliar device, close this session and change the password",
+            "info": {
+                "title": "Session Information",
+                "opened": "Opened",
+                "client": "Client",
+                "device": "Device",
+                "ip": "IP",
+                "close": "Close session",
+                "sessionClosed": "Session closed",
+                "sessionCloseError": "Failed to close session"
+            }
+        }
+    },
+    "Tasks": {
+        "title": "Tasks",
+        "completed": "Completed tasks",
+        "tasksCompletedNotFound": "No completed tasks yet"
+    },
+    "Task": {
+        "title": "About the task",
+        "enterTitle": "Enter title",
+        "enterDescription": "Enter description",
+        "timeSpent": {
+            "title": "Time spent",
+            "today": "Today",
+            "week": "This week"
+        },
+        "activity": {
+            "title": "Activity",
+            "openAll": "All activity"
+        },
+        "create": {
+            "title": "Task creation",
+            "createButton": "Create",
+            "success": "Task created!",
+            "error": "Error creating task!"
+        }
+    },
+    "Pomodoro": {
+        "title": "Pomodoro",
+        "select-task": {
+            "container": {
+                "title": "Select task",
+                "description": "Click to choose a task",
+                "activity": "Activity"
+            },
+            "title": "Task selection",
+            "not-found": "No tasks yet",
+            "delete-task": "Continue without a task"
+        },
+        "settings": {
+            "title": "Settings",
+            "status-update": {
+                "success": "Timer settings updated!",
+                "failure": "Failed to update timer settings!"
+            },
+            "work-time": {
+                "title": "Work session time",
+                "text": "Work session",
+                "description": "Sets the duration of a pomodoro work session"
+            },
+            "break": {
+                "title": "Breaks",
+                "text-short-break": "Short break",
+                "text-long-break": "Long break"
+            },
+            "frequency": {
+                "title": "Long break frequency",
+                "text": "Frequency",
+                "description": "After how many work sessions a long break will be initiated"
+            },
+            "session": {
+                "title": "Session",
+                "text": "Duration",
+                "description": "Sets the stimulus for the day's work, apart from work sessions, breaks are taken into account"
+            }
+        },
+        "timer": {
+            "time-to-start": "Gooo!",
+            "completion": "Pomodoro completed!",
+            "ask": {
+                "reset": {
+                    "title": "Reset?",
+                    "description": "Are you sure you want to reset the pomodoro? This action cannot be undone.",
+                    "button": "Reset"
+                },
+                "completion": {
+                    "title": "Finish early?",
+                    "description": "Are you sure you want to end the pomodoro early? This action cannot be undone.",
+                    "button": "Finish"
+                }
+            },
+            "slogan": {
+                "work": "Time to work!",
+                "shortBreak": "Short break...",
+                "longBreak": "Time to relax!..",
+                "pause": "Not time to pause!.."
+            },
+            "mini-slogans": [
+                "9",
+                "You can do it!",
+                "Keep it up!",
+                "All good!",
+                "Excellent!",
+                "Onwards to the goal!",
+                "Don't give up!",
+                "Go for it!",
+                "You're the best!",
+                "You're a leader!"
+            ]
+        }
+    },
+    "Error": {
+        "E500": "Unknown error, please try again later"
     }
 }

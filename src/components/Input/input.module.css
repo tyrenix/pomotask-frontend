@@ -1,0 +1,69 @@
+.wrapper {
+    @apply
+    w-full
+    h-16
+    flex
+    flex-col
+    px-5
+    py-1
+    rounded-2xl
+    border-primaryInvert-10
+    border-2
+    overflow-hidden
+    transition-colors-custom
+}
+
+.wrapper,
+.wrapper > * {
+    @apply
+    cursor-text
+}
+
+.wrapper-focus {
+    @apply
+    border-primaryInvert-70
+}
+
+.wrapper-error {
+    @apply
+    border-red-500
+}
+
+.wrapper-error > .label {
+    @apply
+    text-red-500
+}
+
+.wrapper-disabled {
+    @apply
+    cursor-not-allowed
+}
+
+.wrapper-disabled > * {
+    @apply
+    cursor-not-allowed
+}
+
+.wrapper-disabled > * {
+    @apply
+    !text-primaryInvert-30
+}
+
+.label {
+    @apply
+    text-small-bold
+    text-primaryInvert-70
+    transition-colors-custom
+    line-clamp-1
+}
+
+.input {
+    @apply
+    w-full
+    flex-1
+    bg-transparent
+    outline-none
+    text-primaryInvert
+    text-lg-bold
+    transition-colors-custom
+}

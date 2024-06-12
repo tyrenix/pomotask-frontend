@@ -1,0 +1,26 @@
+.skeletron-loader {
+    @apply bg-primaryInvert-10 transition-colors-custom rounded-lg !text-transparent animate-blink;
+}
+
+.skeletron-loader * {
+    @apply !text-transparent !bg-transparent;
+}
+
+@keyframes blink {
+    0%,
+    100% {
+        @apply opacity-100;
+    }
+    50% {
+        @apply opacity-65;
+    }
+}
+
+@keyframes scale {
+    0% {
+        @apply scale-125;
+    }
+    100% {
+        @apply scale-100;
+    }
+}

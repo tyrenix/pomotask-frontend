@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import styles from './style.module.css'
+import styles from './styles.module.css'
 
 interface IProps {
     className?: string
     href: string
-    locale?: string
     label: string
+    locale?: string
 }
 
 const LinkComponent = (props: IProps) => {

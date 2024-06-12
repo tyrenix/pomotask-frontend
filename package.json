@@ -1,30 +1,46 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"test/**/*.tsx\" \"src/**/*.ts\"",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "cookies-next": "^4.2.1",
-    "next": "^14.2.3",
-    "next-intl": "^3.14.1",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-icons": "^5.2.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  }
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"test/**/*.tsx\" \"src/**/*.ts\"",
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@hello-pangea/dnd": "^16.6.0",
+        "@tanstack/react-query": "^5.40.0",
+        "@tanstack/react-query-devtools": "^5.40.0",
+        "@tanstack/react-router": "^1.34.9",
+        "@types/axios": "^0.14.0",
+        "@types/lodash.debounce": "^4.0.9",
+        "axios": "^1.7.2",
+        "clsx": "^2.1.1",
+        "cookies-next": "^4.2.1",
+        "device-detector-js": "^3.0.3",
+        "lodash.debounce": "^4.0.8",
+        "lucide-react": "^0.383.0",
+        "next": "^14.2.3",
+        "next-intl": "^3.14.1",
+        "query-string": "^9.0.0",
+        "react": "^18",
+        "react-beautiful-dnd": "^13.1.1",
+        "react-dom": "^18",
+        "react-expanding-textarea": "^2.3.6",
+        "react-hook-form": "^7.51.5",
+        "react-intersection-observer": "^9.10.3",
+        "sonner": "^1.4.41"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.3",
+        "postcss": "^8",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5"
+    }
 }

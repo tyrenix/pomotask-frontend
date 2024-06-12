@@ -12,6 +12,10 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            animation: {
+                blink: 'blink 1.5s ease-in-out infinite',
+                scale: 'scale .15s ease-in-out'
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic':
@@ -75,11 +79,14 @@ const config: Config = {
                 'xs-bold': ['0.625rem', {fontWeight: 'bold'}],
                 'xs-regular': ['0.625rem', {fontWeight: 'regular'}]
             },
+            spacing: {
+                standard: '0.9375rem'
+            },
             padding: {
-                st: '0.9375rem'
+                standard: '0.9375rem'
             },
             margin: {
-                st: '0.9375rem'
+                standard: '0.9375rem'
             },
             borderRadius: {}
         }
@@ -90,6 +97,17 @@ const config: Config = {
                 '.transition-colors-custom': {
                     'transition-property':
                         'color, background-color, border-color, text-decoration-color, fill, stroke',
+                    'transition-duration': '300ms',
+                    'transition-timing-function': 'ease-in-out'
+                },
+                '.transition-custom': {
+                    'transition-property':
+                        'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter',
+                    'transition-duration': '300ms',
+                    'transition-timing-function': 'ease-in-out'
+                },
+                '.transition-transform-custom': {
+                    'transition-property': 'transform',
                     'transition-duration': '300ms',
                     'transition-timing-function': 'ease-in-out'
                 }

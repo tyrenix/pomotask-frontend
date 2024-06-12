@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* #F4F4F4 */
+    --content-color-light: 244, 244, 244;
+    --content-color-dark: 11, 11, 11;
+    /* #F34A4A */
+    --accent-color-light: 243, 74, 74;
+    --accent-color-dark: 243, 74, 74;
+    /* #FFFFFF */
+    --primary-color-light: 255, 255, 255;
+    --primary-color-dark: 0, 0, 0;
+    /* #000000 */
+    --primaryInvert-color-light: 0, 0, 0;
+    --primaryInvert-color-dark: 255, 255, 255;
+    /* #34B728 */
+    --green-color: 52, 183, 40;
+    /* #4870FF */
+    --blue-color: 72, 112, 255;
+}
+
+html.system body,
+html.light body {
+    --content-color: var(--content-color-light);
+    --accent-color: var(--accent-color-light);
+    --primary-color: var(--primary-color-light);
+    --primaryInvert-color: var(--primaryInvert-color-light);
+}
+
+html.dark body {
+    --content-color: var(--content-color-dark);
+    --accent-color: var(--accent-color-dark);
+    --primary-color: var(--primary-color-dark);
+    --primaryInvert-color: var(--primaryInvert-color-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+    html.system body {
+        --content-color: var(--content-color-dark);
+        --accent-color: var(--accent-color-dark);
+        --primary-color: var(--primary-color-dark);
+        --primaryInvert-color: var(--primaryInvert-color-dark);
+    }
+}

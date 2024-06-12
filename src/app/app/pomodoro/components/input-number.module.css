@@ -1,0 +1,11 @@
+.input {
+    @apply w-full h-full bg-transparent text-end text-lg-regular text-primaryInvert-70 placeholder-primaryInvert-70 outline-none;
+}
+
+.wrapper {
+    @apply w-32 h-12 flex justify-center items-center gap-1;
+}
+
+.label {
+    @apply text-base-regular text-primaryInvert-70;
+}

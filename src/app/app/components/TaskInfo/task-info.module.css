@@ -1,0 +1,46 @@
+.wrapper-description {
+    @apply w-full p-standard pl-14 text-lg-regular text-primaryInvert-70 flex flex-col gap-1;
+}
+
+.wrapper-description > textarea {
+    @apply w-full min-h-12 resize-none outline-none bg-transparent;
+}
+
+.wrapper-description > span {
+    @apply ml-auto text-small-bold transition-colors-custom;
+}
+
+.wrapper-title {
+    @apply w-full min-h-14 flex;
+}
+
+.wrapper-completed-box {
+    @apply w-7 h-14 ml-standard flex justify-center items-center cursor-pointer;
+}
+
+.wrapper-completed-box > svg {
+    @apply w-7 h-7 text-primaryInvert-70;
+}
+
+.wrapper-title-description {
+    @apply ml-3 w-full min-h-14 py-3.5 flex pr-standard border-b border-b-primaryInvert-10 justify-center items-center;
+}
+
+.wrapper-title-description > textarea {
+    @apply w-full h-full text-lg-bold bg-transparent resize-none outline-none;
+}
+
+.wrapper-completed-box-scale {
+    animation: scale 0.3s ease-in-out;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

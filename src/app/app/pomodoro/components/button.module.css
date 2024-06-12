@@ -1,0 +1,15 @@
+.secondary-button {
+    @apply w-16 h-16 bg-primaryInvert-10 text-primaryInvert rounded-3xl flex justify-center items-center transition-custom cursor-pointer hover:bg-primaryInvert-30 active:bg-primaryInvert-30;
+}
+
+.secondary-button > svg {
+    @apply w-8 h-8;
+}
+
+.main-button {
+    @apply w-20 h-20 text-white rounded-3xl flex justify-center items-center transition-custom hover:bg-accent-70 active:bg-accent-70;
+}
+
+.main-button > svg {
+    @apply w-10 h-10;
+}
