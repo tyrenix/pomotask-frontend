@@ -1,8 +1,9 @@
-import type {MetadataRoute} from 'next'
-import {cookies} from 'next/headers'
-import {getTranslations} from 'next-intl/server'
 import {cookieConstant} from '@/constants/cookie.constant'
+import {dashboardConstant} from '@/constants/dashboard.constant'
 import {defaultLocale} from '@/i18n'
+import type {MetadataRoute} from 'next'
+import {getTranslations} from 'next-intl/server'
+import {cookies} from 'next/headers'
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
     const cookieStore = cookies()
@@ -17,7 +18,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
         name: t('name'),
         short_name: t('short-name'),
         description: t('description'),
-        start_url: '/wait',
+        start_url: dashboardConstant.APP_PAGE,
         display: 'standalone',
         background_color: theme === 'dark' ? '#0B0B0B' : '#F4F4F4',
         theme_color: theme === 'dark' ? '#0B0B0B' : '#F4F4F4',

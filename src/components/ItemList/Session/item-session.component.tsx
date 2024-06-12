@@ -1,10 +1,6 @@
 import clsx from 'clsx'
 import DeviceDetector from 'device-detector-js'
-import {
-    Smartphone as SmartphoneIcon,
-    Computer as ComputerIcon,
-    ShieldQuestion as ShieldQuestionIcon
-} from 'lucide-react'
+import {SmartphoneIcon, LaptopIcon, ShieldQuestionIcon} from 'lucide-react'
 import {
     ItemDefaultComponent,
     IProps as ItemDefaultProps
@@ -37,7 +33,7 @@ export const ItemSessionComponent = ({session, isLoading, ...rest}: IProps) => {
             )}
         >
             {agent === 'desktop' ? (
-                <ComputerIcon />
+                <LaptopIcon />
             ) : agent === 'smartphone' ? (
                 <SmartphoneIcon />
             ) : (

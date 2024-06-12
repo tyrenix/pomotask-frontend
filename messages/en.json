@@ -121,6 +121,7 @@
         "sessions": {
             "title": "Sessions",
             "description": "List of active sessions, if you see an unfamiliar device, close this session and change the password",
+
             "info": {
                 "title": "Session Information",
                 "opened": "Opened",
@@ -129,7 +130,12 @@
                 "ip": "IP",
                 "close": "Close session",
                 "sessionClosed": "Session closed",
-                "sessionCloseError": "Failed to close session"
+                "sessionCloseError": "Failed to close session",
+                "ask": {
+                    "title": "Close it?",
+                    "description": "if you close this session, you will not be able to use the application anymore, this action cannot be canceled",
+                    "button": "Close it"
+                }
             }
         }
     },
