@@ -13,6 +13,7 @@ export const saveAccessToken = (accessToken: string): void => {
     })
 }
 
-export const removeAccessToken = () => {
+export const removeTokens = () => {
     deleteCookie(cookieConstant.ACCESS_TOKEN)
+    deleteCookie(cookieConstant.REFRESH_TOKEN)
 }

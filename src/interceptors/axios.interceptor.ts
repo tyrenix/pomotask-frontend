@@ -1,5 +1,5 @@
 import axios, {type CreateAxiosDefaults} from 'axios'
-import {getAccessToken, removeAccessToken} from '@/services/auth-token.service'
+import {getAccessToken, removeTokens} from '@/services/auth-token.service'
 import {authService} from '@/services/auth.service'
 import {envConstant} from '@/constants/env.constant'
 import {catchErrorsInterceptor} from '@/interceptors/catch-errors.interceptor'
@@ -40,11 +40,9 @@ axiosWithAuth.interceptors.response.use(
                 await authService.getNewTokens()
                 return axiosWithAuth.request(originalConfig)
             } catch (error) {
-                // @ts-ignore
-                if (error?.response?.status === 401) {
-                    removeAccessToken()
-                }
-
+                // if (error?.response?.status === 401) {
+                // }
+                removeTokens()
                 throw catchErrorsInterceptor(error)
             }
         }
