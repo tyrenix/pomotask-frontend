@@ -11,6 +11,7 @@ import {ListComponent} from '@/components/List/list.component'
 import {useSessions} from '@/hooks/useSessions.hook'
 import {SessionInfoComponent} from '../SessionInfo/session-info.component'
 import {PasswordComponent} from '../Password/password.component'
+import {PtSettingsComponent} from '@/app/app/components/PtSettings/pt-settings.component'
 
 interface IProps {
     isOpen: boolean
@@ -23,6 +24,8 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
     const [openSessionPopUp, setOpenSessionPopUp] = useState<string | null>(
         null
     )
+    const [isOpenPtSettings, setIsOpenPtSettings] = useState<boolean>(false)
+
     const [isOpenPasswordPopUp, setIsOpenPasswordPopUp] =
         useState<boolean>(false)
 
@@ -47,7 +50,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                     />
                 </ListComponent>
                 <ListComponent title={t('pomodoro.title')}>
-                    <ItemTransitionComponent title={t('pomodoro.text')} />
+                    <ItemTransitionComponent
+                        title={t('pomodoro.text')}
+                        onClick={() => setIsOpenPtSettings(true)}
+                    />
                 </ListComponent>
                 {!sessions || isLoadingSessions || !isSuccessSessions ? (
                     <ListComponent
@@ -81,6 +87,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
             <PasswordComponent
                 isOpen={isOpenPasswordPopUp}
                 onClose={() => setIsOpenPasswordPopUp(false)}
+            />
+            <PtSettingsComponent
+                isOpen={isOpenPtSettings}
+                onClose={() => setIsOpenPtSettings(false)}
             />
         </>
     )

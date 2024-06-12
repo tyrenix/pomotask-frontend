@@ -2,6 +2,7 @@
 
 import {useTranslations} from 'next-intl'
 import LinkComponent from '@/components/Link/link.component'
+import {dashboardConstant} from '@/constants/dashboard.constant'
 
 const NotFoundPage = () => {
     const t = useTranslations('NotFound')
@@ -14,7 +15,7 @@ const NotFoundPage = () => {
             </p>
             <LinkComponent
                 className='text-lg-bold'
-                href={'/wait'}
+                href={dashboardConstant.APP_PAGE}
                 label={t('to-main')}
             />
         </div>

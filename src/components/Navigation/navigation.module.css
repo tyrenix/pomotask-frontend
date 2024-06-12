@@ -3,7 +3,7 @@
 }
 
 .wrapper-logo {
-    @apply hidden md:flex w-full text-3xl-bold;
+    @apply hidden md:flex w-full text-3xl-bold cursor-pointer;
 }
 
 .wrapper-logo > span {
@@ -11,7 +11,7 @@
 }
 
 .wrapper-buttons {
-    @apply w-full h-full flex items-center md:flex-col md:h-screen md:gap-1 md:mt-8;
+    @apply w-full h-full flex items-center md:flex-col md:h-screen md:gap-1.5 md:mt-8;
 }
 
 .wrapper-buttons > li {

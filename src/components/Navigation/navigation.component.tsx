@@ -14,9 +14,12 @@ export const NavigationComponent = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.wrapperLogo}>
+            <Link
+                href={dashboardConstant.APP_PAGE}
+                className={styles.wrapperLogo}
+            >
                 <span>Pomo</span>task
-            </div>
+            </Link>
             <ul className={styles.wrapperButtons}>
                 <li
                     className={clsx(
