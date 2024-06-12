@@ -62,7 +62,7 @@ export const PopUpMenuComponent = ({
         } else if (!isOpen && status === 'open') {
             setStatus('closing')
         }
-    }, [isOpen, status])
+    }, [isOpen, status, onClose])
 
     const handlerCancelButton = () => {
         setStatus('closing')

@@ -31,7 +31,7 @@ export const ButtonComponent = ({
         } else if (isShow && statusShow === 'close') {
             setStatusShow('showing')
         }
-    }, [isShow])
+    }, [isShow, setStatusShow, statusShow])
 
     const click = () => {
         setIsClick(true)

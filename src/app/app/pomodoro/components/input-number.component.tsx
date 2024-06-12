@@ -45,3 +45,5 @@ export const InputNumberComponent = forwardRef<HTMLInputElement, IProps>(
         )
     }
 )
+
+InputNumberComponent.displayName = 'InputNumberComponent'

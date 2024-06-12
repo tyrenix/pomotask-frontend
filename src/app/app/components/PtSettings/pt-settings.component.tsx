@@ -65,7 +65,8 @@ export const PtSettingsComponent = ({isOpen, onClose}: IProps) => {
         } else {
             setIsActiveDone(false)
         }
-    }, [watch()])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [watch(), setIsActiveDone, getValues])
 
     const onDone = () => {
         const fields = getValues()

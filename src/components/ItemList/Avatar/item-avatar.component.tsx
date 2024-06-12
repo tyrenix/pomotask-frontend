@@ -28,7 +28,10 @@ export const ItemAvatarComponent = ({
                 rest.isLoading && 'skeletron-loader'
             )}
         >
-            {!rest.isLoading && <img src={avatar} alt='avatar' />}
+            {
+                // eslint-disable-next-line @next/next/no-img-element
+                !rest.isLoading && <img src={avatar} alt='avatar' />
+            }
         </div>
     )
 

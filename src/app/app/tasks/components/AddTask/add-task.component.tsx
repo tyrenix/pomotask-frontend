@@ -43,7 +43,7 @@ export const AddTaskComponent = ({isOpen, ...props}: IProps) => {
             watch()
             setTimeout(() => setFocus('title'), 300)
         }
-    }, [isOpen])
+    }, [isOpen, watch, setFocus])
 
     const onClose = () => {
         reset({description: '', title: ''})

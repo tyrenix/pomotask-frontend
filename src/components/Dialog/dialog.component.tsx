@@ -54,7 +54,7 @@ export const DialogComponent = ({isOpen, onClose, dialog}: IProps) => {
         } else if (!isOpen && status === 'open') {
             setStatus('closing')
         }
-    }, [isOpen, status])
+    }, [isOpen, status, onClose])
 
     const handlerCancelButton = () => {
         setStatus('closing')

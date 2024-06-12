@@ -14,7 +14,7 @@ export const useStatusView = (props?: IProps) => {
             setTimeout(() => setStatusShow('close'), props?.timeout || 300)
         else if (statusShow === 'showing')
             setTimeout(() => setStatusShow('show'), props?.timeout || 300)
-    }, [statusShow])
+    }, [statusShow, props?.timeout])
 
     return {statusShow, setStatusShow}
 }

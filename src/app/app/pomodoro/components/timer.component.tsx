@@ -6,16 +6,20 @@ import {
 } from '@/components/Dialog/dialog.component'
 import LoaderComponent from '@/components/Loader/loader.component'
 import clsx from 'clsx'
-import {HistoryIcon, PauseIcon, PlayIcon, StepForwardIcon} from 'lucide-react'
+import {
+    HistoryIcon,
+    PauseCircleIcon,
+    PlayCircleIcon,
+    StepForwardIcon
+} from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import {useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 import {toast} from 'sonner'
+import {PtSettingsComponent} from '../../components/PtSettings/pt-settings.component'
 import {useHeaderContext} from '../../context/header.context'
 import {useActive} from '../hook/useActive.hook'
 import {ButtonComponent} from './button.component'
 import styles from './timer.module.css'
-import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
-import {PtSettingsComponent} from '../../components/PtSettings/pt-settings.component'
 
 interface IProps {
     taskId?: string
@@ -32,6 +36,28 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     const {active, setActive, isPending, isLoading, ...restActive} = useActive()
     const {isPressed, resetIsPressed} = useHeaderContext()
+
+    const startOrPause = () => {
+        if (!active) {
+            restActive.createMutation.mutate(taskId)
+            return
+        }
+
+        restActive.startOrPauseMutation.mutate(active.id)
+    }
+
+    const reset = () => {
+        if (!active) return
+        setActive(undefined)
+        restActive.deleteMutation.mutate(active.id)
+    }
+
+    const completion = useCallback(() => {
+        if (!active) return
+        setActive(undefined)
+        toast.success(t('completion'))
+        restActive.completionMutation.mutate(active.id)
+    }, [restActive.completionMutation, setActive, t, active])
 
     useEffect(() => {
         if (active && !active.isPaused) {
@@ -54,36 +80,14 @@ export const TimerComponent = ({taskId}: IProps) => {
                 clearInterval(interval)
             }
         }
-    }, [active])
+    }, [active, setActive, completion])
 
     useEffect(() => {
         if (typeof isPressed === 'boolean' && !isOpenSettings) {
             setIsOpenSettings(true)
             resetIsPressed()
         }
-    }, [isPressed])
-
-    const startOrPause = () => {
-        if (!active) {
-            restActive.createMutation.mutate(taskId)
-            return
-        }
-
-        restActive.startOrPauseMutation.mutate(active.id)
-    }
-
-    const reset = () => {
-        if (!active) return
-        setActive(undefined)
-        restActive.deleteMutation.mutate(active.id)
-    }
-
-    const completion = () => {
-        if (!active) return
-        setActive(undefined)
-        toast.success(t('completion'))
-        restActive.completionMutation.mutate(active.id)
-    }
+    }, [isPressed, setIsOpenSettings, isOpenSettings, resetIsPressed])
 
     const totalLengthCircle = mainCircleRef.current?.getTotalLength() || 9999999
     let remainingSeconds: number = active
@@ -212,9 +216,9 @@ export const TimerComponent = ({taskId}: IProps) => {
                         isPending ? (
                             <LoaderComponent mainColor='white' />
                         ) : !active || active?.isPaused ? (
-                            <PlayIcon />
+                            <PlayCircleIcon />
                         ) : (
-                            <PauseIcon />
+                            <PauseCircleIcon />
                         )
                     }
                     isShow={true}

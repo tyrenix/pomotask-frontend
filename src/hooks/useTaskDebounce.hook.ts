@@ -12,6 +12,7 @@ interface IUseTaskDebounce {
 export function useTaskDebounce({watch, taskId}: IUseTaskDebounce) {
     const {mutate} = useUpdateTask()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedUpdateTask = useCallback(
         debounce(
             ({taskId, formData}: {taskId: string; formData: IUpdateTask}) => {
@@ -35,5 +36,6 @@ export function useTaskDebounce({watch, taskId}: IUseTaskDebounce) {
                 unsubscribe()
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [taskId, watch(), debouncedUpdateTask])
 }

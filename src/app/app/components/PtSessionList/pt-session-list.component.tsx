@@ -31,7 +31,7 @@ export const PtSessionListComponent = ({isOpen, onClose, taskId}: IProps) => {
         if (inView) {
             fetchNextPage()
         }
-    }, [inView])
+    }, [inView, fetchNextPage])
 
     return (
         <>
