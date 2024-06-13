@@ -1,12 +1,12 @@
 'use client'
 
+import {CheckBoxTaskComponent} from '@/components/CheckBox'
 import {ITask} from '@/types/task.types'
+import {ListStartIcon} from 'lucide-react'
 import {
     ItemDefaultComponent,
     IProps as ItemDefaultProps
 } from '../Default/item-default.component'
-import {CheckBoxTaskComponent} from '@/components/CheckBox'
-import {Divide, ListStartIcon} from 'lucide-react'
 
 interface IPropsWithoutLoading extends Pick<ItemDefaultProps, 'onClick'> {
     task: ITask

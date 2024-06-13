@@ -174,7 +174,11 @@
             },
             "title": "Task selection",
             "not-found": "No tasks yet",
-            "delete-task": "Continue without a task"
+            "delete-task": {
+                "title": "Remove task",
+                "description": "Tomato will not be assigned to any task",
+                "text": "Continue without task"
+            }
         },
         "settings": {
             "title": "Settings",

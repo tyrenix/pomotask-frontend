@@ -1,9 +1,9 @@
 'use client'
 
+import {useSound} from '@/app/app/context/sound.context'
 import clsx from 'clsx'
 import {BadgeCheckIcon, BadgeIcon} from 'lucide-react'
 import {useState, type MouseEvent, type ReactNode} from 'react'
-
 import styles from './check-box-task.module.css'
 
 interface IProps {
@@ -20,10 +20,13 @@ export const CheckBoxTaskComponent = ({
     const [toChangeIsCompleted, setToChangeIsCompleted] =
         useState<boolean>(false)
 
+    const {playTaskClick} = useSound()
+
     const handleClickToComplete = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
 
+        playTaskClick()
         setToChangeIsCompleted(true)
         setTimeout(() => setToChangeIsCompleted(false), 300)
         changeCompleted && changeCompleted()

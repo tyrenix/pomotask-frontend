@@ -9,23 +9,23 @@ export function middleware(request: NextRequest) {
     // const refreshToken = true
     const pathname = request.nextUrl.pathname
 
-    if (
-        // If user no auth and stay in app pages
-        !refreshToken &&
-        !pathname.includes(dashboardConstant.PREFIX_AUTH_PAGE)
-    ) {
-        return Response.redirect(
-            new URL(dashboardConstant.AUTH_PAGE, request.url)
-        )
-    } else if (
-        // If user auth and stay in auth page
-        refreshToken &&
-        pathname.includes(dashboardConstant.PREFIX_AUTH_PAGE)
-    ) {
-        return Response.redirect(
-            new URL(dashboardConstant.APP_PAGE, request.url)
-        )
-    }
+    // if (
+    //     // If user no auth and stay in app pages
+    //     !refreshToken &&
+    //     !pathname.includes(dashboardConstant.PREFIX_AUTH_PAGE)
+    // ) {
+    //     return Response.redirect(
+    //         new URL(dashboardConstant.AUTH_PAGE, request.url)
+    //     )
+    // } else if (
+    //     // If user auth and stay in auth page
+    //     refreshToken &&
+    //     pathname.includes(dashboardConstant.PREFIX_AUTH_PAGE)
+    // ) {
+    //     return Response.redirect(
+    //         new URL(dashboardConstant.APP_PAGE, request.url)
+    //     )
+    // }
 }
 
 export const config = {
