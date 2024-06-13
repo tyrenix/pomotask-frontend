@@ -6,6 +6,7 @@ import styles from './item-deafult.module.css'
 export interface IProps {
     title?: string
     description?: string
+    className?: string
     size?: 'ultra-big' | 'big' | 'medium' | 'small'
     leftComponent?: ReactNode
     rightComponent?: ReactNode
@@ -19,12 +20,14 @@ export const ItemDefaultComponent = ({
     leftComponent,
     rightComponent,
     size = 'big',
+    className,
     onClick,
     isLoading
 }: IProps) => {
     return (
         <div
             className={clsx(
+                className,
                 styles.wrapper,
                 size === 'ultra-big'
                     ? 'h-20'

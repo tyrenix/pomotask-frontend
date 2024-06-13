@@ -21,6 +21,9 @@ import {useActive} from '../hook/useActive.hook'
 import {ButtonComponent} from './button.component'
 import styles from './timer.module.css'
 
+import {soundConstant} from '@/constants/sound.constant'
+import {useSound} from '../../context/sound.context'
+
 interface IProps {
     taskId?: string
 }
@@ -36,6 +39,7 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     const {active, setActive, isPending, isLoading, ...restActive} = useActive()
     const {isPressed, resetIsPressed} = useHeaderContext()
+    const {playTimerCompletion} = useSound()
 
     const startOrPause = () => {
         if (!active) {
@@ -54,14 +58,21 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     const completion = useCallback(() => {
         if (!active) return
+        playTimerCompletion()
         setActive(undefined)
         toast.success(t('completion'))
         restActive.completionMutation.mutate(active.id)
-    }, [restActive.completionMutation, setActive, t, active])
+    }, [
+        restActive.completionMutation,
+        setActive,
+        t,
+        active,
+        playTimerCompletion
+    ])
 
     useEffect(() => {
         if (active && !active.isPaused) {
-            const interval = setInterval(() => {
+            const timeout = setTimeout(() => {
                 if (active.completedSeconds + 1 >= active.totalSeconds) {
                     completion()
                 } else {
@@ -77,7 +88,7 @@ export const TimerComponent = ({taskId}: IProps) => {
             }, 1e3)
 
             return () => {
-                clearInterval(interval)
+                clearTimeout(timeout)
             }
         }
     }, [active, setActive, completion])

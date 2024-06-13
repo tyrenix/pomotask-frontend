@@ -26,7 +26,7 @@ export const SelectTaskComponent = ({isOpen, onClose, selectTask}: IProps) => {
 
     return (
         <PopUpMenuComponent
-            className='flex flex-col gap-4'
+            className='flex flex-col gap-4 pb-20'
             title={t('title')}
             isOpen={isOpen}
             onClose={onClose}
@@ -53,10 +53,13 @@ export const SelectTaskComponent = ({isOpen, onClose, selectTask}: IProps) => {
                                 />
                             ))}
                     </ListComponent>
-                    <ListComponent>
+                    <ListComponent
+                        title={t('delete-task.title')}
+                        description={t('delete-task.description')}
+                    >
                         <ItemDefaultComponent
                             size='big'
-                            title={t('delete-task')}
+                            title={t('delete-task.text')}
                             onClick={() => onSelectTask(undefined)}
                             leftComponent={
                                 <TrashIcon className='h-7 w-7 text-primaryInvert-70' />

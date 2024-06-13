@@ -140,7 +140,7 @@ export const PtSessionInfoComponent = ({
                     </ListComponent>
                 )}
                 <ListComponent title={t('info.task')}>
-                    {isLoadingTask || isPendingTask ? (
+                    {isLoadingTask ? (
                         <ItemTransitionComponent isLoading={true} />
                     ) : task ? (
                         <ItemTransitionComponent
@@ -151,7 +151,7 @@ export const PtSessionInfoComponent = ({
                             }}
                         />
                     ) : (
-                        <ItemTransitionComponent
+                        <ItemDefaultComponent
                             title={t('info.not-select-task')}
                         />
                     )}
