@@ -72,7 +72,7 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     useEffect(() => {
         if (active && !active.isPaused) {
-            const interval = setInterval(() => {
+            const timeout = setTimeout(() => {
                 if (active.completedSeconds + 1 >= active.totalSeconds) {
                     completion()
                 } else {
@@ -88,7 +88,7 @@ export const TimerComponent = ({taskId}: IProps) => {
             }, 1e3)
 
             return () => {
-                clearInterval(interval)
+                clearTimeout(timeout)
             }
         }
     }, [active, setActive, completion])
