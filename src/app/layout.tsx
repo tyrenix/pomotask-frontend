@@ -57,7 +57,7 @@ export default async function RootLayout({children}: PropsWithChildren) {
         <html lang={locale} className={`w-full h-full ${theme}`}>
             <body
                 className={clsx(
-                    'w-full h-full bg-content md:flex md:items-center md:justify-center text-primaryInvert',
+                    'w-full h-full md:flex md:items-center md:justify-center text-primaryInvert bg-content',
                     nunito.className
                 )}
             >
