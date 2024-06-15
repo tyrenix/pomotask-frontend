@@ -121,7 +121,14 @@
         "sessions": {
             "title": "Sessions",
             "description": "List of active sessions, if you see an unfamiliar device, close this session and change the password",
-
+            "close-all": {
+                "text": "Close all sessions",
+                "ask": {
+                    "title": "Close all sessions?",
+                    "description": "Are you sure you want to close all sessions?",
+                    "button": "Close"
+                }
+            },
             "info": {
                 "title": "Session Information",
                 "opened": "Opened",
@@ -136,6 +143,14 @@
                     "description": "if you close this session, you will not be able to use the application anymore, this action cannot be canceled",
                     "button": "Close it"
                 }
+            }
+        },
+        "logout": {
+            "text": "Log out",
+            "ask": {
+                "title": "Log out?",
+                "description": "Are you sure you want to log out on this device?",
+                "button": "Log out"
             }
         }
     },

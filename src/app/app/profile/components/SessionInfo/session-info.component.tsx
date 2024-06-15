@@ -38,6 +38,7 @@ export const SessionInfoComponent = ({sessionId, isOpen, onClose}: IProps) => {
     const agent = deviceDetect.device?.type
 
     const {mutate} = useMutation({
+        mutationKey: ['session-close', 'all'],
         mutationFn: (sessionId: string) =>
             sessionService.closeSession(sessionId),
         onSuccess: () => {

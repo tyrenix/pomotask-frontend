@@ -1,5 +1,6 @@
 import {axiosWithAuth} from '@/interceptors/axios.interceptor'
 import {ISession} from '@/types/session.types'
+import {removeTokens} from './auth-token.service'
 
 class SessionService {
     private readonly PREFIX: string = '/session'
@@ -27,6 +28,19 @@ class SessionService {
                 data: {sessionId}
             }
         )
+
+        return response.data
+    }
+
+    async closeAll() {
+        const response = await axiosWithAuth.delete<{success: true}>(
+            `${this.PREFIX}/closeAll`
+        )
+
+        if (response?.data) {
+            removeTokens()
+        }
+
         return response.data
     }
 }

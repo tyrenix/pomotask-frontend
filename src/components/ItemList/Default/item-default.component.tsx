@@ -7,6 +7,7 @@ export interface IProps {
     title?: string
     description?: string
     className?: string
+    classNameText?: string
     size?: 'ultra-big' | 'big' | 'medium' | 'small'
     leftComponent?: ReactNode
     rightComponent?: ReactNode
@@ -21,6 +22,7 @@ export const ItemDefaultComponent = ({
     rightComponent,
     size = 'big',
     className,
+    classNameText,
     onClick,
     isLoading
 }: IProps) => {
@@ -50,6 +52,7 @@ export const ItemDefaultComponent = ({
             >
                 <div
                     className={clsx(
+                        classNameText,
                         styles.wrapperDescription,
                         isLoading && 'skeletron-loader'
                     )}
