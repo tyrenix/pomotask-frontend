@@ -2,7 +2,7 @@
 
 import {CheckBoxTaskComponent} from '@/components/CheckBox'
 import {ITask} from '@/types/task.types'
-import {ListStartIcon} from 'lucide-react'
+import {PictureInPictureIcon} from 'lucide-react'
 import {
     ItemDefaultComponent,
     IProps as ItemDefaultProps
@@ -37,7 +37,7 @@ export const ItemTaskComponent = ({
             isLoading={isLoading}
             leftComponent={
                 type === 'select' ? (
-                    <ListStartIcon className='w-7 h-7 text-primaryInvert-70' />
+                    <PictureInPictureIcon className='w-6 h-6 text-primaryInvert-70' />
                 ) : (
                     <CheckBoxTaskComponent
                         changeCompleted={changeCompleted}

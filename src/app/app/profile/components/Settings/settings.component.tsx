@@ -21,6 +21,7 @@ import {
 } from '@/components/Dialog/dialog.component'
 import {useSessionCloseAll} from '@/hooks/useSessionCloseAll.hook'
 import {SettingsLanguageComponent} from '../settings-language.component'
+import {SettingsThemeComponent} from '../settings-theme.component'
 
 interface IProps {
     isOpen: boolean
@@ -34,6 +35,8 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
         null
     )
     const [isOpenLanguageSettings, setIsOpenLanguageSettings] =
+        useState<boolean>(false)
+    const [isOpenThemeSettings, setIsOpenThemeSettings] =
         useState<boolean>(false)
     const [isOpenPtSettings, setIsOpenPtSettings] = useState<boolean>(false)
     const [dialog, setDialog] = useState<IDialogData | null>(null)
@@ -74,7 +77,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                         title={t('language.title')}
                         onClick={() => setIsOpenLanguageSettings(true)}
                     />
-                    <ItemTransitionComponent />
+                    <ItemTransitionComponent
+                        title={t('theme.title')}
+                        onClick={() => setIsOpenThemeSettings(true)}
+                    />
                 </ListComponent>
                 {!sessions || isLoadingSessions || !isSuccessSessions ? (
                     <ListComponent
@@ -151,6 +157,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
             <SettingsLanguageComponent
                 isOpen={isOpenLanguageSettings}
                 onClose={() => setIsOpenLanguageSettings(false)}
+            />
+            <SettingsThemeComponent
+                isOpen={isOpenThemeSettings}
+                onClose={() => setIsOpenThemeSettings(false)}
             />
         </>
     )

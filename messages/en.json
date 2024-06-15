@@ -159,6 +159,14 @@
                 "en": "English",
                 "ru": "Русский"
             }
+        },
+        "theme": {
+            "title": "Appearance",
+            "list": {
+                "light": "Light",
+                "dark": "Dark",
+                "system": "System"
+            }
         }
     },
     "Tasks": {
