@@ -11,7 +11,10 @@ export const useActive = () => {
 
     const {data, refetch, ...query} = useQuery({
         queryKey: ['pomodoro-session'],
-        queryFn: () => ptSessionService.getActive()
+        queryFn: () => ptSessionService.getActive(),
+        refetchOnWindowFocus: true,
+        refetchInterval: 1e3 * 10,
+        refetchOnMount: false
     })
 
     const createMutation = useMutation({
@@ -92,7 +95,7 @@ export const useActive = () => {
         active,
         setActive,
         isPending,
-        isLoading: query.isLoading,
+        isLoading: query.isLoading || query.isPending,
         createMutation,
         deleteMutation,
         completionMutation,
