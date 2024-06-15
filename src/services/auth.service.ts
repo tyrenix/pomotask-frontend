@@ -1,4 +1,4 @@
-import {axiosWithoutAuth} from '@/interceptors/axios.interceptor'
+import {axiosWithAuth, axiosWithoutAuth} from '@/interceptors/axios.interceptor'
 import {removeTokens, saveAccessToken} from '@/services/auth-token.service'
 import {IAuthForm, IAuthResponse, IGetNewTokens} from '@/types/auth.types'
 import {catchErrorsInterceptor} from '@/interceptors/catch-errors.interceptor'
@@ -36,7 +36,7 @@ class AuthService {
     }
 
     async logout(): Promise<{success: true}> {
-        const response = await axiosWithoutAuth
+        const response = await axiosWithAuth
             .post<{success: true}>(`${this.PREFIX}/logout`)
             .catch(error => {
                 throw catchErrorsInterceptor(error)
