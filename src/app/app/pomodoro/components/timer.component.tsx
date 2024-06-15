@@ -13,7 +13,7 @@ import {
     StepForwardIcon
 } from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useDebugValue, useEffect, useRef, useState} from 'react'
 import {toast} from 'sonner'
 import {PtSettingsComponent} from '../../components/PtSettings/pt-settings.component'
 import {useHeaderContext} from '../../context/header.context'
@@ -103,11 +103,13 @@ export const TimerComponent = ({taskId}: IProps) => {
     const totalLengthCircle = mainCircleRef.current?.getTotalLength() || 9999999
     let remainingSeconds: number = active
         ? Math.floor(active.totalSeconds - active.completedSeconds)
-        : 0
+        : 9999999
 
     if (remainingSeconds < 0) remainingSeconds = 0
     const remainingMinutesText = Math.floor(remainingSeconds / 60)
     const remainingSecondsText = remainingSeconds - remainingMinutesText * 60
+
+    console.log(!!active, remainingSeconds)
 
     return (
         <>
@@ -129,7 +131,7 @@ export const TimerComponent = ({taskId}: IProps) => {
                     style={
                         {
                             '--color': `rgba(${
-                                !active
+                                !active || !totalLengthCircle
                                     ? '0, 0, 0, 0'
                                     : active.type === 'longBreak'
                                     ? 'var(--blue-color)'
