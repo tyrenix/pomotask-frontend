@@ -152,6 +152,13 @@
                 "description": "Are you sure you want to log out on this device?",
                 "button": "Log out"
             }
+        },
+        "language": {
+            "title": "Language",
+            "list": {
+                "en": "English",
+                "ru": "Русский"
+            }
         }
     },
     "Tasks": {

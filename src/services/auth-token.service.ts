@@ -8,7 +8,6 @@ export const getAccessToken = (): string | null => {
 
 export const saveAccessToken = (accessToken: string): void => {
     setCookie(cookieConstant.ACCESS_TOKEN, accessToken, {
-        domain: process.env.DOMAIN,
         sameSite: 'strict'
     })
 }

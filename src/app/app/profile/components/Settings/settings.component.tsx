@@ -20,6 +20,7 @@ import {
     IDialogData
 } from '@/components/Dialog/dialog.component'
 import {useSessionCloseAll} from '@/hooks/useSessionCloseAll.hook'
+import {SettingsLanguageComponent} from '../settings-language.component'
 
 interface IProps {
     isOpen: boolean
@@ -32,6 +33,8 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
     const [openSessionPopUp, setOpenSessionPopUp] = useState<string | null>(
         null
     )
+    const [isOpenLanguageSettings, setIsOpenLanguageSettings] =
+        useState<boolean>(false)
     const [isOpenPtSettings, setIsOpenPtSettings] = useState<boolean>(false)
     const [dialog, setDialog] = useState<IDialogData | null>(null)
 
@@ -65,6 +68,13 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                         title={t('pomodoro.text')}
                         onClick={() => setIsOpenPtSettings(true)}
                     />
+                </ListComponent>
+                <ListComponent>
+                    <ItemTransitionComponent
+                        title={t('language.title')}
+                        onClick={() => setIsOpenLanguageSettings(true)}
+                    />
+                    <ItemTransitionComponent />
                 </ListComponent>
                 {!sessions || isLoadingSessions || !isSuccessSessions ? (
                     <ListComponent
@@ -137,6 +147,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                 dialog={dialog}
                 onClose={() => setDialog(null)}
                 isOpen={!!dialog}
+            />
+            <SettingsLanguageComponent
+                isOpen={isOpenLanguageSettings}
+                onClose={() => setIsOpenLanguageSettings(false)}
             />
         </>
     )
