@@ -109,8 +109,6 @@ export const TimerComponent = ({taskId}: IProps) => {
     const remainingMinutesText = Math.floor(remainingSeconds / 60)
     const remainingSecondsText = remainingSeconds - remainingMinutesText * 60
 
-    console.log(!!active, remainingSeconds)
-
     return (
         <>
             <div
