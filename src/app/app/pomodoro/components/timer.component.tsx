@@ -5,6 +5,7 @@ import {
     IDialogData
 } from '@/components/Dialog/dialog.component'
 import LoaderComponent from '@/components/Loader/loader.component'
+import {useQueryClient} from '@tanstack/react-query'
 import clsx from 'clsx'
 import {
     HistoryIcon,
@@ -13,22 +14,22 @@ import {
     StepForwardIcon
 } from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import {useCallback, useDebugValue, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 import {toast} from 'sonner'
 import {PtSettingsComponent} from '../../components/PtSettings/pt-settings.component'
 import {useHeaderContext} from '../../context/header.context'
+import {useSound} from '../../context/sound.context'
 import {useActive} from '../hook/useActive.hook'
 import {ButtonComponent} from './button.component'
 import styles from './timer.module.css'
-
-import {soundConstant} from '@/constants/sound.constant'
-import {useSound} from '../../context/sound.context'
 
 interface IProps {
     taskId?: string
 }
 
 export const TimerComponent = ({taskId}: IProps) => {
+    const queryClient = useQueryClient()
+
     const t = useTranslations('Pomodoro.timer')
 
     const mainCircleRef = useRef<SVGCircleElement | null>(null)
@@ -76,14 +77,16 @@ export const TimerComponent = ({taskId}: IProps) => {
                 if (active.completedSeconds + 1 >= active.totalSeconds) {
                     completion()
                 } else {
-                    setActive(active => {
-                        if (!active) return
-
-                        const newActive = {...active}
-                        newActive.completedSeconds++
-
-                        return newActive
+                    queryClient.setQueryData(['pomodoro-session'], {
+                        ...active,
+                        completedSeconds: active.completedSeconds + 1
                     })
+
+                    if ((active.completedSeconds + 1) % 10 === 0) {
+                        queryClient.invalidateQueries({
+                            queryKey: ['pomodoro-session']
+                        })
+                    }
                 }
             }, 1e3)
 
@@ -91,7 +94,7 @@ export const TimerComponent = ({taskId}: IProps) => {
                 clearTimeout(timeout)
             }
         }
-    }, [active, setActive, completion])
+    }, [active, completion, queryClient])
 
     useEffect(() => {
         if (typeof isPressed === 'boolean' && !isOpenSettings) {
