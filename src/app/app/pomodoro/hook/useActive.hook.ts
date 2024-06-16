@@ -13,7 +13,7 @@ export const useActive = () => {
         queryKey: ['pomodoro-session'],
         queryFn: () => ptSessionService.getActive(),
         refetchOnWindowFocus: true,
-        refetchInterval: 1e3 * 10,
+        // refetchInterval: 1e3 * 10,
         refetchOnMount: false
     })
 
