@@ -103,9 +103,34 @@ export const PtSessionInfoComponent = ({
                     <ListComponent>
                         <ItemDefaultComponent size='medium' isLoading={true} />
                         <ItemDefaultComponent size='medium' isLoading={true} />
+                        <ItemDefaultComponent size='medium' isLoading={true} />
+                        <ItemDefaultComponent size='medium' isLoading={true} />
                     </ListComponent>
                 ) : (
                     <ListComponent>
+                        <ItemDefaultComponent
+                            size='medium'
+                            title={t('info.total')}
+                            rightComponent={
+                                <div className={styles.infoText}>
+                                    {Math.floor(ptSession.totalSeconds / 60)}{' '}
+                                    {tUnits('shortMinutes')}
+                                </div>
+                            }
+                        />
+                        <ItemDefaultComponent
+                            size='medium'
+                            title={t('info.completed')}
+                            rightComponent={
+                                <div className={styles.infoText}>
+                                    {Math.floor(
+                                        ptSession.completedSeconds / 60
+                                    )}{' '}
+                                    {tUnits('shortMinutes')}
+                                </div>
+                            }
+                        />
+
                         <ItemDefaultComponent
                             size='medium'
                             title={t('info.started')}

@@ -29,6 +29,8 @@
         "info": {
             "title": "Information",
             "started": "Started",
+            "total": "Total",
+            "completed": "Completed",
             "ended": "Ended",
             "task": "Task",
             "not-select-task": "Task not selected"

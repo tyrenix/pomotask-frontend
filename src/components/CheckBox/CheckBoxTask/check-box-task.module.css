@@ -1,12 +1,16 @@
+.wrapper-completed-box {
+    @apply w-7 h-7 border-primaryInvert-70 border-2 rounded-full flex justify-center items-center;
+}
+
 .wrapper-completed-box > svg {
-    @apply w-7 h-7 text-primaryInvert-70;
+    @apply w-4 h-4 mt-0.5 text-primaryInvert-70;
 }
 
 .wrapper-completed-box-loaded {
     @apply border-primaryInvert-50;
 }
 
-.wrapper-completed-box-scale {
+.wrapper-completed-box-scale > svg {
     animation: scale 0.3s ease-in-out;
 }
 

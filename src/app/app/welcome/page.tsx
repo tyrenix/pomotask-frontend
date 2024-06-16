@@ -14,7 +14,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 export default function WelcomePage() {
     return (
-        <div className='fixed top-0 left-0 z-50 p-standard bg-content'>
+        <div className='fixed top-0 left-0 z-50 p-standard bg-content flex justify-center items-center'>
             <WelcomeComponent />
         </div>
     )
