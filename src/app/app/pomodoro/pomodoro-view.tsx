@@ -39,6 +39,12 @@ export const PomodoroView = () => {
         enabled: !!selectedTask
     })
 
+    useEffect(() => {
+        if (task && task.isCompleted) {
+            selectTask()
+        }
+    }, [task])
+
     return (
         <>
             <div className={styles.wrapper}>

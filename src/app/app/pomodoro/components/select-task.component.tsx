@@ -4,9 +4,8 @@ import {ItemDefaultComponent, ItemTaskComponent} from '@/components/ItemList'
 import {ListComponent} from '@/components/List/list.component'
 import {PopUpMenuComponent} from '@/components/PopUpMenu/popup-menu.component'
 import {useTasks} from '@/hooks/useTasks.hook'
+import {UnplugIcon} from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import styles from './select-task.module.css'
-import {TrashIcon} from 'lucide-react'
 
 interface IProps {
     isOpen: boolean
@@ -52,18 +51,12 @@ export const SelectTaskComponent = ({isOpen, onClose, selectTask}: IProps) => {
                                     type='select'
                                 />
                             ))}
-                    </ListComponent>
-                    <ListComponent
-                        title={t('delete-task.title')}
-                        description={t('delete-task.description')}
-                    >
                         <ItemDefaultComponent
-                            size='big'
+                            className='text-red-600'
+                            size='small'
                             title={t('delete-task.text')}
                             onClick={() => onSelectTask(undefined)}
-                            leftComponent={
-                                <TrashIcon className='h-7 w-7 text-primaryInvert-70' />
-                            }
+                            leftComponent={<UnplugIcon className='h-6 w-6' />}
                         />
                     </ListComponent>
                 </>

@@ -12,6 +12,7 @@ import {PropsWithChildren} from 'react'
 import {Toaster} from 'sonner'
 import '@/styles/globals.styles.css'
 import '@/styles/theme.styles.css'
+import {SystemSettingsContextProvider} from '@/context/system-settings.context'
 
 const nunito = Nunito({subsets: ['latin', 'cyrillic']})
 
@@ -62,15 +63,19 @@ export default async function RootLayout({children}: PropsWithChildren) {
                 )}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <TanStackQueryProvider>
-                        <Toaster
-                            theme={theme as any}
-                            position='top-center'
-                            duration={2000}
-                        />
-
-                        {children}
-                    </TanStackQueryProvider>
+                    <SystemSettingsContextProvider
+                        language={locale}
+                        theme={theme as any}
+                    >
+                        <TanStackQueryProvider>
+                            <Toaster
+                                theme={theme as any}
+                                position='top-center'
+                                duration={2000}
+                            />
+                            {children}
+                        </TanStackQueryProvider>
+                    </SystemSettingsContextProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

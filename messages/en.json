@@ -29,6 +29,8 @@
         "info": {
             "title": "Information",
             "started": "Started",
+            "total": "Total",
+            "completed": "Completed",
             "ended": "Ended",
             "task": "Task",
             "not-select-task": "Task not selected"
@@ -151,6 +153,21 @@
                 "title": "Log out?",
                 "description": "Are you sure you want to log out on this device?",
                 "button": "Log out"
+            }
+        },
+        "language": {
+            "title": "Language",
+            "list": {
+                "en": "English",
+                "ru": "Русский"
+            }
+        },
+        "theme": {
+            "title": "Appearance",
+            "list": {
+                "light": "Light",
+                "dark": "Dark",
+                "system": "System"
             }
         }
     },

@@ -20,6 +20,8 @@ import {
     IDialogData
 } from '@/components/Dialog/dialog.component'
 import {useSessionCloseAll} from '@/hooks/useSessionCloseAll.hook'
+import {SettingsLanguageComponent} from '../settings-language.component'
+import {SettingsThemeComponent} from '../settings-theme.component'
 
 interface IProps {
     isOpen: boolean
@@ -32,6 +34,10 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
     const [openSessionPopUp, setOpenSessionPopUp] = useState<string | null>(
         null
     )
+    const [isOpenLanguageSettings, setIsOpenLanguageSettings] =
+        useState<boolean>(false)
+    const [isOpenThemeSettings, setIsOpenThemeSettings] =
+        useState<boolean>(false)
     const [isOpenPtSettings, setIsOpenPtSettings] = useState<boolean>(false)
     const [dialog, setDialog] = useState<IDialogData | null>(null)
 
@@ -64,6 +70,16 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                     <ItemTransitionComponent
                         title={t('pomodoro.text')}
                         onClick={() => setIsOpenPtSettings(true)}
+                    />
+                </ListComponent>
+                <ListComponent>
+                    <ItemTransitionComponent
+                        title={t('language.title')}
+                        onClick={() => setIsOpenLanguageSettings(true)}
+                    />
+                    <ItemTransitionComponent
+                        title={t('theme.title')}
+                        onClick={() => setIsOpenThemeSettings(true)}
                     />
                 </ListComponent>
                 {!sessions || isLoadingSessions || !isSuccessSessions ? (
@@ -137,6 +153,14 @@ export const ProfileSettingsComponent = ({isOpen, onClose}: IProps) => {
                 dialog={dialog}
                 onClose={() => setDialog(null)}
                 isOpen={!!dialog}
+            />
+            <SettingsLanguageComponent
+                isOpen={isOpenLanguageSettings}
+                onClose={() => setIsOpenLanguageSettings(false)}
+            />
+            <SettingsThemeComponent
+                isOpen={isOpenThemeSettings}
+                onClose={() => setIsOpenThemeSettings(false)}
             />
         </>
     )

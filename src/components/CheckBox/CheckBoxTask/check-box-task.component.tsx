@@ -2,7 +2,7 @@
 
 import {useSound} from '@/app/app/context/sound.context'
 import clsx from 'clsx'
-import {BadgeCheckIcon, BadgeIcon} from 'lucide-react'
+import {CheckIcon} from 'lucide-react'
 import {useState, type MouseEvent, type ReactNode} from 'react'
 import styles from './check-box-task.module.css'
 
@@ -37,13 +37,19 @@ export const CheckBoxTaskComponent = ({
             className={clsx(
                 styles.wrapperCompletedBox,
                 isLoading
-                    ? 'skeletron-loader'
-                    : styles.wrapperCompletedBoxLoaded,
-                toChangeIsCompleted && styles.wrapperCompletedBoxScale
+                    ? 'skeletron-loader !border-transparent'
+                    : styles.wrapperCompletedBoxLoaded
             )}
             onClick={handleClickToComplete}
         >
-            {isCompleted ? <BadgeCheckIcon /> : <BadgeIcon />}
+            {isCompleted && !isLoading && (
+                <CheckIcon
+                    className={clsx(
+                        toChangeIsCompleted && styles.wrapperCompletedBoxScale
+                    )}
+                    strokeWidth={3}
+                />
+            )}
         </div>
     )
 }

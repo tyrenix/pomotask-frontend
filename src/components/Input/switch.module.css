@@ -1,0 +1,11 @@
+.wrapper-status {
+    @apply w-7 h-7 border-2 border-primaryInvert-70 bg-transparent rounded-full transition-colors-custom flex justify-center items-center;
+}
+
+.wrapper-status > svg {
+    @apply h-4 w-4 mt-0.5 text-white;
+}
+
+.wrapper-status-active {
+    @apply bg-blue border-blue;
+}
