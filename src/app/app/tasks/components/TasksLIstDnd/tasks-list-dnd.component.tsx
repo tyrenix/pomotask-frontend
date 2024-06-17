@@ -1,6 +1,10 @@
 'use client'
 
-import {ItemTaskComponent} from '@/components/ItemList'
+import {
+    ItemDefaultComponent,
+    ItemTaskComponent,
+    ItemTransitionComponent
+} from '@/components/ItemList'
 import {ListComponent} from '@/components/List/list.component'
 import {useTasks} from '@/hooks/useTasks.hook'
 import {useUpdateTask} from '@/hooks/useUpdateTask.hook'
@@ -12,22 +16,29 @@ import {
     type DropResult
 } from '@hello-pangea/dnd'
 import {useMutation, useQueryClient} from '@tanstack/react-query'
+import {BetweenHorizontalStartIcon} from 'lucide-react'
 import type {ReactNode} from 'react'
 import {toast} from 'sonner'
 import styles from './tasks-list-dnd.module.css'
+import {useTranslations} from 'next-intl'
 
 interface IProps {
     isCompleted?: boolean
     openTaskInfo?: (taskId: string) => any
     NotFoundComponent?: ReactNode
+    addTask?: {
+        onClick(): void
+    }
 }
 
 export const TasksListDndComponent = ({
     isCompleted,
     openTaskInfo,
-    NotFoundComponent
+    NotFoundComponent,
+    addTask
 }: IProps) => {
     const queryClient = useQueryClient()
+    const t = useTranslations('Tasks')
 
     const {tasks, isLoading, setTasks} = useTasks({isCompleted})
 
@@ -84,7 +95,7 @@ export const TasksListDndComponent = ({
                     <ItemTaskComponent isLoading={true} />
                     <ItemTaskComponent isLoading={true} />
                 </ListComponent>
-            ) : tasks && tasks.length > 0 ? (
+            ) : tasks ? (
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId='droppable_1'>
                         {provider => (
@@ -119,13 +130,24 @@ export const TasksListDndComponent = ({
                                                         openTaskInfo(task.id)
                                                     }
                                                 />
-                                                {tasks.length - 1 !== index ? (
-                                                    <span className='hidden' />
-                                                ) : null}
+                                                <span className='hidden' />
                                             </div>
                                         )}
                                     </Draggable>
                                 ))}
+                                {addTask && (
+                                    <ItemDefaultComponent
+                                        className='text-accent-70'
+                                        size='medium'
+                                        title={t('add-task')}
+                                        onClick={addTask.onClick}
+                                        leftComponent={
+                                            tasks.length > 0 && (
+                                                <div className='w-7 h-7' />
+                                            )
+                                        }
+                                    />
+                                )}
                                 {provider.placeholder}
                             </div>
                         )}

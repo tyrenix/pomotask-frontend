@@ -47,7 +47,7 @@ export const PtSessionInfoComponent = ({
     return (
         <>
             <PopUpMenuComponent
-                className='flex flex-col gap-6 pb-standard'
+                className='flex flex-col gap-6 pb-6'
                 isOpen={isOpen}
                 onClose={onClose}
                 type='small'

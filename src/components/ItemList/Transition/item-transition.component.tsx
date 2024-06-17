@@ -8,7 +8,12 @@ import {ChevronRight} from 'lucide-react'
 interface IProps
     extends Pick<
         ItemDefaultProps,
-        'title' | 'onClick' | 'leftComponent' | 'size' | 'isLoading'
+        | 'title'
+        | 'onClick'
+        | 'leftComponent'
+        | 'size'
+        | 'isLoading'
+        | 'className'
     > {
     href?: string
 }
