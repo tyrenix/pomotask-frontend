@@ -20,7 +20,7 @@ export const TasksCompletedListComponent = ({isOpen, onClose}: IProps) => {
     return (
         <>
             <PopUpMenuComponent
-                className='!overflow-y-auto'
+                className='!overflow-y-auto pb-20'
                 isOpen={isOpen}
                 onClose={onClose}
                 title={t('completed')}

@@ -124,7 +124,7 @@ export const PopUpMenuComponent = ({
                                 <div
                                     className={clsx(
                                         styles.headerButtons,
-                                        !activeDone && '!text-accent-70'
+                                        !activeDone && '!text-accent-30'
                                     )}
                                     onClick={
                                         activeDone

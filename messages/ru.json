@@ -173,7 +173,7 @@
     },
     "Tasks": {
         "title": "Задачи",
-        "completed": "Выполненные задачи",
+        "completed": "Выполненные",
         "tasksCompletedNotFound": "Еще нет выполненных задач"
     },
     "Task": {
