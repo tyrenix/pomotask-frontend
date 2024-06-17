@@ -42,11 +42,7 @@ export const PtSessionInfoComponent = ({
     const [openTaskInfo, setOpenTaskInfo] = useState<string | null>(null)
 
     const {ptSession, isLoading} = usePtSession(ptSessionId)
-    const {
-        task,
-        isLoading: isLoadingTask,
-        isPending: isPendingTask
-    } = useTask(ptSession?.taskId || '')
+    const {task, isLoading: isLoadingTask} = useTask(ptSession?.taskId || '')
 
     return (
         <>

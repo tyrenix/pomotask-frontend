@@ -1,5 +1,11 @@
 .wrapper {
-    @apply w-full h-full p-standard text-primaryInvert flex flex-col gap-8 overflow-y-scroll pb-28;
+    @apply w-full h-full p-standard text-primaryInvert flex flex-col gap-8 overflow-y-scroll pb-32;
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+    .wrapper {
+        padding-bottom: calc(8rem + env(safe-area-inset-bottom));
+    }
 }
 
 .main {
