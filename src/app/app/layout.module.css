@@ -4,14 +4,14 @@
 
 @supports (padding: env(safe-area-inset-bottom)) {
     .wrapper {
-        padding-bottom: calc(8rem + env(safe-area-inset-bottom));
+        padding-bottom: calc(8rem + env(safe-area-inset-bottom) + 10px);
     }
 }
 
 .main {
-    @apply w-full  md:flex md:flex-row-reverse md:justify-center md:gap-8;
+    @apply w-full md:flex md:flex-row-reverse md:justify-center md:gap-8;
 }
 
 .content {
-    @apply w-full h-auto flex flex-col gap-8 md:w-3/6;
+    @apply relative w-full h-auto flex flex-col gap-8 md:w-3/6;
 }

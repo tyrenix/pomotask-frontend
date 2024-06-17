@@ -2,7 +2,7 @@
 }
 
 .wrapper-add-task {
-    @apply w-16 h-16 right-4 bottom-28 fixed bg-accent rounded-3xl flex justify-center items-center text-white cursor-pointer transition-colors-custom hover:bg-accent-70 active:bg-accent-70;
+    @apply w-16 h-16 right-4 bottom-28 fixed bg-accent rounded-3xl flex justify-center items-center text-white cursor-pointer transition-colors-custom hover:bg-accent-70 active:bg-accent-70 md:hidden;
 }
 
 .wrapper-add-task > svg {

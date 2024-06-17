@@ -174,7 +174,8 @@
     "Tasks": {
         "title": "Задачи",
         "completed": "Выполненные",
-        "tasksCompletedNotFound": "Еще нет выполненных задач"
+        "tasksCompletedNotFound": "Еще нет выполненных задач",
+        "add-task": "Добавить задачу"
     },
     "Task": {
         "title": "О задаче",

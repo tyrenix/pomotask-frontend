@@ -174,7 +174,8 @@
     "Tasks": {
         "title": "Tasks",
         "completed": "Completed tasks",
-        "tasksCompletedNotFound": "No completed tasks yet"
+        "tasksCompletedNotFound": "No completed tasks yet",
+        "add-task": "Add task"
     },
     "Task": {
         "title": "About the task",

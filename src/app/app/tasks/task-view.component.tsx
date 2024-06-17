@@ -25,6 +25,9 @@ export const TaskView = () => {
             <TasksListDndComponent
                 isCompleted={false}
                 openTaskInfo={taskId => setOpenTaskInfo(taskId)}
+                addTask={{
+                    onClick: () => setIsOpenAddTask(true)
+                }}
             />
             <ListComponent title={t('completed')}>
                 <ItemTransitionComponent

@@ -57,7 +57,7 @@ export const AddTaskComponent = ({isOpen, ...props}: IProps) => {
 
     return (
         <PopUpMenuComponent
-            className='flex flex-col gap-8 pb-standard'
+            className='flex flex-col gap-8 pb-6'
             isOpen={isOpen}
             onClose={onClose}
             title={t('create.title')}
