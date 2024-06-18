@@ -6,16 +6,25 @@ import {useUserActivity} from '@/hooks/useUserActivity.hook'
 import clsx from 'clsx'
 import {CircleFadingPlusIcon, Code2Icon} from 'lucide-react'
 import {useTranslations} from 'next-intl'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {SelectTaskComponent} from './components/select-task.component'
 import {TimerComponent} from './components/timer.component'
+import {useActive} from './hook/useActive.hook'
 import styles from './pomodoro-view.module.css'
 import {selectTaskService} from './services/select-task.service'
-import {useActive} from './hook/useActive.hook'
+import {notificationService} from '@/services/notification.service'
 
 export const PomodoroView = () => {
     const tUnits = useTranslations('Units')
     const t = useTranslations('Pomodoro')
+
+    const isCallSubscription = useRef(false)
+    useEffect(() => {
+        if (!isCallSubscription.current) {
+            notificationService.subscribe()
+            isCallSubscription.current = true
+        }
+    }, [])
 
     const [isOpenSelectTask, setIsOpenSelectTask] = useState<boolean>(false)
     const [selectedTask, setSelectedTask] = useState<string | null | undefined>(
