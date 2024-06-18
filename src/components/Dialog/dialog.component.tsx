@@ -1,13 +1,13 @@
 'use client'
 
-import {useStatusView} from '@/hooks/useStatusView.hook'
+import {useKeyDownHandlerContext} from '@/app/app/context/key-down-handler.context'
 import clsx from 'clsx'
-import {useEffect, useState, type MouseEvent} from 'react'
-import styles from './dialog.module.css'
+import {useTranslations} from 'next-intl'
+import {useCallback, useEffect, useRef, useState, type MouseEvent} from 'react'
 import FillButtonComponent from '../Button/fill-button.component'
 import NoFillButtonComponent from '../Button/no-fill.button.component'
-import {useTranslations} from 'next-intl'
-import {CircleHelpIcon} from 'lucide-react'
+import {nanoid} from 'nanoid'
+import styles from './dialog.module.css'
 
 export interface IDialogData {
     title: string
@@ -29,11 +29,14 @@ interface INoOpened extends Omit<IOpened, 'isOpen'> {
 type IProps = IOpened | INoOpened
 
 export const DialogComponent = ({isOpen, onClose, dialog}: IProps) => {
+    const componentId = useRef(nanoid())
     const t = useTranslations('Dialog')
 
     const [status, setStatus] = useState<
         'open' | 'opening' | 'close' | 'closing'
     >('close')
+
+    const keyDownHandler = useKeyDownHandlerContext()
 
     useEffect(() => {
         if (
@@ -44,17 +47,22 @@ export const DialogComponent = ({isOpen, onClose, dialog}: IProps) => {
         ) {
             setStatus('opening')
             setTimeout(() => {
+                keyDownHandler.addHandler({
+                    id: componentId.current,
+                    onKeyDown: handlerCancelButton
+                })
                 setStatus('open')
             }, 10)
         } else if (status === 'closing') {
             setTimeout(() => {
                 onClose()
                 setTimeout(() => setStatus('close'), 10)
+                keyDownHandler.removeHandler(componentId.current)
             }, 300)
         } else if (!isOpen && status === 'open') {
             setStatus('closing')
         }
-    }, [isOpen, status, onClose])
+    }, [isOpen, status, onClose, keyDownHandler])
 
     const handlerCancelButton = () => {
         setStatus('closing')

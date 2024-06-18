@@ -40,7 +40,7 @@ export const TimerComponent = ({taskId}: IProps) => {
 
     const {active, setActive, isPending, isLoading, ...restActive} = useActive()
     const {isPressed, resetIsPressed} = useHeaderContext()
-    const {playTimerCompletion} = useSound()
+    const {playTimerCompletion, playTaskClick} = useSound()
 
     const startOrPause = () => {
         if (!active) {
@@ -122,6 +122,7 @@ export const TimerComponent = ({taskId}: IProps) => {
                 onClick={() => {
                     setIsClickAnimation(true)
                     setTimeout(() => setIsClickAnimation(false), 150)
+                    playTaskClick()
                 }}
             >
                 <svg

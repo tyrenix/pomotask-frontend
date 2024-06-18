@@ -1,9 +1,11 @@
 'use client'
 
+import {useKeyDownHandlerContext} from '@/app/app/context/key-down-handler.context'
 import clsx from 'clsx'
-import {X as XIcon} from 'lucide-react'
+import {XIcon} from 'lucide-react'
+import {nanoid} from 'nanoid'
 import {useTranslations} from 'next-intl'
-import {MouseEvent, PropsWithChildren, useEffect, useState} from 'react'
+import {MouseEvent, PropsWithChildren, useEffect, useRef, useState} from 'react'
 import styles from './popup-menu.module.css'
 
 interface IPropsForFull extends PropsWithChildren {
@@ -37,11 +39,14 @@ export const PopUpMenuComponent = ({
     onClose,
     type = 'full'
 }: PropsPopUpMenu) => {
+    const componentId = useRef(nanoid())
     const t = useTranslations('PopUpMenu')
 
     const [status, setStatus] = useState<
         'open' | 'opening' | 'close' | 'closing'
     >('close')
+
+    const keyDownHandler = useKeyDownHandlerContext()
 
     useEffect(() => {
         if (
@@ -53,16 +58,21 @@ export const PopUpMenuComponent = ({
             setStatus('opening')
             setTimeout(() => {
                 setStatus('open')
+                keyDownHandler.addHandler({
+                    id: componentId.current,
+                    onKeyDown: handlerCancelButton
+                })
             }, 10)
         } else if (status === 'closing') {
             setTimeout(() => {
                 onClose()
                 setTimeout(() => setStatus('close'), 10)
+                keyDownHandler.removeHandler(componentId.current)
             }, 300)
         } else if (!isOpen && status === 'open') {
             setStatus('closing')
         }
-    }, [isOpen, status, onClose])
+    }, [isOpen, status, onClose, keyDownHandler])
 
     const handlerCancelButton = () => {
         setStatus('closing')
@@ -104,7 +114,7 @@ export const PopUpMenuComponent = ({
                         ? styles.wrapperContainerFull
                         : styles.wrapperContainerSmall,
                     status === 'opening' || status === 'closing'
-                        ? 'translate-y-full'
+                        ? 'translate-y-full md:translate-y-0 md:scale-0'
                         : status === 'open' || status === 'close'
                         ? ''
                         : ''

@@ -1,6 +1,12 @@
 'use client'
 
-import {createContext, PropsWithChildren, useContext, useState} from 'react'
+import {
+    createContext,
+    PropsWithChildren,
+    useContext,
+    useEffect,
+    useState
+} from 'react'
 
 export interface IKeyDownContext {
     addHandler(listItem: IListItem): void
@@ -19,6 +25,18 @@ export const KeyDownHandlerContextProvider = ({
 }: PropsWithChildren) => {
     const [list, setList] = useState<IListItem[]>([])
 
+    useEffect(() => {
+        const handlerKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                e.preventDefault()
+                list[0] && list[0].onKeyDown()
+            }
+        }
+
+        window.addEventListener('keydown', handlerKeyDown)
+        return () => window.removeEventListener('keydown', handlerKeyDown)
+    }, [list])
+
     return (
         <KeyDownHandlerContext.Provider
             value={{
@@ -34,8 +52,11 @@ export const KeyDownHandlerContextProvider = ({
                         const newList = [...list]
 
                         const index = newList.findIndex(item => item.id === id)
-                        newList.splice(index, 1)
+                        if (index === -1) {
+                            return list
+                        }
 
+                        newList.splice(index, 1)
                         return newList
                     })
                 }
