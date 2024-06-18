@@ -27,4 +27,4 @@ const nextConfig = {
     }
 }
 
-export default withPWA(withNextIntlPlugin(nextConfig))
+export default withNextIntlPlugin(nextConfig)

@@ -14,7 +14,8 @@ const config: Config = {
         extend: {
             animation: {
                 blink: 'blink 1.5s ease-in-out infinite',
-                scale: 'scale .15s ease-in-out'
+                scale: 'scale .15s ease-in-out',
+                rotate: 'rotate .3s ease-in-out'
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

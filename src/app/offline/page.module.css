@@ -1,0 +1,15 @@
+.wrapper {
+    @apply w-full h-full flex justify-center items-center;
+}
+
+.wrapper-content {
+    @apply w-64 flex flex-col justify-center items-center;
+}
+
+.wrapper-content > svg {
+    @apply w-24 h-24 text-accent;
+}
+
+.wrapper-content > p {
+    @apply text-lg-bold text-center;
+}

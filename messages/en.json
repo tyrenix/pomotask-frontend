@@ -22,6 +22,10 @@
         "perform": "Perform",
         "cancel": "Cancel"
     },
+    "Offline": {
+        "title": "Offline",
+        "text": "I can't connect to the servers, try again later"
+    },
     "PtSession": {
         "work": "Pomodoro",
         "shortBreak": "Short Break",
