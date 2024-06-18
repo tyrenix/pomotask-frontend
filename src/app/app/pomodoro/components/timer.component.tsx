@@ -22,6 +22,7 @@ import {useSound} from '../../context/sound.context'
 import {useActive} from '../hook/useActive.hook'
 import {ButtonComponent} from './button.component'
 import styles from './timer.module.css'
+import {UpcomingComponent} from './upcoming.component'
 
 interface IProps {
     taskId?: string
@@ -38,7 +39,8 @@ export const TimerComponent = ({taskId}: IProps) => {
     const [dialog, setDialog] = useState<IDialogData | null>(null)
     const [isClickAnimation, setIsClickAnimation] = useState<boolean>(false)
 
-    const {active, setActive, isPending, isLoading, ...restActive} = useActive()
+    const {upcoming, active, setActive, isPending, isLoading, ...restActive} =
+        useActive()
     const {isPressed, resetIsPressed} = useHeaderContext()
     const {playTimerCompletion, playTaskClick} = useSound()
 
@@ -179,20 +181,18 @@ export const TimerComponent = ({taskId}: IProps) => {
                 </svg>
                 {!isLoading && (
                     <div>
-                        {
-                            <h4>
-                                {!active
-                                    ? t('time-to-start')
-                                    : `${remainingMinutesText
-                                          .toString()
-                                          .padStart(
-                                              2,
-                                              '0'
-                                          )}:${remainingSecondsText
-                                          .toString()
-                                          .padStart(2, '0')}`}
-                            </h4>
-                        }
+                        <h4>
+                            {!active
+                                ? t('time-to-start')
+                                : `${remainingMinutesText
+                                      .toString()
+                                      .padStart(2, '0')}:${remainingSecondsText
+                                      .toString()
+                                      .padStart(2, '0')}`}
+                        </h4>
+                        <UpcomingComponent
+                            ptSessionsTypes={upcoming.data || []}
+                        />
                     </div>
                 )}
             </div>

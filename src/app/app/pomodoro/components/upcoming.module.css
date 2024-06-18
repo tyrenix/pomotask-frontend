@@ -1,0 +1,7 @@
+.wrapper {
+    @apply w-full h-6 flex;
+}
+
+.item {
+    @apply flex-1 h-full first:rounded-tl-md first:rounded-bl-md last:rounded-tr-md last:rounded-br-md transition-colors-custom;
+}

@@ -13,8 +13,13 @@ export const useActive = () => {
         queryKey: ['pomodoro-session'],
         queryFn: () => ptSessionService.getActive(),
         refetchOnWindowFocus: true,
-        // refetchInterval: 1e3 * 10,
         refetchOnMount: false
+    })
+
+    const upcoming = useQuery({
+        queryKey: ['pomodoro-session', 'upcoming'],
+        queryFn: () => ptSessionService.upcoming(),
+        refetchOnWindowFocus: true
     })
 
     const createMutation = useMutation({
@@ -52,6 +57,7 @@ export const useActive = () => {
             refetch()
         },
         onSuccess(data) {
+            upcoming.refetch()
             refetch()
 
             if (data.taskId) {
@@ -74,6 +80,7 @@ export const useActive = () => {
         },
         onSuccess() {
             refetch()
+            upcoming.refetch()
         }
     })
 
@@ -99,6 +106,7 @@ export const useActive = () => {
         createMutation,
         deleteMutation,
         completionMutation,
-        startOrPauseMutation
+        startOrPauseMutation,
+        upcoming
     }
 }
