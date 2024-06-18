@@ -22,6 +22,10 @@
         "perform": "Perform",
         "cancel": "Cancel"
     },
+    "Offline": {
+        "title": "Offline",
+        "text": "I can't connect to the servers, try again later"
+    },
     "PtSession": {
         "work": "Pomodoro",
         "shortBreak": "Short Break",
@@ -195,6 +199,16 @@
             "createButton": "Create",
             "success": "Task created!",
             "error": "Error creating task!"
+        },
+        "delete": {
+            "text": "Delete task",
+            "success": "Task deleted!",
+            "failure": "Failed to delete task!",
+            "ask": {
+                "title": "Delete task?",
+                "description": "Are you sure you want to delete this task?",
+                "button": "Delete"
+            }
         }
     },
     "Pomodoro": {

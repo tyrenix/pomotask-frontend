@@ -1,14 +1,15 @@
-import {Metadata, Viewport} from 'next'
-import {PropsWithChildren} from 'react'
 import {HeaderComponent} from '@/components/Header/header.component'
 import {NavigationComponent} from '@/components/Navigation/navigation.component'
-import {seoConstants} from '@/constants/seo.constant'
-import {HeaderProvider} from './context/header.context'
-import styles from './layout.module.css'
-import '@/styles/app.styles.css'
-import {SoundProvider} from './context/sound.context'
-import {cookies} from 'next/headers'
 import {cookieConstant} from '@/constants/cookie.constant'
+import {seoConstants} from '@/constants/seo.constant'
+import '@/styles/app.styles.css'
+import {Metadata, Viewport} from 'next'
+import {cookies} from 'next/headers'
+import {PropsWithChildren} from 'react'
+import {HeaderProvider} from './context/header.context'
+import {KeyDownHandlerContextProvider} from './context/key-down-handler.context'
+import {SoundProvider} from './context/sound.context'
+import styles from './layout.module.css'
 
 export const metadata: Metadata = {
     ...seoConstants.NO_INDEX_PAGE
@@ -38,15 +39,17 @@ export default function AppLayout({children}: PropsWithChildren) {
     return (
         <HeaderProvider>
             <SoundProvider>
-                <div className={styles.wrapper}>
-                    <main className={styles.main}>
-                        <div className={styles.content}>
-                            <HeaderComponent />
-                            {children}
-                        </div>
-                        <NavigationComponent />
-                    </main>
-                </div>
+                <KeyDownHandlerContextProvider>
+                    <div className={styles.wrapper}>
+                        <main className={styles.main}>
+                            <div className={styles.content}>
+                                <HeaderComponent />
+                                {children}
+                            </div>
+                            <NavigationComponent />
+                        </main>
+                    </div>
+                </KeyDownHandlerContextProvider>
             </SoundProvider>
         </HeaderProvider>
     )

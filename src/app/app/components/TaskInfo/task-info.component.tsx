@@ -3,6 +3,7 @@
 import {ActivityComponent} from '@/components/Activity/activity.component'
 import {CheckBoxTaskComponent} from '@/components/CheckBox'
 import {
+    ItemDefaultComponent,
     ItemPtSessionComponent,
     ItemTaskComponent,
     ItemTransitionComponent
@@ -25,6 +26,13 @@ import {PtSessionInfoComponent} from '../PtSessionInfo/pt-session-info.component
 import {PtSessionListComponent} from '../PtSessionList/pt-session-list.component'
 
 import styles from './task-info.module.css'
+import {
+    DialogComponent,
+    IDialogData
+} from '@/components/Dialog/dialog.component'
+import {useMutation, useQueryClient} from '@tanstack/react-query'
+import {taskService} from '@/services/task.service'
+import {toast} from 'sonner'
 
 interface IProps {
     isOpen: boolean
@@ -33,12 +41,14 @@ interface IProps {
 }
 
 export const TaskInfoComponent = ({isOpen, taskId, onClose}: IProps) => {
+    const queryClient = useQueryClient()
     const t = useTranslations('Task')
 
     const {statusShow, setStatusShow} = useStatusView()
     const [openPtSession, setOpenPtSession] = useState<string | null>(null)
     const [isOpenPtSessionsList, setIsOpenPtSessionsList] =
         useState<boolean>(false)
+    const [dialog, setDialog] = useState<IDialogData | null>(null)
 
     const {isLoading, task} = useTask(taskId)
     const {ptSettings, isLoading: isLoadingPtSettings} = usePtSettings()
@@ -57,6 +67,19 @@ export const TaskInfoComponent = ({isOpen, taskId, onClose}: IProps) => {
         filters: {taskId: task?.id, limit: 10}
     })
 
+    const {mutate} = useMutation({
+        mutationKey: ['task-delete'],
+        mutationFn: (taskId: string) => taskService.deleteById(taskId),
+        onSuccess(data, taskId) {
+            toast.success(t('delete.success'))
+            queryClient.invalidateQueries({queryKey: ['tasks']})
+            queryClient.invalidateQueries({queryKey: ['task', taskId]})
+        },
+        onError() {
+            toast.error(t('delete.failure'))
+        }
+    })
+
     const {watch, register, control, getValues} = useForm<IUpdateTask>({
         values: {
             isCompleted: task?.isCompleted,
@@ -69,6 +92,7 @@ export const TaskInfoComponent = ({isOpen, taskId, onClose}: IProps) => {
     return (
         <>
             <PopUpMenuComponent
+                type='full'
                 className='flex flex-col gap-4 pb-20'
                 title={t('title')}
                 isOpen={isOpen}
@@ -186,6 +210,24 @@ export const TaskInfoComponent = ({isOpen, taskId, onClose}: IProps) => {
                         />
                     </ListComponent>
                 ) : null}
+                <ListComponent>
+                    <ItemDefaultComponent
+                        className='text-red-500'
+                        size='medium'
+                        title={t('delete.text')}
+                        onClick={() =>
+                            setDialog({
+                                title: t('delete.ask.title'),
+                                description: t('delete.ask.description'),
+                                button: t('delete.ask.button'),
+                                onClick() {
+                                    mutate(taskId)
+                                    onClose()
+                                }
+                            })
+                        }
+                    />
+                </ListComponent>
             </PopUpMenuComponent>
             <PtSessionListComponent
                 isOpen={isOpenPtSessionsList}
@@ -202,6 +244,11 @@ export const TaskInfoComponent = ({isOpen, taskId, onClose}: IProps) => {
                     ptSessionId={openPtSession || ''}
                 />
             )}
+            <DialogComponent
+                dialog={dialog}
+                isOpen={!!dialog}
+                onClose={() => setDialog(null)}
+            />
         </>
     )
 }

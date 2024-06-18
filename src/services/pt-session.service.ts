@@ -75,6 +75,14 @@ class PtSessionService {
 
         return response.data
     }
+
+    async upcoming() {
+        const response = await axiosWithAuth.get<IPomodoroSession['type'][]>(
+            `${this.PREFIX}/upcoming`
+        )
+
+        return response.data
+    }
 }
 
 export const ptSessionService = new PtSessionService()

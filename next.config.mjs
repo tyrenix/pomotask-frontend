@@ -4,7 +4,6 @@ const withNextIntlPlugin = createNextIntlPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // reactStrictMode: false,
     webpack: config => {
         config.module.rules
             .find(({oneOf}) => !!oneOf)
@@ -23,3 +22,4 @@ const nextConfig = {
 }
 
 export default withNextIntlPlugin(nextConfig)
+
