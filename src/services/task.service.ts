@@ -53,6 +53,14 @@ class TaskService {
 
         return response.data
     }
+
+    async deleteById(taskId: string) {
+        const response = await axiosWithAuth.delete<{success: true}>(
+            `${this.PREFIX}/${taskId}`
+        )
+
+        return response.data
+    }
 }
 
 export const taskService = new TaskService()

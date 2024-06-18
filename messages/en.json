@@ -195,6 +195,16 @@
             "createButton": "Create",
             "success": "Task created!",
             "error": "Error creating task!"
+        },
+        "delete": {
+            "text": "Delete task",
+            "success": "Task deleted!",
+            "failure": "Failed to delete task!",
+            "ask": {
+                "title": "Delete task?",
+                "description": "Are you sure you want to delete this task?",
+                "button": "Delete"
+            }
         }
     },
     "Pomodoro": {

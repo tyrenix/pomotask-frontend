@@ -33,17 +33,17 @@ export const PomodoroView = () => {
         setSelectedTask(selectTaskService.get())
     }, [])
 
-    const {task, isLoading: isLoadingTask} = useTask(selectedTask || '')
+    const {task, isLoading: isLoadingTask, error} = useTask(selectedTask || '')
     const {activity, isLoading: isLoadingActivity} = useUserActivity({
         filters: {taskId: selectedTask || undefined, filter: 'total'},
         enabled: !!selectedTask
     })
 
     useEffect(() => {
-        if (task && task.isCompleted) {
+        if ((task && task.isCompleted) || (!task && error)) {
             selectTask()
         }
-    }, [task])
+    }, [task, error])
 
     return (
         <>
